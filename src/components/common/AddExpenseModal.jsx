@@ -1,169 +1,247 @@
-import React, { useState } from 'react';
-import { X, AlertCircle, PlusCircle, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, AlertCircle, PlusCircle, CheckCircle2, Loader2, Save } from 'lucide-react';
+import { createExpense, updateExpense } from '../../services/expenseService';
+import {
+  ALLOWED_CATEGORIES,
+  ALLOWED_PAYMENT_METHODS,
+  getTodayLocalDateString,
+  validateExpenseInput
+} from '../../utils/dateUtils';
 import './AddExpenseModal.css';
 
-export default function AddExpenseModal({ isOpen, onClose }) {
+export default function AddExpenseModal({
+  isOpen,
+  onClose,
+  expenseToEdit = null,
+  onSuccess
+}) {
+  const isEditMode = Boolean(expenseToEdit?.id);
+
   const [formData, setFormData] = useState({
-    title: '',
     amount: '',
-    category: 'Groceries & Food',
-    date: new Date().toISOString().split('T')[0],
-    paymentMethod: 'UPI',
-    notes: ''
+    category: 'Food',
+    expense_date: getTodayLocalDateString(),
+    payment_method: 'UPI',
+    description: ''
   });
 
-  const [previewFeedback, setPreviewFeedback] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successNotice, setSuccessNotice] = useState('');
+
+  // Hydrate form when opening or editing
+  useEffect(() => {
+    if (expenseToEdit) {
+      setFormData({
+        amount: expenseToEdit.amount !== undefined ? String(expenseToEdit.amount) : '',
+        category: expenseToEdit.category || 'Food',
+        expense_date: expenseToEdit.expense_date || getTodayLocalDateString(),
+        payment_method: expenseToEdit.payment_method || 'UPI',
+        description: expenseToEdit.description || ''
+      });
+    } else {
+      setFormData({
+        amount: '',
+        category: 'Food',
+        expense_date: getTodayLocalDateString(),
+        payment_method: 'UPI',
+        description: ''
+      });
+    }
+    setErrors({});
+    setServerError('');
+    setSuccessNotice('');
+  }, [expenseToEdit, isOpen]);
 
   if (!isOpen) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear field-specific error upon typing
+    if (errors[name]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+    setServerError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.title || !formData.amount) return;
+    setServerError('');
+    setSuccessNotice('');
 
-    setPreviewFeedback({
-      message: `UI Interaction Preview: "${formData.title}" (₹${formData.amount}) submitted in demo mode.`,
-      subtext: 'No data was saved to any backend database. Phase 1 provides static and UI structure only.'
-    });
+    const validation = validateExpenseInput(formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      return;
+    }
 
-    // Reset feedback after 4 seconds
-    setTimeout(() => {
-      setPreviewFeedback(null);
-      onClose();
-    }, 2800);
+    try {
+      setIsSubmitting(true);
+
+      if (isEditMode) {
+        await updateExpense(expenseToEdit.id, formData);
+        setSuccessNotice('Expense updated successfully!');
+      } else {
+        await createExpense(formData);
+        setSuccessNotice('Expense recorded successfully!');
+      }
+
+      setTimeout(() => {
+        if (onSuccess) onSuccess();
+        onClose();
+      }, 500);
+    } catch (err) {
+      console.error('Failed to submit expense:', err);
+      setServerError(err.message || 'Failed to save expense. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div
+      className="modal-backdrop"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       <div className="modal-content card" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div>
-            <h2 id="modal-title" className="modal-title">Add New Expense</h2>
-            <p className="modal-subtitle">Record an expense transaction</p>
+            <h2 id="modal-title" className="modal-title">
+              {isEditMode ? 'Edit Expense Transaction' : 'Record New Expense'}
+            </h2>
+            <p className="modal-subtitle">
+              {isEditMode
+                ? 'Update your transaction details in Supabase'
+                : 'Save a real transaction to your Supabase PostgreSQL ledger'}
+            </p>
           </div>
           <button
             className="modal-close-btn"
             onClick={onClose}
             aria-label="Close modal"
+            disabled={isSubmitting}
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="modal-demo-banner">
-          <AlertCircle size={16} />
-          <span>
-            <strong>UI Preview Mode:</strong> This form demonstrates the modal interaction. Expenses will not be saved.
-          </span>
-        </div>
-
-        {previewFeedback && (
-          <div className="preview-feedback-banner">
-            <CheckCircle size={18} className="feedback-icon" />
-            <div>
-              <p className="feedback-main">{previewFeedback.message}</p>
-              <p className="feedback-sub">{previewFeedback.subtext}</p>
-            </div>
+        {serverError && (
+          <div className="modal-error-banner" role="alert">
+            <AlertCircle size={16} className="flex-shrink-0" />
+            <span>{serverError}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="expense-form">
-          <div className="form-group">
-            <label htmlFor="expense-title">Expense Description / Merchant</label>
-            <input
-              id="expense-title"
-              name="title"
-              type="text"
-              required
-              placeholder="e.g. Groceries at Supermarket"
-              value={formData.title}
-              onChange={handleChange}
-              className="form-input"
-            />
+        {successNotice && (
+          <div className="preview-feedback-banner" role="status">
+            <CheckCircle2 size={18} className="feedback-icon" />
+            <p className="feedback-main">{successNotice}</p>
           </div>
+        )}
 
+        <form onSubmit={handleSubmit} className="expense-form" noValidate>
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="expense-amount">Amount (₹)</label>
+              <label htmlFor="expense-amount">Amount (₹) *</label>
               <input
                 id="expense-amount"
                 name="amount"
                 type="number"
-                min="1"
-                step="any"
+                min="0.01"
+                step="0.01"
                 required
                 placeholder="0.00"
                 value={formData.amount}
                 onChange={handleChange}
-                className="form-input"
+                className={`form-input ${errors.amount ? 'input-error' : ''}`}
+                disabled={isSubmitting}
+                autoFocus
               />
+              {errors.amount && <span className="field-error-msg">{errors.amount}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="expense-category">Category</label>
+              <label htmlFor="expense-category">Category *</label>
               <select
                 id="expense-category"
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="form-input"
+                className={`form-input ${errors.category ? 'input-error' : ''}`}
+                disabled={isSubmitting}
               >
-                <option value="Groceries & Food">Groceries & Food</option>
-                <option value="Housing & Utilities">Housing & Utilities</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Entertainment & Leisure">Entertainment & Leisure</option>
-                <option value="Healthcare & Fitness">Healthcare & Fitness</option>
-                <option value="Other Discretionary">Other Discretionary</option>
+                {ALLOWED_CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
               </select>
+              {errors.category && <span className="field-error-msg">{errors.category}</span>}
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="expense-date">Date</label>
+              <label htmlFor="expense-date">Expense Date *</label>
               <input
                 id="expense-date"
-                name="date"
+                name="expense_date"
                 type="date"
-                value={formData.date}
+                required
+                value={formData.expense_date}
                 onChange={handleChange}
-                className="form-input"
+                className={`form-input ${errors.expense_date ? 'input-error' : ''}`}
+                disabled={isSubmitting}
               />
+              {errors.expense_date && <span className="field-error-msg">{errors.expense_date}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="expense-payment">Payment Method</label>
+              <label htmlFor="expense-payment">Payment Method *</label>
               <select
                 id="expense-payment"
-                name="paymentMethod"
-                value={formData.paymentMethod}
+                name="payment_method"
+                value={formData.payment_method}
                 onChange={handleChange}
-                className="form-input"
+                className={`form-input ${errors.payment_method ? 'input-error' : ''}`}
+                disabled={isSubmitting}
               >
-                <option value="UPI">UPI (GooglePay / PhonePe / Paytm)</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="Debit Card">Debit Card</option>
-                <option value="Net Banking">Net Banking</option>
-                <option value="Cash">Cash</option>
+                {ALLOWED_PAYMENT_METHODS.map((method) => (
+                  <option key={method} value={method}>
+                    {method}
+                  </option>
+                ))}
               </select>
+              {errors.payment_method && <span className="field-error-msg">{errors.payment_method}</span>}
             </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="expense-notes">Notes (Optional)</label>
+            <div className="label-with-counter">
+              <label htmlFor="expense-description">Description / Merchant (Optional)</label>
+              <span className="char-counter">{formData.description.length}/500</span>
+            </div>
             <textarea
-              id="expense-notes"
-              name="notes"
+              id="expense-description"
+              name="description"
               rows={2}
-              placeholder="Add additional details..."
-              value={formData.notes}
+              maxLength={500}
+              placeholder="e.g. Weekly grocery shopping at Reliance Fresh"
+              value={formData.description}
               onChange={handleChange}
-              className="form-input form-textarea"
+              className={`form-input form-textarea ${errors.description ? 'input-error' : ''}`}
+              disabled={isSubmitting}
             />
+            {errors.description && <span className="field-error-msg">{errors.description}</span>}
           </div>
 
           <div className="modal-actions">
@@ -171,16 +249,26 @@ export default function AddExpenseModal({ isOpen, onClose }) {
               type="button"
               className="btn btn-outline"
               onClick={onClose}
+              disabled={isSubmitting}
             >
               Cancel
             </button>
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={Boolean(previewFeedback)}
+              disabled={isSubmitting}
             >
-              <PlusCircle size={16} />
-              {previewFeedback ? 'Previewing...' : 'Preview Add Expense'}
+              {isSubmitting ? (
+                <>
+                  <Loader2 size={16} className="spinner-icon" />
+                  <span>{isEditMode ? 'Updating...' : 'Saving...'}</span>
+                </>
+              ) : (
+                <>
+                  {isEditMode ? <Save size={16} /> : <PlusCircle size={16} />}
+                  <span>{isEditMode ? 'Update Expense' : 'Save Expense'}</span>
+                </>
+              )}
             </button>
           </div>
         </form>

@@ -1,6 +1,6 @@
-# PaisaTrack — Personal Expense Tracker & Budget Analytics
+# PaisaTrack — Personal Expense Tracker & Live Financial Analytics
 
-PaisaTrack is a modern, high-performance personal expense tracking web application built with **React 19**, **Vite 6**, **React Router 7**, **Recharts**, and **Supabase Authentication**.
+PaisaTrack is a production-grade personal expense tracking web application built with **React 19**, **Vite 6**, **React Router 7**, **Recharts**, and **Supabase PostgreSQL** with strict **Row Level Security (RLS)**.
 
 ---
 
@@ -9,6 +9,7 @@ PaisaTrack is a modern, high-performance personal expense tracking web applicati
 - **Node.js**: v18.0.0 or higher (Tested on Node v25.4.0)
 - **npm**: v9.0.0 or higher (Tested on npm 11.7.0)
 - **Git**: For version control
+- **Supabase Account**: [https://supabase.com](https://supabase.com) (Free tier supported)
 
 ---
 
@@ -17,135 +18,126 @@ PaisaTrack is a modern, high-performance personal expense tracking web applicati
 ### 1. Clone & Install Dependencies
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/25csdaksh/daksh_kharch.git
 cd daksh_kharch
 npm install
 ```
 
-### 2. Configure Supabase Authentication
+### 2. Configure Environment Variables
 
-1. Navigate to [Supabase](https://supabase.com/) and create a free project.
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
 2. In your Supabase project dashboard, navigate to **Project Settings** -> **API**.
-3. Locate:
-   - **Project URL** (e.g. `https://your-project-id.supabase.co`)
-   - **Project API Keys** -> `anon` / `public` key (e.g. `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`)
-4. Create your local `.env` file from `.env.example`:
+3. Fill in your project credentials:
+   ```env
+   VITE_SUPABASE_URL=https://your-project-id.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-or-publishable-key
+   ```
 
+> 🔒 **Security Notice:** Never commit your `.env` file or expose service-role keys in client-side code. The `anon` key is safely restricted by Row Level Security.
+
+---
+
+## 🗄️ Database Setup & SQL Migration
+
+To create the `expenses` table, indexes, updated_at triggers, and Row Level Security policies:
+
+### Method 1: Using Supabase Dashboard SQL Editor (Recommended)
+1. In your Supabase Dashboard, click **SQL Editor** in the left navigation.
+2. Click **New Query**.
+3. Copy and paste the complete contents of [`supabase/migrations/20261009000100_create_expenses.sql`](file:///e:/daksh_kharch/supabase/migrations/20261009000100_create_expenses.sql).
+4. Click **Run**.
+5. Verify table creation in **Table Editor** -> `expenses`.
+
+### Method 2: Using Supabase CLI
 ```bash
-cp .env.example .env
+supabase db push
 ```
 
-5. Populate `.env` with your project credentials:
+---
 
-```env
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-or-publishable-key
-```
+## 📊 Database Schema & Row Level Security
 
-> ⚠️ **Security Notice:** Never commit your `.env` file or expose secret service-role keys in client-side code. The `anon` key is safe for client browser consumption.
+### `public.expenses` Table Definition
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `id` | `UUID` | `PRIMARY KEY`, Default `gen_random_uuid()` | Unique transaction ID |
+| `user_id` | `UUID` | `REFERENCES auth.users(id) ON DELETE CASCADE`, Default `auth.uid()` | Authenticated owner ID |
+| `amount` | `NUMERIC(12,2)` | `NOT NULL`, `CHECK (amount > 0 AND amount <= 9999999999.99)` | Monetary transaction value |
+| `category` | `TEXT` | `NOT NULL`, `CHECK (category IN ('Food', 'Transport', 'Shopping', 'Education', 'Entertainment', 'Bills', 'Healthcare', 'Personal Care', 'Other'))` | Allowed expense category |
+| `description` | `TEXT` | `CHECK (char_length(description) <= 500)` | Optional merchant/notes |
+| `expense_date` | `DATE` | `NOT NULL` | Calendar transaction date |
+| `payment_method` | `TEXT` | `NOT NULL`, `CHECK (payment_method IN ('Cash', 'UPI', 'Card', 'Bank Transfer', 'Other'))` | Payment medium |
+| `created_at` | `TIMESTAMPTZ` | Default `now()` | Record creation timestamp |
+| `updated_at` | `TIMESTAMPTZ` | Default `now()`, updated via trigger | Record last modified |
 
-### 3. Start Development Server
-
-```bash
-npm run dev
-```
-
-Open your browser and visit: `http://localhost:5173`
+### 🛡️ Row Level Security (RLS) Policies
+- **SELECT**: `auth.uid() = user_id` (Users only view their own records).
+- **INSERT**: `auth.uid() = user_id` (Users only insert records bound to their authenticated UID).
+- **UPDATE**: `auth.uid() = user_id` (Users only update their own rows; ownership cannot be transferred).
+- **DELETE**: `auth.uid() = user_id` (Users only delete their own rows).
 
 ---
 
-## 🔒 Authentication Flow & Testing Guide
+## 🧪 Two-Account RLS User Isolation Verification
 
-### 1. User Sign Up (`/signup`)
-- Visit `/signup`.
-- Enter your Full Name, Email, and a password (minimum 6 characters).
-- **Email Confirmation**: If *Confirm Email* is enabled in your Supabase Auth Settings (Authentication -> Providers -> Email), check your inbox for the confirmation email before logging in.
-- **Auto-Confirm**: If email confirmation is disabled in Supabase development mode, you will immediately be logged in and redirected to the `/` dashboard.
-
-### 2. User Sign In (`/login`)
-- Visit `/login`.
-- Enter your registered email and password.
-- Upon successful authentication, your session is securely persisted and you will be redirected to the dashboard.
-
-### 3. Protected Route Navigation
-- Protected routes include: `/` (Dashboard), `/expenses` (Ledger), `/reports` (Analytics), and `/settings` (Settings).
-- If unauthenticated, navigating directly to these URLs safely redirects to `/login`, preserving your destination in navigation state.
-
-### 4. Password Recovery & Reset (`/reset-password`)
-- Click **Forgot password?** on the `/login` screen.
-- Enter your registered email address to receive password reset instructions.
-- Follow the email link back to the application to set and confirm a new password.
-
-### 5. Secure Sign Out
-- Click the **Sign Out** button in the sidebar profile section or top-right header menu.
-- Supabase session tokens are cleared, and you are redirected back to the `/login` screen.
+To verify that Row Level Security strictly isolates user financial records:
+1. Open the app in a regular browser window and sign up Account A (`user_a@example.com`).
+2. Add 2 expenses (e.g. ₹500 for Food and ₹200 for Transport). Verify they appear on Account A's Dashboard and Ledger.
+3. Open an Incognito/Private window and sign up Account B (`user_b@example.com`).
+4. **Observe**: Account B's Dashboard and Ledger start completely empty with ₹0 totals. Account A's records are completely inaccessible.
+5. Add an expense under Account B (e.g. ₹1,200 for Bills).
+6. Refresh Account A's browser: Account A only sees their own 2 transactions (₹700 total), and Account B's ₹1,200 bill is completely hidden.
 
 ---
 
-## 🎨 Design System & Palette
+## 💻 Available Scripts
 
-- **Background**: `#F7F8F5`
-- **Surface**: `#FFFFFF`
-- **Primary**: `#245C45`
-- **Secondary**: `#DCE9DF`
-- **Text**: `#202923`
-- **Muted Text**: `#727B73`
-- **Accent**: `#D8B86A`
-- **Border**: `#E7EBE5`
+- **Development Server**: `npm run dev`
+- **Automated Unit Tests**: `npm test`
+- **Production Build**: `npm run build`
+- **Preview Production Build**: `npm run preview`
 
 ---
 
-## 🔍 Troubleshooting & Common Errors
-
-| Issue | Root Cause | Resolution |
-|---|---|---|
-| **"Supabase Setup Required" Screen** | Missing or placeholder `.env` variables | Ensure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are defined in `.env` and restart Vite dev server (`npm run dev`). |
-| **"Invalid login credentials"** | Incorrect email/password or email not yet verified | Verify email confirmation status in Supabase Dashboard -> Authentication -> Users. |
-| **"Auth session missing" after refresh** | Browser cookie/localStorage blocked | Ensure browser allows third-party storage or standard localStorage permissions for session synchronization. |
-
----
-
-## 📦 Project Architecture
+## 📁 Project Architecture
 
 ```text
 src/
 ├── lib/
-│   └── supabase.js            # Supabase JS client with validation & safe fallbacks
+│   └── supabase.js             # Supabase JS client with validation & fallbacks
 ├── context/
-│   └── AuthContext.jsx        # Global AuthProvider, session lifecycle & useAuth hook
+│   └── AuthContext.jsx         # Global AuthProvider & useAuth hook
+├── services/
+│   └── expenseService.js       # Live Supabase CRUD & metric aggregation
+├── utils/
+│   └── dateUtils.js            # Calendar boundaries, INR formatting, & validation
 ├── components/
 │   ├── auth/
-│   │   ├── AuthLoadingScreen.jsx   # Polished session hydration loading screen
-│   │   ├── ProtectedRoute.jsx      # Route guard with setup & session checks
-│   │   └── PublicRoute.jsx         # Guard for unauthenticated routes
+│   │   ├── AuthLoadingScreen.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── PublicRoute.jsx
 │   ├── layout/
-│   │   ├── AppLayout.jsx           # Main shared shell
-│   │   ├── Header.jsx              # Header with user avatar and menu
-│   │   └── Sidebar.jsx             # Sidebar with active route and user logout
+│   │   ├── AppLayout.jsx
+│   │   ├── Header.jsx
+│   │   └── Sidebar.jsx
 │   ├── common/
-│   │   ├── AddExpenseModal.jsx     # Expense creation modal (Phase 1/2 UI preview)
-│   │   ├── DemoNotice.jsx          # Live auth state & preview disclaimer
-│   │   └── StatCard.jsx            # KPI summary card
+│   │   ├── AddExpenseModal.jsx  # Real expense create/edit modal
+│   │   ├── DemoNotice.jsx       # Real-time DB & RLS status badge
+│   │   └── StatCard.jsx         # KPI summary card
 │   └── dashboard/
-│       ├── BudgetProgress.jsx      # Budget gauge
-│       ├── CategoryBreakdownChart.jsx # Donut chart
-│       ├── RecentExpenses.jsx      # Transaction table
-│       └── WeeklySpendingChart.jsx # Weekly bar chart
+│       ├── BudgetProgress.jsx   # Live budget gauge
+│       ├── CategoryBreakdownChart.jsx # Live category donut chart
+│       ├── RecentExpenses.jsx   # Live recent transactions table
+│       └── WeeklySpendingChart.jsx # Live weekly daily bar chart
 └── pages/
-    ├── Auth.css               # Shared authentication styles
-    ├── DashboardPage.jsx      # Main dashboard view
-    ├── ExpensesPage.jsx       # Expense ledger view
-    ├── LoginPage.jsx          # Supabase Sign In view
-    ├── ReportsPage.jsx        # Reports & analytics view
-    ├── ResetPasswordPage.jsx  # Password recovery & reset view
-    ├── SettingsPage.jsx       # Account & currency settings
-    └── SignupPage.jsx         # Supabase registration view
+    ├── DashboardPage.jsx       # Live dashboard overview
+    ├── ExpensesPage.jsx        # Live expense ledger & filter engine
+    ├── LoginPage.jsx           # Sign in view
+    ├── ReportsPage.jsx         # Reports & analytics preview
+    ├── ResetPasswordPage.jsx   # Password recovery view
+    ├── SettingsPage.jsx        # Account settings view
+    └── SignupPage.jsx          # Registration view
 ```
-
----
-
-## 🛠️ Verification & Build Commands
-
-- Development: `npm run dev`
-- Production Build: `npm run build`
-- Preview Build: `npm run preview`

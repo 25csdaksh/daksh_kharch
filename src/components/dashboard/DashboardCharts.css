@@ -347,6 +347,107 @@
   font-style: italic;
 }
 
+.text-danger {
+  color: #c84b31;
+}
+
+.progress-exceeded {
+  background-color: #c84b31 !important;
+}
+
+.budget-note-warning {
+  background-color: #fff4e5 !important;
+  color: #8c5208 !important;
+}
+
+.chart-loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  background-color: #fafbf9;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+}
+
+.loading-pulse-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+  font-weight: 500;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.chart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #fafbf9;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+}
+
+.empty-state-icon {
+  color: #b5c2b9;
+  margin-bottom: var(--spacing-xs);
+}
+
+.empty-state-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.empty-state-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+  max-width: 320px;
+}
+
+.th-actions {
+  text-align: center;
+  width: 90px;
+}
+
+.cell-actions {
+  text-align: center;
+}
+
+.action-buttons-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-icon-action {
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  transition: all var(--transition-speed);
+}
+
+.btn-icon-action:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.btn-delete-action:hover {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+  background-color: var(--color-danger-light);
+}
+
 @media (max-width: 992px) {
   .category-chart-layout {
     grid-template-columns: 1fr;
