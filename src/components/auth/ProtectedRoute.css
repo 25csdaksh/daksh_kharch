@@ -1,0 +1,91 @@
+.setup-required-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background-color: var(--color-bg);
+}
+
+.setup-required-card {
+  max-width: 480px;
+  width: 100%;
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: var(--radius-xl);
+}
+
+.setup-icon-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-accent-light);
+  color: #a47d25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.setup-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.setup-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.setup-instructions {
+  width: 100%;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  text-align: left;
+  margin-bottom: var(--spacing-xl);
+}
+
+.step-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.step-list {
+  padding-left: 1.25rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step-list code {
+  background-color: #e2e8e3;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.setup-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.setup-actions .btn {
+  width: 100%;
+}

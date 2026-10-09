@@ -1,85 +1,138 @@
 import React, { useState } from 'react';
-import { LogIn, Lock, Mail, ShieldAlert, Sparkles } from 'lucide-react';
-import './PlaceholderPage.css';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Wallet, Mail, Lock, AlertCircle, Loader2, ArrowRight, Info } from 'lucide-react';
+import './Auth.css';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('daksh@example.com');
-  const [password, setPassword] = useState('••••••••');
-  const [notice, setNotice] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { signIn, isConfigured } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectPath = location.state?.from?.pathname || '/';
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setNotice('Authentication Preview: Authentication will be enabled in a future phase with Supabase Auth.');
+    setErrorMessage('');
+
+    if (!email || !password) {
+      setErrorMessage('Please provide both email and password.');
+      return;
+    }
+
+    if (!isConfigured) {
+      setErrorMessage('Supabase is not configured. Please set your credentials in .env.');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await signIn({ email, password });
+      navigate(redirectPath, { replace: true });
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to authenticate. Please check your credentials.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="login-card-container">
-      <div className="placeholder-card card">
-        <div className="page-header-info" style={{ justifyContent: 'center', textAlign: 'center', flexDirection: 'column' }}>
-          <div className="page-header-icon" style={{ margin: '0 auto' }}>
-            <LogIn size={24} />
+    <div className="auth-page-wrapper">
+      <div className="auth-card card">
+        <div className="auth-brand-header">
+          <div className="auth-brand-logo">
+            <Wallet size={26} />
           </div>
-          <div>
-            <h1 className="page-main-heading">Sign In to PaisaTrack</h1>
-            <p className="page-main-subheading">Access your expense ledger and analytics</p>
-          </div>
+          <h1 className="auth-page-title">Welcome to PaisaTrack</h1>
+          <p className="auth-page-subtitle">Sign in to manage your expense ledger & budgets</p>
         </div>
 
-        <div className="modal-demo-banner" style={{ marginTop: '1rem', marginBottom: '0' }}>
-          <ShieldAlert size={16} />
-          <span>
-            <strong>UI Placeholder:</strong> Authentication backend is not connected in Phase 1.
-          </span>
-        </div>
-
-        {notice && (
-          <div className="preview-feedback-banner" style={{ marginTop: '0.5rem', marginBottom: '0' }}>
-            <Sparkles size={16} className="feedback-icon" />
-            <p className="feedback-main">{notice}</p>
+        {!isConfigured && (
+          <div className="auth-alert auth-alert-warning" role="alert">
+            <Info size={16} className="flex-shrink-0" />
+            <div>
+              <strong>Supabase Setup Required:</strong> Live authentication requires <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> in <code>.env</code>.
+            </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-field">
-            <label className="form-label" htmlFor="auth-email">Email Address</label>
-            <input
-              id="auth-email"
-              type="email"
-              className="form-text-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+        {errorMessage && (
+          <div className="auth-alert auth-alert-error" role="alert">
+            <AlertCircle size={16} className="flex-shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="auth-form" noValidate>
+          <div className="auth-field">
+            <label className="auth-label" htmlFor="login-email">Email Address</label>
+            <div className="auth-input-wrapper">
+              <Mail size={16} className="auth-input-icon" aria-hidden="true" />
+              <input
+                id="login-email"
+                type="email"
+                required
+                autoComplete="email"
+                placeholder="name@example.com"
+                className="auth-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
           </div>
 
-          <div className="form-field">
-            <label className="form-label" htmlFor="auth-password">Password</label>
-            <input
-              id="auth-password"
-              type="password"
-              className="form-text-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <div className="auth-field">
+            <div className="auth-label-row">
+              <label className="auth-label" htmlFor="login-password">Password</label>
+              <Link to="/reset-password" className="auth-link">Forgot password?</Link>
+            </div>
+            <div className="auth-input-wrapper">
+              <Lock size={16} className="auth-input-icon" aria-hidden="true" />
+              <input
+                id="login-password"
+                type="password"
+                required
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                className="auth-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
           </div>
 
-          <button type="submit" className="btn btn-primary auth-btn">
-            Sign In (Preview)
+          <button
+            type="submit"
+            className="btn btn-primary auth-submit-btn"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 size={16} className="spinner-icon" />
+                <span>Signing in...</span>
+              </>
+            ) : (
+              <>
+                <span>Sign In</span>
+                <ArrowRight size={16} />
+              </>
+            )}
           </button>
         </form>
 
-        <div className="oauth-divider">
-          <span>or sign in with</span>
+        <div className="auth-footer">
+          Don't have an account?{' '}
+          <Link to="/signup" className="auth-link">
+            Create an account
+          </Link>
         </div>
-
-        <button
-          type="button"
-          className="btn btn-outline auth-btn"
-          onClick={() => setNotice('Social authentication (Google / GitHub) will be integrated with Supabase.')}
-        >
-          Continue with Google (Demo)
-        </button>
       </div>
     </div>
   );

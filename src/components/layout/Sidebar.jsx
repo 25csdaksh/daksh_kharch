@@ -1,26 +1,50 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Receipt,
   BarChart3,
   Settings,
   LogIn,
+  LogOut,
   PlusCircle,
   Wallet,
+  ShieldCheck,
   Sparkles
 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 import { DEMO_METADATA } from '../../data/mockData';
 import './Sidebar.css';
 
 export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile }) {
+  const { user, signOut, isConfigured } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+  };
+
   const navItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/expenses', label: 'Expenses', icon: Receipt },
     { path: '/reports', label: 'Reports', icon: BarChart3 },
-    { path: '/settings', label: 'Settings', icon: Settings },
-    { path: '/login', label: 'Login / Account', icon: LogIn }
+    { path: '/settings', label: 'Settings', icon: Settings }
   ];
+
+  // Derive display name & initials
+  const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || (isConfigured ? 'User' : DEMO_METADATA.user.name);
+  const displayEmail = user?.email || DEMO_METADATA.user.email;
+  const initials = displayName
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2) || 'PT';
 
   return (
     <>
@@ -38,7 +62,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
           </div>
           <div className="sidebar-brand-text">
             <span className="brand-name">PaisaTrack</span>
-            <span className="brand-badge">Phase 1</span>
+            <span className="brand-badge">Phase 2</span>
           </div>
         </div>
 
@@ -74,19 +98,52 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
               </NavLink>
             );
           })}
+
+          {!user && (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `nav-item ${isActive ? 'nav-item-active' : ''}`
+              }
+              onClick={onCloseMobile}
+            >
+              <LogIn size={18} className="nav-icon" />
+              <span className="nav-label">Sign In</span>
+            </NavLink>
+          )}
         </nav>
 
         <div className="sidebar-footer">
           <div className="demo-pill">
-            <Sparkles size={14} />
-            <span>Demo Mode Active</span>
+            {user ? (
+              <>
+                <ShieldCheck size={14} className="text-primary" />
+                <span>Supabase Authenticated</span>
+              </>
+            ) : (
+              <>
+                <Sparkles size={14} />
+                <span>Demo Session</span>
+              </>
+            )}
           </div>
+
           <div className="user-profile-preview">
-            <div className="avatar-circle">{DEMO_METADATA.user.avatar}</div>
+            <div className="avatar-circle">{initials}</div>
             <div className="user-info">
-              <span className="user-name">{DEMO_METADATA.user.name}</span>
-              <span className="user-plan">{DEMO_METADATA.user.role}</span>
+              <span className="user-name" title={displayName}>{displayName}</span>
+              <span className="user-plan" title={displayEmail}>{displayEmail}</span>
             </div>
+            {user && (
+              <button
+                className="btn-logout-sidebar"
+                onClick={handleSignOut}
+                title="Sign Out"
+                aria-label="Sign Out"
+              >
+                <LogOut size={16} />
+              </button>
+            )}
           </div>
         </div>
       </aside>

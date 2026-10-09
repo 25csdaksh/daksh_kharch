@@ -164,6 +164,25 @@
 .user-plan {
   font-size: 11px;
   color: var(--color-muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.btn-logout-sidebar {
+  margin-left: auto;
+  color: var(--color-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed);
+}
+
+.btn-logout-sidebar:hover {
+  color: var(--color-danger);
+  background-color: var(--color-danger-light);
 }
 
 .sidebar-mobile-backdrop {

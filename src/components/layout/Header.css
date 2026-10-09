@@ -108,6 +108,10 @@
   border-radius: var(--radius-full);
 }
 
+.header-user-menu-wrapper {
+  position: relative;
+}
+
 .header-user-avatar {
   width: 38px;
   height: 38px;
@@ -120,6 +124,78 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: transform var(--transition-speed);
+}
+
+.header-user-avatar:hover {
+  transform: scale(1.05);
+}
+
+.header-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 220px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-sm);
+  z-index: 100;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.dropdown-user-info {
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.dropdown-user-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-user-email {
+  font-size: 11px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--spacing-xs) 0;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0.5rem var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-speed);
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-bg);
+}
+
+.dropdown-logout {
+  color: var(--color-danger);
+}
+
+.dropdown-logout:hover {
+  background-color: var(--color-danger-light);
 }
 
 @media (max-width: 900px) {
