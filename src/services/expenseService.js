@@ -3,14 +3,18 @@
  * Interacts with Supabase PostgreSQL 'expenses' table with Row Level Security.
  */
 
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase.js';
 import {
   getTodayLocalDateString,
   getCurrentWeekRange,
   getCurrentMonthRange,
   validateExpenseInput,
   CATEGORY_COLORS
-} from '../utils/dateUtils';
+} from '../utils/dateUtils.js';
+import {
+  calculatePeriodComparison,
+  aggregateCategories
+} from '../utils/reportUtils.js';
 
 function notifyExpenseChange() {
   if (typeof window !== 'undefined') {
@@ -213,8 +217,7 @@ export async function getDashboardMetrics() {
   const weekRange = getCurrentWeekRange();
   const monthRange = getCurrentMonthRange();
 
-  // Fetch all expenses for the current month (which covers today, this week, and the month)
-  // Also fetch any week expenses that might cross month boundaries if the week started in previous month
+  // Fetch all expenses for the current month and week
   const queryStartDate = weekRange.startDate < monthRange.startDate ? weekRange.startDate : monthRange.startDate;
   const queryEndDate = weekRange.endDate > monthRange.endDate ? weekRange.endDate : monthRange.endDate;
 
@@ -330,5 +333,263 @@ export async function getDashboardMetrics() {
       categories: categoryBreakdownData
     },
     recentExpenses: recent5 || []
+  };
+}
+
+/**
+ * Computes deep report analytics for a specified reporting period.
+ * Supports Weekly, Monthly, Yearly, and Custom intervals with comparative delta.
+ */
+export async function getReportAnalytics({
+  periodType,
+  startDate,
+  endDate,
+  prevStartDate,
+  prevEndDate,
+  days = [],
+  months = [],
+  daysCount = 1
+}) {
+  if (!isSupabaseConfigured || !supabase) {
+    throw new Error('Supabase is not configured.');
+  }
+
+  // 1. Fetch current period expenses
+  const { data: currentRecords, error: currentError } = await supabase
+    .from('expenses')
+    .select('*')
+    .gte('expense_date', startDate)
+    .lte('expense_date', endDate)
+    .order('expense_date', { ascending: true })
+    .order('created_at', { ascending: true });
+
+  if (currentError) {
+    console.error('Error fetching report expenses:', currentError.message);
+    throw currentError;
+  }
+
+  const currentExpenses = currentRecords || [];
+
+  // 2. Fetch previous period expenses for comparison if applicable
+  let previousTotal = 0;
+  let previousCount = 0;
+
+  if (prevStartDate && prevEndDate) {
+    const { data: prevRecords, error: prevError } = await supabase
+      .from('expenses')
+      .select('amount')
+      .gte('expense_date', prevStartDate)
+      .lte('expense_date', prevEndDate);
+
+    if (!prevError && prevRecords) {
+      previousTotal = prevRecords.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+      previousCount = prevRecords.length;
+    }
+  }
+
+  // 3. Compute Current Totals
+  const totalExpenditure = currentExpenses.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+  const totalSafeExpenditure = parseFloat(totalExpenditure.toFixed(2));
+  const transactionCount = currentExpenses.length;
+
+  // 4. Comparison Analysis
+  const comparison = calculatePeriodComparison(totalSafeExpenditure, previousTotal);
+
+  // 5. Timeline Chart & High-Metric Calculations based on periodType
+  let timelineChartData = [];
+  let highestMetric = { label: 'None', amount: 0, subtext: '' };
+  let averageSpending = 0;
+
+  if (periodType === 'weekly') {
+    // Map each of the 7 days (Mon-Sun)
+    const dayMap = {};
+    days.forEach((d) => {
+      dayMap[d.dateString] = {
+        name: d.name,
+        date: d.dateString,
+        amount: 0,
+        count: 0
+      };
+    });
+
+    currentExpenses.forEach((item) => {
+      if (dayMap[item.expense_date]) {
+        dayMap[item.expense_date].amount += Number(item.amount) || 0;
+        dayMap[item.expense_date].count += 1;
+      }
+    });
+
+    timelineChartData = days.map((d) => ({
+      name: d.name,
+      fullDate: d.dateString,
+      amount: parseFloat((dayMap[d.dateString]?.amount || 0).toFixed(2)),
+      count: dayMap[d.dateString]?.count || 0
+    }));
+
+    averageSpending = parseFloat((totalSafeExpenditure / 7).toFixed(2));
+
+    // Find highest spending day
+    let maxDay = null;
+    timelineChartData.forEach((d) => {
+      if (!maxDay || d.amount > maxDay.amount) {
+        maxDay = d;
+      }
+    });
+
+    if (maxDay && maxDay.amount > 0) {
+      highestMetric = {
+        label: `${maxDay.name}`,
+        amount: maxDay.amount,
+        subtext: `Highest spending day (${maxDay.fullDate})`
+      };
+    } else {
+      highestMetric = { label: 'None', amount: 0, subtext: 'No spending this week' };
+    }
+  } else if (periodType === 'monthly') {
+    // Map each day of the month (1 to N)
+    const dayMap = {};
+    days.forEach((d) => {
+      dayMap[d.dateString] = {
+        name: `${d.dayNumber}`,
+        fullDate: d.dateString,
+        amount: 0,
+        count: 0
+      };
+    });
+
+    currentExpenses.forEach((item) => {
+      if (dayMap[item.expense_date]) {
+        dayMap[item.expense_date].amount += Number(item.amount) || 0;
+        dayMap[item.expense_date].count += 1;
+      }
+    });
+
+    timelineChartData = days.map((d) => ({
+      name: `${d.dayNumber}`,
+      fullDate: d.dateString,
+      amount: parseFloat((dayMap[d.dateString]?.amount || 0).toFixed(2)),
+      count: dayMap[d.dateString]?.count || 0
+    }));
+
+    const safeDaysCount = daysCount > 0 ? daysCount : days.length || 30;
+    averageSpending = parseFloat((totalSafeExpenditure / safeDaysCount).toFixed(2));
+
+    let maxDay = null;
+    timelineChartData.forEach((d) => {
+      if (!maxDay || d.amount > maxDay.amount) {
+        maxDay = d;
+      }
+    });
+
+    if (maxDay && maxDay.amount > 0) {
+      highestMetric = {
+        label: `Day ${maxDay.name}`,
+        amount: maxDay.amount,
+        subtext: `Peak daily spend on ${maxDay.fullDate}`
+      };
+    } else {
+      highestMetric = { label: 'None', amount: 0, subtext: 'No spending this month' };
+    }
+  } else if (periodType === 'yearly') {
+    // Map each of the 12 months (Jan-Dec)
+    const monthMap = {};
+    months.forEach((m) => {
+      monthMap[m.monthIndex] = {
+        name: m.name,
+        amount: 0,
+        count: 0
+      };
+    });
+
+    currentExpenses.forEach((item) => {
+      const monthIdx = new Date(item.expense_date).getMonth();
+      if (monthMap[monthIdx]) {
+        monthMap[monthIdx].amount += Number(item.amount) || 0;
+        monthMap[monthIdx].count += 1;
+      }
+    });
+
+    timelineChartData = months.map((m) => ({
+      name: m.name,
+      amount: parseFloat((monthMap[m.monthIndex]?.amount || 0).toFixed(2)),
+      count: monthMap[m.monthIndex]?.count || 0
+    }));
+
+    averageSpending = parseFloat((totalSafeExpenditure / 12).toFixed(2));
+
+    let maxMonth = null;
+    timelineChartData.forEach((m) => {
+      if (!maxMonth || m.amount > maxMonth.amount) {
+        maxMonth = m;
+      }
+    });
+
+    if (maxMonth && maxMonth.amount > 0) {
+      highestMetric = {
+        label: `${maxMonth.name}`,
+        amount: maxMonth.amount,
+        subtext: `Peak month of the year`
+      };
+    } else {
+      highestMetric = { label: 'None', amount: 0, subtext: 'No spending this year' };
+    }
+  } else if (periodType === 'custom') {
+    // Custom range: group by date or list
+    const dateMap = {};
+    currentExpenses.forEach((item) => {
+      const d = item.expense_date;
+      if (!dateMap[d]) {
+        dateMap[d] = { name: d.slice(5), fullDate: d, amount: 0, count: 0 };
+      }
+      dateMap[d].amount += Number(item.amount) || 0;
+      dateMap[d].count += 1;
+    });
+
+    timelineChartData = Object.values(dateMap).map((d) => ({
+      name: d.name,
+      fullDate: d.fullDate,
+      amount: parseFloat(d.amount.toFixed(2)),
+      count: d.count
+    }));
+
+    const safeDaysCount = daysCount > 0 ? daysCount : timelineChartData.length || 1;
+    averageSpending = parseFloat((totalSafeExpenditure / safeDaysCount).toFixed(2));
+
+    let maxEntry = null;
+    timelineChartData.forEach((d) => {
+      if (!maxEntry || d.amount > maxEntry.amount) {
+        maxEntry = d;
+      }
+    });
+
+    if (maxEntry && maxEntry.amount > 0) {
+      highestMetric = {
+        label: `${maxEntry.fullDate}`,
+        amount: maxEntry.amount,
+        subtext: `Peak day in custom range`
+      };
+    } else {
+      highestMetric = { label: 'None', amount: 0, subtext: 'No spending in custom range' };
+    }
+  }
+
+  // 6. Category Breakdown
+  const categoryAnalytics = aggregateCategories(currentExpenses, totalSafeExpenditure);
+
+  return {
+    periodType,
+    startDate,
+    endDate,
+    totalExpenditure: totalSafeExpenditure,
+    transactionCount,
+    previousTotal: parseFloat(previousTotal.toFixed(2)),
+    previousCount,
+    comparison,
+    averageSpending,
+    highestMetric,
+    timelineChartData,
+    categories: categoryAnalytics.categories,
+    topCategory: categoryAnalytics.topCategory,
+    expenses: currentExpenses
   };
 }

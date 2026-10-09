@@ -1,4 +1,4 @@
-# PaisaTrack — Personal Expense Tracker & Live Financial Analytics
+# PaisaTrack — Personal Expense Tracker & Advanced Financial Analytics
 
 PaisaTrack is a production-grade personal expense tracking web application built with **React 19**, **Vite 6**, **React Router 7**, **Recharts**, and **Supabase PostgreSQL** with strict **Row Level Security (RLS)**.
 
@@ -81,15 +81,47 @@ supabase db push
 
 ---
 
-## 🧪 Two-Account RLS User Isolation Verification
+## 📈 Phase 4: Advanced Financial Reports & Analytics
 
-To verify that Row Level Security strictly isolates user financial records:
-1. Open the app in a regular browser window and sign up Account A (`user_a@example.com`).
-2. Add 2 expenses (e.g. ₹500 for Food and ₹200 for Transport). Verify they appear on Account A's Dashboard and Ledger.
-3. Open an Incognito/Private window and sign up Account B (`user_b@example.com`).
-4. **Observe**: Account B's Dashboard and Ledger start completely empty with ₹0 totals. Account A's records are completely inaccessible.
-5. Add an expense under Account B (e.g. ₹1,200 for Bills).
-6. Refresh Account A's browser: Account A only sees their own 2 transactions (₹700 total), and Account B's ₹1,200 bill is completely hidden.
+The `/reports` view provides multi-period deep financial intelligence based on real PostgreSQL data:
+
+### 1. Reporting Periods & Time-Travel Navigation
+- **Weekly**: Exact Monday–Sunday calendar interval with previous/next week navigation.
+- **Monthly**: Exact calendar month with 28, 29 (leap year), 30, and 31 day handling.
+- **Yearly**: Complete 12-month calendar overview (Jan–Dec).
+- **Custom Range**: Custom start and end date selection with date order validation.
+
+### 2. Analytical Metrics
+- **Total Expenditure & Transaction Count**: Aggregates all authenticated records in the period.
+- **Comparative Deltas**: Automatic comparison with prior period (`+X%` / `-X%` / `No prior spending`).
+- **Average Spend Calculation**: Daily average for weekly/monthly/custom periods; monthly average for yearly period.
+- **Peak Metrics**: Identifies peak spending days, peak spending months, and top spending categories.
+- **Timeline & Distribution Charts**: Recharts daily/monthly bar visualization and donut category chart.
+- **Category Distribution Ledger**: Tabular category breakdown including percentage shares and average ticket size per transaction.
+
+### 3. CSV Data Export & Formula Injection Security
+- Click **Download CSV** to export the filtered transactions for any selected period.
+- RFC-4180 compliant with UTF-8 BOM encoding for Microsoft Excel compatibility.
+- **Formula Injection Mitigation**: Automatically sanitizes cells starting with `=`, `+`, `-`, `@`, Tab, or Carriage Returns by prefixing single quotes.
+
+---
+
+## 🧪 Automated Testing
+
+Run the automated test suite covering financial validation, date boundaries, leap years, CSV sanitization, and comparative analytics:
+
+```bash
+npm test
+```
+
+Test coverage includes:
+- Monday–Sunday week boundaries and offsets.
+- Month boundaries (including Feb in leap year 2024 and non-leap years).
+- Year boundaries for all 12 calendar months.
+- Comparative period percentage calculation & zero denominator handling.
+- Category share percentages and top category identification.
+- CSV sanitization, quote escaping, and formula injection mitigation.
+- Amount limits and input validation constraints.
 
 ---
 
@@ -113,7 +145,8 @@ src/
 ├── services/
 │   └── expenseService.js       # Live Supabase CRUD & metric aggregation
 ├── utils/
-│   └── dateUtils.js            # Calendar boundaries, INR formatting, & validation
+│   ├── dateUtils.js            # Calendar boundaries, INR formatting, & validation
+│   └── reportUtils.js          # Period boundaries, delta analytics & CSV export
 ├── components/
 │   ├── auth/
 │   │   ├── AuthLoadingScreen.jsx
@@ -127,16 +160,19 @@ src/
 │   │   ├── AddExpenseModal.jsx  # Real expense create/edit modal
 │   │   ├── DemoNotice.jsx       # Real-time DB & RLS status badge
 │   │   └── StatCard.jsx         # KPI summary card
-│   └── dashboard/
-│       ├── BudgetProgress.jsx   # Live budget gauge
-│       ├── CategoryBreakdownChart.jsx # Live category donut chart
-│       ├── RecentExpenses.jsx   # Live recent transactions table
-│       └── WeeklySpendingChart.jsx # Live weekly daily bar chart
+│   ├── dashboard/
+│   │   ├── BudgetProgress.jsx   # Live budget gauge
+│   │   ├── CategoryBreakdownChart.jsx # Live category donut chart
+│   │   ├── RecentExpenses.jsx   # Live recent transactions table
+│   │   └── WeeklySpendingChart.jsx # Live weekly daily bar chart
+│   └── reports/
+│       ├── ReportCategoryTable.jsx # Category breakdown table & average metrics
+│       └── ReportTimelineChart.jsx # Multi-period timeline bar chart
 └── pages/
     ├── DashboardPage.jsx       # Live dashboard overview
     ├── ExpensesPage.jsx        # Live expense ledger & filter engine
     ├── LoginPage.jsx           # Sign in view
-    ├── ReportsPage.jsx         # Reports & analytics preview
+    ├── ReportsPage.jsx         # Advanced financial reports & analytics
     ├── ResetPasswordPage.jsx   # Password recovery view
     ├── SettingsPage.jsx        # Account settings view
     └── SignupPage.jsx          # Registration view
