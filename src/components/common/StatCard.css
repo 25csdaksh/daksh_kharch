@@ -1,0 +1,94 @@
+.stat-card {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.stat-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: var(--spacing-xs);
+}
+
+.stat-card-amount {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.stat-card-currency {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.stat-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-muted);
+  margin-top: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.stat-card-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.trend-up {
+  color: #b33927;
+  background-color: #fdf0ee;
+}
+
+.trend-down {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.trend-neutral {
+  color: var(--color-muted);
+  background-color: var(--color-bg);
+}
+
+.stat-card-comparison {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
