@@ -5,6 +5,11 @@
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .chart-header,
@@ -80,33 +85,58 @@
   margin-top: 2px;
 }
 
+/* Weekly Spending Chart Container */
+.chart-container-bar {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 230px;
+  position: relative;
+  overflow: hidden;
+}
+
 /* Budget Card */
 .budget-metrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
   margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
+  padding: 10px;
   background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
 }
 
 .budget-metric-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  padding: 8px 10px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  min-width: 0;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .metric-label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--color-muted);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .metric-value {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
 }
 
 .text-primary {
@@ -114,7 +144,7 @@
 }
 
 .text-success {
-  color: #1f7a55;
+  color: #10b981;
 }
 
 .budget-progress-bar-container {
@@ -165,65 +195,105 @@
 
 /* Category Breakdown Layout */
 .category-chart-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-md);
-  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 993px) {
+  .category-chart-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
 }
 
 .pie-container {
+  width: 100%;
+  max-width: 220px;
+  height: 210px;
+  margin: 0 auto;
+  position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 
 .category-legend {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
+  min-width: 0;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 8px 12px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   font-size: var(--font-size-xs);
+  min-width: 0;
+  transition: all var(--transition-speed);
+}
+
+.legend-item:hover {
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
 }
 
 .legend-indicator-group {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .legend-color-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
   flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .legend-label {
   color: var(--color-text);
-  font-weight: 500;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .legend-values {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .legend-percent {
   font-weight: 700;
-  color: var(--color-text);
-  min-width: 32px;
-  text-align: right;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
 }
 
 .legend-amount {
-  color: var(--color-muted);
-  min-width: 60px;
+  color: var(--color-text);
+  font-weight: 700;
+  min-width: 65px;
   text-align: right;
+  font-size: 12px;
 }
 
 /* Recent Expenses Table */
@@ -449,13 +519,10 @@
 }
 
 @media (max-width: 992px) {
-  .category-chart-layout {
-    grid-template-columns: 1fr;
-  }
-
   .budget-metrics {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
   }
 }
 

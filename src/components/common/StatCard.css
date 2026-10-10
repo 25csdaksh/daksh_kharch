@@ -19,15 +19,28 @@
   color: var(--color-muted);
 }
 
+.stat-card-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-card-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  font-weight: 700;
+}
+
 .stat-card-icon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-md);
   background-color: var(--color-primary-light);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .stat-card-value-row {

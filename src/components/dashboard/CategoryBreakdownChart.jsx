@@ -57,19 +57,24 @@ export default function CategoryBreakdownChart({ categories = [], isLoading = fa
       ) : (
         <div className="category-chart-layout">
           <div className="pie-container">
-            <ResponsiveContainer width="100%" height={220}>
+            <ResponsiveContainer width="100%" height={210}>
               <PieChart>
                 <Pie
                   data={categories}
                   cx="50%"
                   cy="50%"
-                  innerRadius={55}
-                  outerRadius={85}
+                  innerRadius={48}
+                  outerRadius={76}
                   paddingAngle={3}
                   dataKey="value"
                 >
                   {categories.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={entry.color}
+                      stroke="#FFFFFF"
+                      strokeWidth={2}
+                    />
                   ))}
                 </Pie>
                 <Tooltip content={<CustomPieTooltip />} />

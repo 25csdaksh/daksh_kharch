@@ -23,15 +23,15 @@ export const ALLOWED_PAYMENT_METHODS = [
 ];
 
 export const CATEGORY_COLORS = {
-  Food: '#245C45',
-  Transport: '#3B7A5D',
-  Shopping: '#D8B86A',
-  Education: '#4A7C59',
-  Entertainment: '#D97724',
-  Bills: '#C84B31',
-  Healthcare: '#5C9EAD',
-  'Personal Care': '#9B5DE5',
-  Other: '#727B73'
+  Food: '#10B981',
+  Transport: '#2563EB',
+  Shopping: '#EC4899',
+  Education: '#8B5CF6',
+  Entertainment: '#F59E0B',
+  Bills: '#EF4444',
+  Healthcare: '#06B6D4',
+  'Personal Care': '#F97316',
+  Other: '#64748B'
 };
 
 /**

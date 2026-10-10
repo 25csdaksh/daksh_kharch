@@ -3,6 +3,7 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
+  Cell,
   XAxis,
   YAxis,
   Tooltip,
@@ -60,27 +61,35 @@ export default function WeeklySpendingChart({ data = [], isLoading = false }) {
           </div>
         ) : (
           <ResponsiveContainer width="100%" height={230}>
-            <BarChart data={data} margin={{ top: 10, right: 8, left: -4, bottom: 0 }}>
+            <BarChart data={data} margin={{ top: 12, right: 6, left: -16, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
               <XAxis
                 dataKey="day"
+                interval={0}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#64748B', fontSize: 12, fontWeight: 600 }}
+                tick={{ fill: '#64748B', fontSize: 11, fontWeight: 600 }}
               />
               <YAxis
+                width={36}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#64748B', fontSize: 11 }}
+                tick={{ fill: '#64748B', fontSize: 10, fontWeight: 500 }}
                 tickFormatter={(v) => `₹${v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v}`}
               />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(5, 150, 105, 0.06)', radius: 6 }} />
               <Bar
                 dataKey="amount"
-                fill="#059669"
                 radius={[6, 6, 0, 0]}
-                maxBarSize={38}
-              />
+                maxBarSize={30}
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`bar-${index}`}
+                    fill={entry.amount > 0 ? '#059669' : '#E2E8F0'}
+                  />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         )}

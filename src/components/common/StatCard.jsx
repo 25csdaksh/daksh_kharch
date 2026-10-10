@@ -24,11 +24,18 @@ export default function StatCard({
     <div className="stat-card card">
       <div className="stat-card-header">
         <span className="stat-card-title">{title}</span>
-        {Icon && (
-          <div className="stat-card-icon" aria-hidden="true">
-            <Icon size={18} />
-          </div>
-        )}
+        <div className="stat-card-header-right">
+          {badgeText && (
+            <span className="badge badge-success stat-card-badge">
+              {badgeText}
+            </span>
+          )}
+          {Icon && (
+            <div className="stat-card-icon" aria-hidden="true">
+              <Icon size={18} />
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="stat-card-value-row">
@@ -36,11 +43,6 @@ export default function StatCard({
           <span className="stat-card-currency">{currency}</span>
           <span className="stat-card-number">{formattedAmount}</span>
         </div>
-        {badgeText && (
-          <span className="badge badge-success">
-            {badgeText}
-          </span>
-        )}
       </div>
 
       <div className="stat-card-footer">

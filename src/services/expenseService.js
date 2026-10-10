@@ -295,7 +295,7 @@ export async function getDashboardMetrics() {
       name,
       value: parseFloat(val.toFixed(2)),
       percentage: spentThisMonth > 0 ? Math.round((val / spentThisMonth) * 100) : 0,
-      color: CATEGORY_COLORS[name] || '#727B73'
+      color: CATEGORY_COLORS[name] || '#64748B'
     }))
     .sort((a, b) => b.value - a.value);
 

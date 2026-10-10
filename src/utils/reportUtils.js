@@ -298,7 +298,7 @@ export function aggregateCategories(expenses, totalSpend) {
         value: amount,
         count: data.count,
         percentage,
-        color: CATEGORY_COLORS[name] || '#727B73',
+        color: CATEGORY_COLORS[name] || '#64748B',
         avgPerTransaction: data.count > 0 ? parseFloat((amount / data.count).toFixed(2)) : 0
       };
     })
