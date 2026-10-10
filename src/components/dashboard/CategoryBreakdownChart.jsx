@@ -57,14 +57,14 @@ export default function CategoryBreakdownChart({ categories = [], isLoading = fa
       ) : (
         <div className="category-chart-layout">
           <div className="pie-container">
-            <ResponsiveContainer width="100%" height={210}>
+            <ResponsiveContainer width="100%" height={190}>
               <PieChart>
                 <Pie
                   data={categories}
                   cx="50%"
                   cy="50%"
-                  innerRadius={48}
-                  outerRadius={76}
+                  innerRadius={42}
+                  outerRadius={68}
                   paddingAngle={3}
                   dataKey="value"
                 >

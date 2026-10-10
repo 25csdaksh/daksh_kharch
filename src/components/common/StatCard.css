@@ -5,24 +5,37 @@
   gap: var(--spacing-sm);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .stat-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  min-width: 0;
+  gap: 6px;
 }
 
 .stat-card-title {
   font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
 }
 
 .stat-card-header-right {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .stat-card-badge {
@@ -32,8 +45,8 @@
 }
 
 .stat-card-icon {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-md);
   background-color: var(--color-primary-light);
   color: var(--color-primary);
@@ -48,6 +61,8 @@
   align-items: baseline;
   justify-content: space-between;
   margin-top: var(--spacing-xs);
+  width: 100%;
+  min-width: 0;
 }
 
 .stat-card-amount {
@@ -58,6 +73,9 @@
   display: flex;
   align-items: baseline;
   gap: 2px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .stat-card-currency {

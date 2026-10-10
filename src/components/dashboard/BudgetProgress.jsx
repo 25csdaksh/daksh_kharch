@@ -32,17 +32,17 @@ export default function BudgetProgress({
 
       <div className="budget-metrics">
         <div className="budget-metric-item">
-          <span className="metric-label">Total Allocated</span>
+          <span className="metric-label">Budget</span>
           <span className="metric-value">{formatCurrencyINR(totalBudget, false)}</span>
         </div>
         <div className="budget-metric-item">
-          <span className="metric-label">Spent So Far</span>
+          <span className="metric-label">Spent</span>
           <span className={`metric-value ${isOverBudget ? 'text-danger' : 'text-primary'}`}>
             {formatCurrencyINR(safeSpent, false)}
           </span>
         </div>
         <div className="budget-metric-item">
-          <span className="metric-label">Remaining Balance</span>
+          <span className="metric-label">Remaining</span>
           <span className={`metric-value ${isOverBudget ? 'text-danger' : 'text-success'}`}>
             {isOverBudget ? `-₹${(safeSpent - totalBudget).toLocaleString('en-IN')}` : formatCurrencyINR(remainingAmount, false)}
           </span>

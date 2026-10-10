@@ -29,6 +29,10 @@
 
 @media (max-width: 768px) {
   .app-main-content {
-    padding: var(--spacing-md) var(--spacing-md) calc(80px + env(safe-area-inset-bottom, 0px));
+    padding: 12px 12px calc(80px + env(safe-area-inset-bottom, 0px));
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 }
