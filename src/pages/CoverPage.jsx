@@ -67,7 +67,8 @@ export default function CoverPage() {
       </header>
 
       {/* 2. Hero Section */}
-      <section className="cover-hero-section">
+      <div className="cover-hero-banner">
+        <section className="cover-hero-section">
         <div className="hero-pill-badge">
           <Sparkles size={14} />
           <span>Smart Personal Finance & Budgeting Platform</span>
@@ -118,6 +119,7 @@ export default function CoverPage() {
           </div>
         </div>
       </section>
+    </div>
 
       {/* 3. Hero Visual Interactive Preview (Dashboard Showcase) */}
       <div className="cover-preview-section">
