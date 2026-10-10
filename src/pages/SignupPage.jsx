@@ -63,7 +63,7 @@ export default function SignupPage() {
             <Wallet size={26} />
           </div>
           <h1 className="auth-page-title">Create Account</h1>
-          <p className="auth-page-subtitle">Start tracking your personal finances with PaisaTrack</p>
+          <p className="auth-page-subtitle">Start tracking your personal finances with HisabSetu</p>
         </div>
 
         {errorMessage && (

@@ -1,21 +1,43 @@
 :root {
-  /* Core Color Palette */
-  --color-bg: #F7F8F5;
+  /* ==========================================================================
+     HISABSETU DESIGN SYSTEM (60 : 30 : 10 RULE)
+     60% Dominant Base: #F8FAFC (Canvas) & #FFFFFF (Card Surfaces)
+     30% Structural Contrast: #0F172A (Headings), #1E293B (Text), #64748B (Muted)
+     10% Vibrant Action Accent: #059669 (Emerald) & #D97706 (Amber Gold)
+     ========================================================================== */
+
+  /* 60% Dominant Palette */
+  --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
-  --color-primary: #245C45;
-  --color-primary-hover: #1c4735;
-  --color-primary-light: #eaf2ed;
-  --color-secondary: #DCE9DF;
-  --color-text: #202923;
-  --color-muted: #727B73;
-  --color-accent: #D8B86A;
-  --color-accent-hover: #c4a457;
-  --color-accent-light: #fbf6ec;
-  --color-border: #E7EBE5;
-  --color-border-hover: #d2d9cf;
-  --color-danger: #d9534f;
-  --color-danger-light: #fdf2f2;
-  --color-warning: #e09f3e;
+  --color-surface-hover: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+
+  /* 30% Structural Contrast & Hierarchy */
+  --color-text: #0F172A;
+  --color-heading: #0F172A;
+  --color-muted: #64748B;
+  --color-brand-deep: #064E3B;
+  --color-secondary: #F1F5F9;
+  --color-secondary-hover: #E2E8F0;
+  --color-secondary-text: #334155;
+
+  /* 10% Vibrant Energy Accent (CTAs, Badges, Highlights) */
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-primary-light: #ECFDF5;
+  --color-primary-glow: rgba(5, 150, 105, 0.28);
+  --color-accent: #D97706;
+  --color-accent-hover: #B45309;
+  --color-accent-light: #FEF3C7;
+
+  /* Status Colors */
+  --color-danger: #EF4444;
+  --color-danger-light: #FEF2F2;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FFFBEB;
+  --color-info: #0284C7;
+  --color-info-light: #F0F9FF;
 
   /* Typography */
   --font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -36,21 +58,22 @@
   --spacing-2xl: 2.5rem;  /* 40px */
 
   /* Borders & Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(32, 41, 35, 0.04);
-  --shadow-md: 0 4px 12px rgba(32, 41, 35, 0.05), 0 1px 3px rgba(32, 41, 35, 0.03);
-  --shadow-lg: 0 10px 25px rgba(32, 41, 35, 0.08), 0 4px 8px rgba(32, 41, 35, 0.03);
+  /* Shadows (Depth & Modern Elevation) */
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 8px 24px -4px var(--color-primary-glow);
 
-  /* Layout */
+  /* Layout Constants */
   --sidebar-width: 260px;
   --header-height: 70px;
-  --transition-speed: 0.2s ease;
+  --transition-speed: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after {
@@ -97,29 +120,38 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: 0.625rem 1.25rem;
+  padding: 0.65rem 1.35rem;
   font-size: var(--font-size-sm);
   font-weight: 600;
   border-radius: var(--radius-md);
   transition: all var(--transition-speed);
 }
 
+.btn:active {
+  transform: scale(0.98);
+}
+
 .btn-primary {
   background-color: var(--color-primary);
   color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
   background-color: var(--color-secondary);
-  color: var(--color-primary);
+  color: var(--color-secondary-text);
+  border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background-color: #cde0d1;
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-border-hover);
 }
 
 .btn-outline {
@@ -129,16 +161,17 @@ input, select, textarea {
 }
 
 .btn-outline:hover {
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-hover);
   border-color: var(--color-border-hover);
+  transform: translateY(-1px);
 }
 
-/* Utility Badge */
+/* Badges */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 0.25rem 0.625rem;
+  padding: 0.25rem 0.65rem;
   font-size: var(--font-size-xs);
   font-weight: 600;
   border-radius: var(--radius-full);
@@ -146,29 +179,31 @@ input, select, textarea {
 
 .badge-demo {
   background-color: var(--color-accent-light);
-  color: #8c7128;
-  border: 1px solid rgba(216, 184, 106, 0.4);
+  color: var(--color-accent);
+  border: 1px solid rgba(217, 119, 6, 0.3);
 }
 
 .badge-success {
   background-color: var(--color-primary-light);
   color: var(--color-primary);
+  border: 1px solid rgba(5, 150, 105, 0.2);
 }
 
 .badge-warning {
-  background-color: #fff8eb;
+  background-color: var(--color-warning-light);
   color: var(--color-warning);
 }
 
-/* Base Card */
+/* Cards (60% Surface with Clean Border Structure) */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), transform var(--transition-speed);
 }
 
 .card:hover {
   border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
 }

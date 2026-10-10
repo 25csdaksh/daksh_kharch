@@ -14,6 +14,7 @@ export default function AppLayout() {
   const getPageTitle = (pathname) => {
     switch (pathname) {
       case '/':
+      case '/dashboard':
         return 'Dashboard Overview';
       case '/expenses':
         return 'Expense Ledger';
@@ -24,7 +25,7 @@ export default function AppLayout() {
       case '/login':
         return 'Authentication & Profile';
       default:
-        return 'PaisaTrack Dashboard';
+        return 'HisabSetu Dashboard';
     }
   };
 

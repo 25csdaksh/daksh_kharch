@@ -30,7 +30,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
   };
 
   const navItems = [
-    { path: '/', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/expenses', label: 'Expenses', icon: Receipt },
     { path: '/reports', label: 'Reports', icon: BarChart3 },
     { path: '/settings', label: 'Settings', icon: Settings }
@@ -44,7 +44,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
     .map((n) => n[0])
     .join('')
     .toUpperCase()
-    .slice(0, 2) || 'PT';
+    .slice(0, 2) || 'HS';
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
             <Wallet size={24} />
           </div>
           <div className="sidebar-brand-text">
-            <span className="brand-name">PaisaTrack</span>
+            <span className="brand-name">HisabSetu</span>
             <span className="brand-badge">PRO</span>
           </div>
         </div>

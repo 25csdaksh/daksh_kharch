@@ -12,7 +12,7 @@ import {
 } from '../src/utils/reportUtils.js';
 import { formatCurrencyINR } from '../src/utils/dateUtils.js';
 
-describe('PaisaTrack Phase 4 Financial Reports & Analytics Tests', () => {
+describe('HisabSetu Financial Reports & Analytics Tests', () => {
   describe('Week Boundary Calculations', () => {
     it('calculates Monday–Sunday boundaries for current week', () => {
       // Oct 09, 2026 is a Friday

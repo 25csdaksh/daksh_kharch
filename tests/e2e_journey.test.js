@@ -20,7 +20,7 @@ import {
   generateExpensesCSV
 } from '../src/utils/reportUtils.js';
 
-describe('PaisaTrack Phase 5 Production Hardening & E2E Journey Tests', () => {
+describe('HisabSetu Production Hardening & E2E Journey Tests', () => {
   describe('User Journey Step 1: Input Validation & Expense Lifecycle', () => {
     it('validates a complete expense lifecycle (Create -> Validate -> Edit -> Delete)', () => {
       // 1. Creation payload

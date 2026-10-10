@@ -166,7 +166,7 @@ export default function ReportsPage() {
 
     try {
       const csvString = generateExpensesCSV(reportData.expenses, periodParams.label);
-      const safeFilename = `paisatrack-${periodTab}-report-${periodParams.startDate}-to-${periodParams.endDate}.csv`;
+      const safeFilename = `hisabsetu-${periodTab}-report-${periodParams.startDate}-to-${periodParams.endDate}.csv`;
       triggerCSVDownload(csvString, safeFilename);
 
       setDownloadSuccess(`Exported ${reportData.expenses.length} records to ${safeFilename}`);

@@ -10,7 +10,7 @@ import {
   ALLOWED_PAYMENT_METHODS
 } from '../src/utils/dateUtils.js';
 
-describe('PaisaTrack Phase 3 Financial Validation Tests', () => {
+describe('HisabSetu Financial Validation Tests', () => {
   describe('Expense Input Validation', () => {
     it('validates a correct expense payload', () => {
       const payload = {

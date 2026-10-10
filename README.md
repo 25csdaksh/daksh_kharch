@@ -1,6 +1,6 @@
-# PaisaTrack — Personal Expense Tracker & Advanced Financial Analytics
+# HisabSetu — Personal Expense Tracker & Smart Financial Bridge
 
-PaisaTrack is a production-grade personal expense tracking web application built with **React 19**, **Vite 6**, **React Router 7**, **Recharts**, and **Supabase PostgreSQL** with strict **Row Level Security (RLS)**.
+HisabSetu is a production-grade personal expense tracking web application built with **React 19**, **Vite 6**, **React Router 7**, **Recharts**, and **Supabase PostgreSQL** with strict **Row Level Security (RLS)**.
 
 ---
 

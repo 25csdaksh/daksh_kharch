@@ -10,7 +10,7 @@ export default function AuthLoadingScreen({ message = 'Verifying authentication 
           <Wallet size={28} className="auth-loading-brand-icon" />
           <Loader2 size={44} className="auth-loading-spinner" />
         </div>
-        <h2 className="auth-loading-title">PaisaTrack</h2>
+        <h2 className="auth-loading-title">HisabSetu</h2>
         <p className="auth-loading-text">{message}</p>
       </div>
     </div>

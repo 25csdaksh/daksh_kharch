@@ -25,7 +25,9 @@ export const supabase = isSupabaseConfigured
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
-        storageKey: 'paisatrack_auth_session'
+        storageKey: (typeof window !== 'undefined' && window.localStorage?.getItem('paisatrack_auth_session'))
+          ? 'paisatrack_auth_session'
+          : 'hisabsetu_auth_session'
       }
     })
   : null;

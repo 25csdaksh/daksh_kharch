@@ -20,21 +20,21 @@ export default function SettingsPage() {
   const navigate = useNavigate();
 
   const [budgetLimit, setBudgetLimit] = useState(() => {
-    return localStorage.getItem('paisatrack_monthly_budget') || '45000';
+    return localStorage.getItem('hisabsetu_monthly_budget') || localStorage.getItem('paisatrack_monthly_budget') || '45000';
   });
   const [currencySymbol, setCurrencySymbol] = useState(() => {
-    return localStorage.getItem('paisatrack_currency') || 'INR';
+    return localStorage.getItem('hisabsetu_currency') || localStorage.getItem('paisatrack_currency') || 'INR';
   });
   const [budgetAlerts, setBudgetAlerts] = useState(() => {
-    return localStorage.getItem('paisatrack_budget_alerts') !== 'false';
+    return localStorage.getItem('hisabsetu_budget_alerts') !== 'false';
   });
   const [saveMessage, setSaveMessage] = useState('');
 
   const handleSavePreferences = (e) => {
     e.preventDefault();
-    localStorage.setItem('paisatrack_monthly_budget', budgetLimit);
-    localStorage.setItem('paisatrack_currency', currencySymbol);
-    localStorage.setItem('paisatrack_budget_alerts', String(budgetAlerts));
+    localStorage.setItem('hisabsetu_monthly_budget', budgetLimit);
+    localStorage.setItem('hisabsetu_currency', currencySymbol);
+    localStorage.setItem('hisabsetu_budget_alerts', String(budgetAlerts));
     setSaveMessage('Preferences saved successfully!');
     setTimeout(() => setSaveMessage(''), 3000);
   };
@@ -210,7 +210,7 @@ export default function SettingsPage() {
           </div>
 
           <p className="page-main-subheading" style={{ marginBottom: '1rem' }}>
-            PaisaTrack implements end-to-end security using PostgreSQL Row Level Security (RLS) on Supabase.
+            HisabSetu implements end-to-end security using PostgreSQL Row Level Security (RLS) on Supabase.
           </p>
 
           <ul className="feature-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem' }}>
