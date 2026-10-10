@@ -1,5 +1,5 @@
 .stat-card {
-  padding: 1.25rem 1.4rem;
+  padding: 1.35rem 1.45rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
@@ -12,39 +12,19 @@
   background-color: #FFFFFF;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
 }
 
-/* Top Accent Bars */
+/* Hide legacy multi-colored top bars for clean Neo-Bank look */
 .stat-card-accent-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--color-border);
-}
-
-.stat-card-today .stat-card-accent-bar {
-  background: linear-gradient(90deg, #10B981, #059669);
-}
-
-.stat-card-week .stat-card-accent-bar {
-  background: linear-gradient(90deg, #3B82F6, #2563EB);
-}
-
-.stat-card-month .stat-card-accent-bar {
-  background: linear-gradient(90deg, #8B5CF6, #7C3AED);
-}
-
-.stat-card-budget .stat-card-accent-bar {
-  background: linear-gradient(90deg, #F59E0B, #D97706);
+  display: none;
 }
 
 .stat-card-header {
@@ -53,11 +33,11 @@
   justify-content: space-between;
   width: 100%;
   min-width: 0;
-  gap: 6px;
+  gap: 8px;
 }
 
 .stat-card-title {
-  font-size: 0.825rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-muted);
   text-transform: capitalize;
@@ -72,17 +52,17 @@
 .stat-card-header-right {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
-/* Badges */
+/* Clean Neo-Bank Badges */
 .stat-card-badge {
   font-size: 10px;
-  padding: 3px 8px;
+  padding: 2px 7px;
   font-weight: 700;
   border-radius: var(--radius-full);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
 }
 
@@ -110,11 +90,11 @@
   border: 1px solid #FDE68A;
 }
 
-/* Icons */
+/* Clean Rounded Icon Containers */
 .stat-card-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,26 +103,26 @@
 }
 
 .stat-card:hover .stat-card-icon {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .icon-wrap-today {
-  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  background-color: #ECFDF5;
   color: #059669;
 }
 
 .icon-wrap-week {
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  background-color: #EFF6FF;
   color: #2563EB;
 }
 
 .icon-wrap-month {
-  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  background-color: #F5F3FF;
   color: #7C3AED;
 }
 
 .icon-wrap-budget {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  background-color: #FFFBEB;
   color: #D97706;
 }
 
@@ -155,7 +135,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 2px;
   width: 100%;
   min-width: 0;
 }
@@ -171,13 +151,13 @@
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .stat-card-currency {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: var(--color-muted);
+  color: #94A3B8;
 }
 
 .stat-card-footer {
@@ -201,8 +181,8 @@
 }
 
 .trend-up {
-  color: #b33927;
-  background-color: #fdf0ee;
+  color: #EF4444;
+  background-color: #FEF2F2;
 }
 
 .trend-down {
@@ -221,4 +201,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
+  font-size: 12px;
+  color: var(--color-muted);
 }

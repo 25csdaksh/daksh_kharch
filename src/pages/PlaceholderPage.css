@@ -114,10 +114,19 @@
 .form-text-input {
   padding: 0.625rem 0.875rem;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   font-size: var(--font-size-sm);
-  background-color: #fafbf9;
-  color: var(--color-text);
+  background-color: #F8FAFC;
+  color: var(--color-heading);
+  transition: all var(--transition-speed);
+}
+
+.form-select:focus,
+.form-text-input:focus {
+  background-color: #FFFFFF;
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
 .settings-toggle-row {

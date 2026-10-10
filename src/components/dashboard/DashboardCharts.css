@@ -390,19 +390,20 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--color-muted);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0.75rem var(--spacing-md);
   border-bottom: 1px solid var(--color-border);
+  background-color: #F8FAFC;
 }
 
 .expenses-table td {
-  padding: 0.875rem var(--spacing-md);
+  padding: 0.85rem var(--spacing-md);
   font-size: var(--font-size-sm);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #F1F5F9;
   vertical-align: middle;
 }
 
 .expense-row:hover {
-  background-color: #fcfdfb;
+  background-color: #F8FAFC;
 }
 
 .cell-title {

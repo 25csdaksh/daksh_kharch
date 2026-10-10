@@ -64,11 +64,11 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Shadows (Depth & Modern Elevation) */
-  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.1), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
-  --shadow-glow: 0 8px 24px -4px var(--color-primary-glow);
+  /* Shadows (Clean Neo-Bank Ambient Elevation) */
+  --shadow-sm: 0 1px 3px 0 rgba(16, 24, 40, 0.05), 0 1px 2px 0 rgba(16, 24, 40, 0.03);
+  --shadow-md: 0 4px 16px -2px rgba(16, 24, 40, 0.07), 0 2px 6px -1px rgba(16, 24, 40, 0.04);
+  --shadow-lg: 0 12px 28px -4px rgba(16, 24, 40, 0.09), 0 4px 10px -2px rgba(16, 24, 40, 0.04);
+  --shadow-glow: 0 8px 20px -4px rgba(5, 150, 105, 0.25);
 
   /* Layout Constants */
   --sidebar-width: 260px;
