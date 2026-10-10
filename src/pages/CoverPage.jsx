@@ -33,14 +33,14 @@ export default function CoverPage() {
           </div>
           <span className="cover-brand-title">
             HisabSetu
-            <span className="cover-brand-badge">હિસાબસેતુ</span>
+            <span className="cover-brand-badge">PRO</span>
           </span>
         </Link>
 
         <nav className="cover-nav-links" aria-label="Main Cover Links">
-          <a href="#features" className="cover-nav-link">સુવિધાઓ (Features)</a>
-          <a href="#how-it-works" className="cover-nav-link">કેવી રીતે કામ કરે છે?</a>
-          <a href="#security" className="cover-nav-link">સુરક્ષા (Security)</a>
+          <a href="#features" className="cover-nav-link">Features</a>
+          <a href="#how-it-works" className="cover-nav-link">How It Works</a>
+          <a href="#security" className="cover-nav-link">Security</a>
         </nav>
 
         <div className="cover-nav-actions">
@@ -49,16 +49,16 @@ export default function CoverPage() {
               className="btn btn-cover-signup"
               onClick={() => navigate('/dashboard')}
             >
-              <span>ડેશબોર્ડ ખોલો (Open Dashboard)</span>
+              <span>Open Dashboard</span>
               <ArrowRight size={16} />
             </button>
           ) : (
             <>
               <Link to="/login" className="btn btn-cover-login">
-                લૉગ ઇન (Log In)
+                Sign In
               </Link>
               <Link to="/signup" className="btn btn-cover-signup">
-                <span>શરૂ કરો (Sign Up)</span>
+                <span>Sign Up</span>
                 <ArrowRight size={16} />
               </Link>
             </>
@@ -70,16 +70,15 @@ export default function CoverPage() {
       <section className="cover-hero-section">
         <div className="hero-pill-badge">
           <Sparkles size={14} />
-          <span>ભારતનું સ્માર્ટ પર્સનલ ફાઇનાન્સ પ્લેટફોર્મ</span>
+          <span>Smart Personal Finance & Budgeting Platform</span>
         </div>
 
         <h1 className="hero-main-heading">
-          તમારા દરેક ખર્ચ અને બચતનો સ્માર્ટ સેતુ — <span className="gradient-text">HisabSetu</span>
+          The Smart Bridge Between Your Expenses & Savings — <span className="gradient-text">HisabSetu</span>
         </h1>
 
         <p className="hero-description">
-          દૈનિક ખર્ચ ટ્રેક કરો, બજેટ લિમિટ નક્કી કરો અને સચોટ વિઝ્યુઅલ રિપોર્ટ્સ સાથે તમારા નાણાકીય ભવિષ્યને સુરક્ષિત બનાવો.
-          ૧૦૦% પ્રાઇવેટ અને બેંક-ગ્રેડ સિક્યોરિટી સાથે.
+          Track daily expenses effortlessly, set custom budget limits, and gain deep visual financial insights with bank-grade PostgreSQL security. Master your money with total clarity.
         </p>
 
         <div className="hero-cta-group">
@@ -88,17 +87,17 @@ export default function CoverPage() {
               className="btn-hero-primary"
               onClick={() => navigate('/dashboard')}
             >
-              <span>તમારા ડેશબોર્ડ પર જાઓ</span>
+              <span>Go to Your Dashboard</span>
               <ArrowRight size={18} />
             </button>
           ) : (
             <>
               <Link to="/signup" className="btn-hero-primary">
-                <span>મફતમાં એકાઉન્ટ બનાવો (Get Started)</span>
+                <span>Create Free Account (Get Started)</span>
                 <ArrowRight size={18} />
               </Link>
               <Link to="/login" className="btn-hero-secondary">
-                <span>પહેલેથી એકાઉન્ટ છે? લૉગ ઇન કરો</span>
+                <span>Already have an account? Sign In</span>
               </Link>
             </>
           )}
@@ -111,11 +110,11 @@ export default function CoverPage() {
           </div>
           <div className="trust-item">
             <Lock size={16} className="text-primary" />
-            <span>૧૦૦% ખાનગી અને એન્ક્રિપ્ટેડ</span>
+            <span>100% Private & Encrypted</span>
           </div>
           <div className="trust-item">
             <Download size={16} className="text-primary" />
-            <span>Excel / CSV એક્સપોર્ટ સપોર્ટ</span>
+            <span>Excel / CSV Export Ready</span>
           </div>
         </div>
       </section>
@@ -135,24 +134,24 @@ export default function CoverPage() {
 
           <div className="preview-content">
             <div className="preview-metric-card">
-              <div className="preview-metric-title">આજનો ખર્ચ (Today)</div>
+              <div className="preview-metric-title">Today's Spend</div>
               <div className="preview-metric-value">₹450.00</div>
-              <div className="preview-badge-positive">✓ ૨ ટ્રાન્ઝેક્શન્સ</div>
+              <div className="preview-badge-positive">✓ 2 Transactions</div>
             </div>
 
             <div className="preview-metric-card">
-              <div className="preview-metric-title">આ સપ્તાહનો ખર્ચ (This Week)</div>
+              <div className="preview-metric-title">This Week's Spend</div>
               <div className="preview-metric-value">₹3,820.00</div>
               <div className="preview-badge-positive" style={{ color: 'var(--color-primary)' }}>
-                <TrendingUp size={13} /> નિયંત્રણમાં છે
+                <TrendingUp size={13} /> Within Limits
               </div>
             </div>
 
             <div className="preview-metric-card">
-              <div className="preview-metric-title">માસિક કુલ ખર્ચ (This Month)</div>
+              <div className="preview-metric-title">This Month's Spend</div>
               <div className="preview-metric-value">₹18,450.00</div>
               <div className="preview-badge-positive" style={{ color: 'var(--color-accent)' }}>
-                લક્ષ્યાંક: ₹45,000 (બાકી ₹26,550)
+                Target: ₹45,000 (₹26,550 Remaining)
               </div>
             </div>
 
@@ -163,10 +162,10 @@ export default function CoverPage() {
                 </div>
                 <div>
                   <strong style={{ fontSize: '0.9rem', color: 'var(--color-heading)' }}>
-                    તાજેતરનો ખર્ચ: કરિયાણું અને દૂધ (Food)
+                    Recent Transaction: Groceries & Supermarket (Food)
                   </strong>
                   <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>
-                    UPI પેમેન્ટ • આજે સાંજે ૬:૩૦
+                    UPI Payment • Today at 6:30 PM
                   </p>
                 </div>
               </div>
@@ -182,10 +181,10 @@ export default function CoverPage() {
       <section id="features" className="cover-features-section">
         <div className="features-container">
           <div className="section-badge-center">
-            <p className="section-tag">મુખ્ય સુવિધાઓ</p>
-            <h2 className="section-title">શા માટે HisabSetu તમારા માટે શ્રેષ્ઠ છે?</h2>
+            <p className="section-tag">Key Capabilities</p>
+            <h2 className="section-title">Why HisabSetu is the Right Choice for You</h2>
             <p className="section-subtitle">
-              સરળતા અને શક્તિશાળી એનાલિટિક્સનું પરફેક્ટ સંયોજન — તમારા દરેક રૂપિયાની સાચી ગણતરી.
+              A powerful balance of speed, deep visual analytics, and bank-grade data security — giving you total control over every rupee.
             </p>
           </div>
 
@@ -194,9 +193,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <Receipt size={24} />
               </div>
-              <h3 className="feature-heading">ઝડપી ખર્ચ એન્ટ્રી (Fast Ledger)</h3>
+              <h3 className="feature-heading">Fast Expense Ledger</h3>
               <p className="feature-desc">
-                માત્ર ૫ સેકન્ડમાં કોઈપણ ખર્ચ રકમ, કેટેગરી અને પેમેન્ટ મોડ (UPI, Cash, Card) સાથે નોંધી લો.
+                Record any expense transaction in under 5 seconds with amount, category, and payment method (UPI, Cash, Card).
               </p>
             </div>
 
@@ -204,9 +203,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <BarChart3 size={24} />
               </div>
-              <h3 className="feature-heading">લાઇવ ગ્રાફ્સ અને રિપોર્ટ્સ</h3>
+              <h3 className="feature-heading">Live Visual Analytics</h3>
               <p className="feature-desc">
-                સાપ્તાહિક, માસિક અને વાર્ષિક ખર્ચના સુંદર Recharts બાર ચાર્ટ અને કેટેગરી ડોનટ ચાર્ટ્સ.
+                Interactive weekly, monthly, and yearly Recharts visualizations, bar breakdowns, and category donut distribution.
               </p>
             </div>
 
@@ -214,9 +213,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="feature-heading">૧૦૦% બેંક-ગ્રેડ સિક્યોરિટી</h3>
+              <h3 className="feature-heading">100% Bank-Grade Security</h3>
               <p className="feature-desc">
-                Supabase PostgreSQL Row Level Security (RLS) દ્વારા તમારો ડેટા ફક્ત તમારા જ ખાતા પૂરતો સંપૂર્ણ સુરક્ષિત છે.
+                Powered by Supabase PostgreSQL Row Level Security (RLS). Your records are strictly isolated and accessible only to you.
               </p>
             </div>
 
@@ -224,9 +223,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <TrendingUp size={24} />
               </div>
-              <h3 className="feature-heading">સ્માર્ટ બજેટ એલર્ટ્સ</h3>
+              <h3 className="feature-heading">Smart Budget Alerts</h3>
               <p className="feature-desc">
-                તમારી મર્યાદા નક્કી કરો અને જ્યારે ૮૦% બજેટ વપરાઈ જાય ત્યારે તરત ચેતવણી મેળવો.
+                Set monthly targets and track real-time budget progress with visual indicators before exceeding limits.
               </p>
             </div>
 
@@ -234,9 +233,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <Download size={24} />
               </div>
-              <h3 className="feature-heading">સિક્યોર CSV / Excel ડાઉનલોડ</h3>
+              <h3 className="feature-heading">Secure CSV / Excel Export</h3>
               <p className="feature-desc">
-                તમામ વ્યવહારોને એક જ ક્લિકમાં એક્સેલ-રેડી CSV ફાઇલમાં એક્સપોર્ટ કરો. ફોર્મ્યુલા ઇન્જેક્શન પ્રોટેક્શન સાથે.
+                Export all your financial records in one click with spreadsheet formula injection protection and UTF-8 encoding.
               </p>
             </div>
 
@@ -244,9 +243,9 @@ export default function CoverPage() {
               <div className="feature-icon-circle">
                 <Smartphone size={24} />
               </div>
-              <h3 className="feature-heading">મોબાઇલ અને લેપટોપ રેડી</h3>
+              <h3 className="feature-heading">Responsive on All Devices</h3>
               <p className="feature-desc">
-                મોબાઇલ, ટેબ્લેટ કે કોમ્પ્યુટર — દરેક સ્ક્રીન પર સરળ અને પ્રતિભાવશીલ યુઝર ઇન્ટરફેસ.
+                Optimized for phones, tablets, laptops, and desktop screens with lightning-fast load times.
               </p>
             </div>
           </div>
@@ -255,34 +254,34 @@ export default function CoverPage() {
 
       {/* 5. 3-Step Walkthrough */}
       <section id="how-it-works" className="cover-steps-section">
-        <p className="section-tag">સરળ પ્રક્રિયા</p>
-        <h2 className="section-title">માત્ર ૩ સરળ સ્ટેપ્સમાં શરૂ કરો</h2>
+        <p className="section-tag">Simple Workflow</p>
+        <h2 className="section-title">Get Started in 3 Simple Steps</h2>
         <p className="section-subtitle">
-          જટિલ એકાઉન્ટિંગ નહીં, માત્ર સરળ અને સ્માર્ટ પર્સનલ હિસાબ.
+          No complicated accounting jargon. Just clean, intelligent personal finance tracking.
         </p>
 
         <div className="steps-grid">
           <div className="step-card">
-            <div className="step-number">૧</div>
-            <h3 className="step-title">એકાઉન્ટ બનાવો</h3>
+            <div className="step-number">1</div>
+            <h3 className="step-title">Create Free Account</h3>
             <p className="step-desc">
-              તમારા ઇમેઇલ અને પાસવર્ડ વડે ૩૦ સેકન્ડમાં મફત એકાઉન્ટ રજીસ્ટર કરો.
+              Register in 30 seconds with your email and secure password.
             </p>
           </div>
 
           <div className="step-card">
-            <div className="step-number">૨</div>
-            <h3 className="step-title">દૈનિક ખર્ચ એડ કરો</h3>
+            <div className="step-number">2</div>
+            <h3 className="step-title">Log Daily Expenses</h3>
             <p className="step-desc">
-              તમારો દૈનિક ખર્ચ જેમ કે ખોરાક, યાત્રા, બિલ કે શોપિંગ તરત જ સેવ કરો.
+              Quickly record transactions across Food, Bills, Shopping, Travel, and more.
             </p>
           </div>
 
           <div className="step-card">
-            <div className="step-number">૩</div>
-            <h3 className="step-title">વિશ્લેષણ કરો અને બચાવો</h3>
+            <div className="step-number">3</div>
+            <h3 className="step-title">Analyze & Grow Savings</h3>
             <p className="step-desc">
-              રિપોર્ટ્સ જુઓ, ક્યાં વધારે ખર્ચ થાય છે તે સમજો અને બચતમાં વધારો કરો.
+              View visual charts, identify unnecessary spending trends, and maximize your savings.
             </p>
           </div>
         </div>
@@ -291,17 +290,17 @@ export default function CoverPage() {
       {/* 6. Call To Action Banner */}
       <section className="cover-cta-banner">
         <h2 className="cta-banner-title">
-          આજે જ તમારા હિસાબને સ્માર્ટ અને ડિજિટલ બનાવો!
+          Ready to Take Control of Your Financial Future?
         </h2>
         <p className="cta-banner-subtitle">
-          હજારો રૂપિયાના અણધાર્યા ખર્ચાઓથી બચો. HisabSetu સાથે તમારું નાણાકીય આયોજન આજે જ શરૂ કરો.
+          Stop wondering where your money went. Start managing your expenses with HisabSetu today.
         </p>
         <div className="cta-banner-buttons">
           <Link to="/signup" className="btn-cta-white">
-            મફતમાં શરૂ કરો (Create Account)
+            Create Free Account
           </Link>
           <Link to="/login" className="btn-cta-transparent">
-            લૉગ ઇન કરો (Sign In)
+            Sign In
           </Link>
         </div>
       </section>
@@ -310,10 +309,10 @@ export default function CoverPage() {
       <footer className="cover-footer">
         <div className="footer-brand-row">
           <Wallet size={18} className="text-primary" />
-          <span>HisabSetu — સ્માર્ટ પર્સનલ એક્સપેન્સ ટ્રેકર</span>
+          <span>HisabSetu — Intelligent Personal Expense & Budget Tracker</span>
         </div>
         <p style={{ margin: 0 }}>
-          © {new Date().getFullYear()} HisabSetu. સુરક્ષિત PostgreSQL અને Row Level Security દ્વારા સંચાલિત.
+          © {new Date().getFullYear()} HisabSetu. Powered by Supabase PostgreSQL with strict Row Level Security.
         </p>
       </footer>
     </div>
