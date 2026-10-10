@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Wallet,
@@ -22,6 +22,27 @@ import './CoverPage.css';
 export default function CoverPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  const fullTextPart1 = 'The Smart Bridge Between Your Expenses & Savings — ';
+  const fullTextPart2 = 'HisabSetu';
+  const fullText = fullTextPart1 + fullTextPart2;
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    let current = 0;
+    const interval = setInterval(() => {
+      current += 1;
+      setCharCount(current);
+      if (current >= fullText.length) {
+        clearInterval(interval);
+      }
+    }, 40);
+    return () => clearInterval(interval);
+  }, [fullText.length]);
+
+  const part1Display = fullText.slice(0, Math.min(charCount, fullTextPart1.length));
+  const part2Display = charCount > fullTextPart1.length ? fullText.slice(fullTextPart1.length, charCount) : '';
+  const isTyping = charCount < fullText.length;
 
   return (
     <div className="cover-wrapper">
@@ -69,14 +90,14 @@ export default function CoverPage() {
       {/* 2. Hero Section */}
       <div className="cover-hero-banner">
         <section className="cover-hero-section">
-        <div className="hero-pill-badge">
-          <Sparkles size={14} />
-          <span>Smart Personal Finance & Budgeting Platform</span>
-        </div>
-
-        <h1 className="hero-main-heading">
-          The Smart Bridge Between Your Expenses & Savings — <span className="gradient-text">HisabSetu</span>
-        </h1>
+          <h1
+            className="hero-main-heading"
+            aria-label="The Smart Bridge Between Your Expenses & Savings — HisabSetu"
+          >
+            <span>{part1Display}</span>
+            {part2Display && <span className="gradient-text">{part2Display}</span>}
+            {isTyping && <span className="typewriter-cursor">|</span>}
+          </h1>
 
         <p className="hero-description">
           Track daily expenses effortlessly, set custom budget limits, and gain deep visual financial insights with bank-grade PostgreSQL security. Master your money with total clarity.
