@@ -82,10 +82,10 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #064E3B 100%);
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
   color: #FFFFFF;
   border: 3px solid #FFFFFF;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4), 0 2px 6px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.45), 0 2px 6px rgba(15, 23, 42, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@
 
 .nav-center-action-btn:active {
   transform: scale(0.9);
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
 }
 
 .nav-tab-center-label {

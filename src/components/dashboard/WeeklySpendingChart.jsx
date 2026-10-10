@@ -64,8 +64,8 @@ export default function WeeklySpendingChart({ data = [], isLoading = false }) {
             <BarChart data={data} margin={{ top: 22, right: 14, left: 4, bottom: 4 }}>
               <defs>
                 <linearGradient id="spendBarGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#10B981" />
-                  <stop offset="100%" stopColor="#059669" />
+                  <stop offset="0%" stopColor="#1E3A8A" />
+                  <stop offset="100%" stopColor="#0A2540" />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />

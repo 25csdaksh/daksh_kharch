@@ -77,20 +77,20 @@
   width: 100%;
   justify-content: center;
   padding: 0.72rem 1rem;
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
   color: #FFFFFF;
   border-radius: 10px;
   font-weight: 600;
   font-size: var(--font-size-sm);
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 2px 6px rgba(5, 150, 105, 0.2);
-  border: 1px solid rgba(5, 150, 105, 0.1);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 2px 8px rgba(217, 119, 6, 0.28);
+  border: 1px solid rgba(217, 119, 6, 0.2);
   transition: all var(--transition-speed);
 }
 
 .btn-add-expense:hover {
-  background: var(--color-primary-hover);
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
 }
 
 .sidebar-nav {
@@ -128,10 +128,10 @@
 }
 
 .nav-item-active {
-  background-color: #ECFDF5;
-  color: var(--color-primary);
+  background-color: #EFF6FF;
+  color: #1E3A8A;
   font-weight: 600;
-  box-shadow: inset 3px 0 0 var(--color-primary);
+  box-shadow: inset 3px 0 0 #D97706;
 }
 
 .nav-icon {
@@ -159,10 +159,11 @@
 .avatar-circle {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #064E3B 0%, #047857 100%);
+  background: linear-gradient(135deg, #0A2540 0%, #1E3A8A 100%);
   color: #FFFFFF;
   font-weight: 700;
   font-size: 13px;
+  border: 2px solid #FDE68A;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;

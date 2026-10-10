@@ -100,16 +100,16 @@
   background-color: #FFFFFF;
   border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
 }
 
 .header-add-btn {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
   color: #FFFFFF;
-  border: 1px solid rgba(5, 150, 105, 0.2);
+  border: 1px solid rgba(217, 119, 6, 0.25);
   border-radius: 10px;
   padding: 0.55rem 1.1rem;
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 2px 8px rgba(217, 119, 6, 0.25);
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -119,9 +119,9 @@
 }
 
 .header-add-btn:hover {
-  background: var(--color-primary-hover);
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
 }
 
 .header-icon-btn {
@@ -164,7 +164,7 @@
   width: 38px;
   height: 38px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #064E3B 0%, #047857 100%);
+  background: linear-gradient(135deg, #0A2540 0%, #1E3A8A 100%);
   color: #FFFFFF;
   font-weight: 700;
   font-size: var(--font-size-xs);
@@ -172,8 +172,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 2px solid var(--color-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 2px solid #FDE68A;
+  box-shadow: 0 1px 3px rgba(10, 37, 64, 0.15);
   transition: transform var(--transition-speed), border-color var(--transition-speed);
 }
 

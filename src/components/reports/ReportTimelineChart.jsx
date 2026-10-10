@@ -106,11 +106,11 @@ export default function ReportTimelineChart({
               />
               <Tooltip
                 content={<CustomTimelineTooltip />}
-                cursor={{ fill: 'rgba(5, 150, 105, 0.06)', radius: 6 }}
+                cursor={{ fill: 'rgba(30, 58, 138, 0.06)', radius: 6 }}
               />
               <Bar
                 dataKey="amount"
-                fill="#059669"
+                fill="#1E3A8A"
                 radius={[5, 5, 0, 0]}
                 maxBarSize={periodType === 'monthly' ? 16 : 36}
               />
