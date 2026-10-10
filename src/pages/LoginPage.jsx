@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Wallet, Mail, Lock, AlertCircle, Loader2, ArrowRight, Info } from 'lucide-react';
+import { Wallet, Mail, Lock, AlertCircle, Loader2, ArrowRight, Info, MailCheck } from 'lucide-react';
 import './Auth.css';
 
 export default function LoginPage() {
@@ -9,8 +9,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailNotConfirmed, setEmailNotConfirmed] = useState(false);
+  const [resendStatus, setResendStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
 
-  const { signIn, isConfigured } = useAuth();
+  const { signIn, isConfigured, resendConfirmationEmail } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,6 +21,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
+    setEmailNotConfirmed(false);
 
     if (!email || !password) {
       setErrorMessage('Please provide both email and password.');
@@ -35,9 +38,24 @@ export default function LoginPage() {
       await signIn({ email, password });
       navigate(redirectPath, { replace: true });
     } catch (err) {
-      setErrorMessage(err.message || 'Failed to authenticate. Please check your credentials.');
+      const msg = err.message || '';
+      if (msg.toLowerCase().includes('email not confirmed')) {
+        setEmailNotConfirmed(true);
+      } else {
+        setErrorMessage(msg || 'Failed to authenticate. Please check your credentials.');
+      }
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleResendConfirmation = async () => {
+    setResendStatus('sending');
+    try {
+      await resendConfirmationEmail(email);
+      setResendStatus('sent');
+    } catch {
+      setResendStatus('error');
     }
   };
 
@@ -65,6 +83,43 @@ export default function LoginPage() {
           <div className="auth-alert auth-alert-error" role="alert">
             <AlertCircle size={16} className="flex-shrink-0" />
             <span>{errorMessage}</span>
+          </div>
+        )}
+
+        {emailNotConfirmed && (
+          <div className="auth-alert auth-alert-warning" role="alert" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <MailCheck size={16} className="flex-shrink-0" />
+              <strong>Email not confirmed</strong>
+            </div>
+            <p style={{ margin: 0, fontSize: '0.85rem' }}>
+              Please check <strong>{email}</strong> for a confirmation link from Supabase and click it before signing in.
+            </p>
+            {resendStatus === 'idle' && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: '0.82rem', padding: '6px 14px' }}
+                onClick={handleResendConfirmation}
+              >
+                Resend confirmation email
+              </button>
+            )}
+            {resendStatus === 'sending' && (
+              <span style={{ fontSize: '0.82rem', color: 'var(--color-muted)' }}>
+                <Loader2 size={14} className="spinner-icon" /> Sending…
+              </span>
+            )}
+            {resendStatus === 'sent' && (
+              <span style={{ fontSize: '0.82rem', color: 'var(--color-primary)' }}>
+                ✓ Confirmation email sent! Check your inbox.
+              </span>
+            )}
+            {resendStatus === 'error' && (
+              <span style={{ fontSize: '0.82rem', color: 'var(--color-danger)' }}>
+                Failed to resend. Please try again later.
+              </span>
+            )}
           </div>
         )}
 

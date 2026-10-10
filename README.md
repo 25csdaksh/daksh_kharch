@@ -10,6 +10,7 @@ PaisaTrack is a production-grade personal expense tracking web application built
 - **npm**: v9.0.0 or higher (Tested on npm 11.7.0)
 - **Git**: For version control
 - **Supabase Account**: [https://supabase.com](https://supabase.com) (Free tier supported)
+- **Vercel Account**: [https://vercel.com](https://vercel.com) (For production hosting)
 
 ---
 
@@ -42,7 +43,7 @@ npm install
 
 ## 🗄️ Database Setup & SQL Migration
 
-To create the `expenses` table, indexes, updated_at triggers, and Row Level Security policies:
+To create the `expenses` table, indexes, `updated_at` triggers, and Row Level Security policies:
 
 ### Method 1: Using Supabase Dashboard SQL Editor (Recommended)
 1. In your Supabase Dashboard, click **SQL Editor** in the left navigation.
@@ -79,16 +80,76 @@ supabase db push
 - **UPDATE**: `auth.uid() = user_id` (Users only update their own rows; ownership cannot be transferred).
 - **DELETE**: `auth.uid() = user_id` (Users only delete their own rows).
 
+Anonymous/unauthenticated requests have **zero access** to any rows.
+
 ---
 
-## 📈 Phase 4: Advanced Financial Reports & Analytics
+## 🧪 Production Verification & Isolation Testing Procedure
+
+To safely verify multi-tenant isolation without touching production data:
+
+1. **Create Account 1** (e.g. `tester-a@example.com`):
+   - Sign up at `/signup`.
+   - Add an expense: `Food`, `₹450`, description: `Test Expense A`.
+   - Confirm it appears on the Dashboard and Expense Ledger.
+2. **Create Account 2** (e.g. `tester-b@example.com`):
+   - Open an incognito/private browser window.
+   - Sign up with the second account.
+   - Open `/expenses` and verify that the ledger is **completely empty** (0 records). `Test Expense A` is not visible.
+   - Add an expense: `Bills`, `₹1200`, description: `Test Expense B`.
+3. **Verify Cross-Tenant Immutability**:
+   - In Account 1's window, refresh the page: Account 1 continues to see only `Test Expense A`.
+   - Attempting to query, update, or delete Account 2's ID via Supabase client fails immediately with an RLS policy violation.
+4. **Log out** from both test sessions. Protected routes (`/`, `/expenses`, `/reports`, `/settings`) immediately redirect to `/login`.
+
+---
+
+## 🚀 Vercel Deployment Guide
+
+PaisaTrack is pre-configured for seamless single-page application (SPA) deployment on Vercel.
+
+### 1. Vercel Configuration (`vercel.json`)
+The repository includes `vercel.json` with SPA route rewrites:
+```json
+{
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+This ensures direct URLs (e.g. `/expenses`, `/reports`, `/reset-password`) do not return 404 errors on browser reload.
+
+### 2. Environment Variables on Vercel
+In your Vercel Project Dashboard -> **Settings** -> **Environment Variables**, add:
+- `VITE_SUPABASE_URL`: Your Supabase project URL (e.g. `https://xyzcompany.supabase.co`)
+- `VITE_SUPABASE_ANON_KEY`: Your Supabase anon or publishable key
+
+### 3. Supabase Redirect URL Configuration
+In your Supabase Dashboard -> **Authentication** -> **URL Configuration**:
+1. Set **Site URL** to your production domain:
+   ```
+   https://your-paisatrack-app.vercel.app
+   ```
+2. In **Redirect URLs**, add:
+   ```
+   https://your-paisatrack-app.vercel.app/login
+   https://your-paisatrack-app.vercel.app/reset-password
+   ```
+
+---
+
+## 📈 Advanced Financial Reports & Analytics
 
 The `/reports` view provides multi-period deep financial intelligence based on real PostgreSQL data:
 
 ### 1. Reporting Periods & Time-Travel Navigation
 - **Weekly**: Exact Monday–Sunday calendar interval with previous/next week navigation.
 - **Monthly**: Exact calendar month with 28, 29 (leap year), 30, and 31 day handling.
-- **Yearly**: Complete 12-month calendar overview (Jan–Dec).
+- **Yearly**: Complete 12-month calendar overview (Jan–Dec) with timezone-safe parsing.
 - **Custom Range**: Custom start and end date selection with date order validation.
 
 ### 2. Analytical Metrics
@@ -108,27 +169,29 @@ The `/reports` view provides multi-period deep financial intelligence based on r
 
 ## 🧪 Automated Testing
 
-Run the automated test suite covering financial validation, date boundaries, leap years, CSV sanitization, and comparative analytics:
+Run the automated test suite:
 
 ```bash
 npm test
 ```
 
-Test coverage includes:
-- Monday–Sunday week boundaries and offsets.
+Test coverage includes 42 tests across 20 test suites:
+- Input validation constraints (amounts, enums, dates, length limits).
+- Multi-tenant isolation and RLS security contract.
+- Monday–Sunday week boundaries and offsets without timezone skew.
 - Month boundaries (including Feb in leap year 2024 and non-leap years).
 - Year boundaries for all 12 calendar months.
 - Comparative period percentage calculation & zero denominator handling.
 - Category share percentages and top category identification.
 - CSV sanitization, quote escaping, and formula injection mitigation.
-- Amount limits and input validation constraints.
+- Indian numbering system (Lakhs and Crores) currency formatting.
 
 ---
 
 ## 💻 Available Scripts
 
 - **Development Server**: `npm run dev`
-- **Automated Unit Tests**: `npm test`
+- **Automated Unit & E2E Tests**: `npm test`
 - **Production Build**: `npm run build`
 - **Preview Production Build**: `npm run preview`
 
@@ -141,7 +204,7 @@ src/
 ├── lib/
 │   └── supabase.js             # Supabase JS client with validation & fallbacks
 ├── context/
-│   └── AuthContext.jsx         # Global AuthProvider & useAuth hook
+│   └── AuthContext.jsx         # Global AuthProvider, useAuth hook, resendConfirmation
 ├── services/
 │   └── expenseService.js       # Live Supabase CRUD & metric aggregation
 ├── utils/
@@ -154,10 +217,10 @@ src/
 │   │   └── PublicRoute.jsx
 │   ├── layout/
 │   │   ├── AppLayout.jsx
-│   │   ├── Header.jsx
-│   │   └── Sidebar.jsx
+│   │   ├── Header.jsx          # Interactive search and notifications
+│   │   └── Sidebar.jsx         # Responsive navigation & user profile
 │   ├── common/
-│   │   ├── AddExpenseModal.jsx  # Real expense create/edit modal
+│   │   ├── AddExpenseModal.jsx  # Expense create/edit modal with validation
 │   │   ├── DemoNotice.jsx       # Real-time DB & RLS status badge
 │   │   └── StatCard.jsx         # KPI summary card
 │   ├── dashboard/
@@ -169,11 +232,11 @@ src/
 │       ├── ReportCategoryTable.jsx # Category breakdown table & average metrics
 │       └── ReportTimelineChart.jsx # Multi-period timeline bar chart
 └── pages/
-    ├── DashboardPage.jsx       # Live dashboard overview
-    ├── ExpensesPage.jsx        # Live expense ledger & filter engine
-    ├── LoginPage.jsx           # Sign in view
-    ├── ReportsPage.jsx         # Advanced financial reports & analytics
-    ├── ResetPasswordPage.jsx   # Password recovery view
-    ├── SettingsPage.jsx        # Account settings view
-    └── SignupPage.jsx          # Registration view
+    ├── DashboardPage.jsx       # Live dashboard overview (Lazy loaded)
+    ├── ExpensesPage.jsx        # Live expense ledger & filter engine (Lazy loaded)
+    ├── LoginPage.jsx           # Sign in view with email confirmation support
+    ├── ReportsPage.jsx         # Advanced financial reports & analytics (Lazy loaded)
+    ├── ResetPasswordPage.jsx   # Password recovery view (Lazy loaded)
+    ├── SettingsPage.jsx        # Account settings & preferences (Lazy loaded)
+    └── SignupPage.jsx          # Registration view (Lazy loaded)
 ```

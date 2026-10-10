@@ -55,16 +55,29 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
       </div>
 
       <div className="header-right">
-        <div className="header-search">
+        <form
+          className="header-search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const input = e.currentTarget.elements.headerSearchInput;
+            const query = input?.value?.trim();
+            if (query) {
+              navigate(`/expenses?search=${encodeURIComponent(query)}`);
+            } else {
+              navigate('/expenses');
+            }
+          }}
+        >
           <Search size={16} className="search-icon" aria-hidden="true" />
           <input
+            id="headerSearchInput"
+            name="headerSearchInput"
             type="search"
             placeholder="Search expenses, tags..."
             className="search-input"
-            disabled
-            title="Search filtering is coming in Phase 3"
+            aria-label="Search expenses"
           />
-        </div>
+        </form>
 
         <button
           className="btn btn-primary header-add-btn"

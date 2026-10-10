@@ -79,7 +79,7 @@ export default function DashboardPage() {
     }
   };
 
-  const monthlyBudgetLimit = 45000;
+  const monthlyBudgetLimit = Number(localStorage.getItem('paisatrack_monthly_budget')) || 45000;
   const spentThisMonth = metrics?.month?.amount || 0;
   const remainingMonthBudget = Math.max(0, monthlyBudgetLimit - spentThisMonth);
 

@@ -502,7 +502,8 @@ export async function getReportAnalytics({
     });
 
     currentExpenses.forEach((item) => {
-      const monthIdx = new Date(item.expense_date).getMonth();
+      // Timezone-safe extraction from YYYY-MM-DD format
+      const monthIdx = parseInt(item.expense_date.slice(5, 7), 10) - 1;
       if (monthMap[monthIdx]) {
         monthMap[monthIdx].amount += Number(item.amount) || 0;
         monthMap[monthIdx].count += 1;

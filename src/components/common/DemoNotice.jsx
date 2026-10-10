@@ -13,26 +13,26 @@ export default function DemoNotice() {
           <>
             <ShieldCheck size={16} className="demo-notice-icon" aria-hidden="true" />
             <span>
-              <strong>Phase 3 Live:</strong> Connected to Supabase PostgreSQL with user-isolated Row Level Security ({user.email}).
+              <strong>Secure Session:</strong> Connected to Supabase PostgreSQL with user-isolated Row Level Security ({user.email}).
             </span>
           </>
         ) : isConfigured ? (
           <>
             <Database size={16} className="demo-notice-icon" aria-hidden="true" />
             <span>
-              <strong>Phase 3 Ready:</strong> Supabase client connected. Sign in to view and persist live personal expense records.
+              <strong>Supabase Connected:</strong> Sign in to access your encrypted personal expense records.
             </span>
           </>
         ) : (
           <>
             <KeyRound size={16} className="demo-notice-icon" aria-hidden="true" />
             <span>
-              <strong>Phase 3 Preview:</strong> Configure <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> in <code>.env</code> for live persistence.
+              <strong>Configuration Notice:</strong> Set <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> in environment variables.
             </span>
           </>
         )}
       </div>
-      <span className="demo-notice-tag">{user ? 'Live PostgreSQL' : isConfigured ? 'RLS Active' : 'Setup Required'}</span>
+      <span className="demo-notice-tag">{user ? 'RLS Enforced' : isConfigured ? 'Ready' : 'Setup Required'}</span>
     </div>
   );
 }

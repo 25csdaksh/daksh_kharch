@@ -62,7 +62,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
           </div>
           <div className="sidebar-brand-text">
             <span className="brand-name">PaisaTrack</span>
-            <span className="brand-badge">Phase 2</span>
+            <span className="brand-badge">PRO</span>
           </div>
         </div>
 

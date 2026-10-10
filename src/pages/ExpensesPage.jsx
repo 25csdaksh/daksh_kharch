@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useSearchParams } from 'react-router-dom';
 import {
   Receipt,
   PlusCircle,
@@ -31,6 +31,7 @@ import '../components/dashboard/DashboardCharts.css';
 
 export default function ExpensesPage() {
   const { onOpenAddExpense } = useOutletContext() || {};
+  const [searchParams] = useSearchParams();
 
   const [expenses, setExpenses] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -43,7 +44,15 @@ export default function ExpensesPage() {
   const [dateFilterType, setDateFilterType] = useState('All');
   const [customStartDate, setCustomStartDate] = useState('');
   const [customEndDate, setCustomEndDate] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
+
+  // Synchronize when URL search param changes
+  useEffect(() => {
+    const urlQuery = searchParams.get('search');
+    if (urlQuery !== null && urlQuery !== undefined) {
+      setSearchQuery(urlQuery);
+    }
+  }, [searchParams]);
 
   // Edit / Delete Modal State
   const [editingExpense, setEditingExpense] = useState(null);

@@ -124,6 +124,18 @@ export function AuthProvider({ children }) {
     return data;
   };
 
+  const resendConfirmationEmail = async (email) => {
+    if (!isSupabaseConfigured || !supabase) {
+      throw new Error('Supabase is not configured.');
+    }
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: email.trim(),
+      options: { emailRedirectTo: `${window.location.origin}/login` }
+    });
+    if (error) throw error;
+  };
+
   const value = useMemo(() => ({
     user,
     session,
@@ -133,7 +145,8 @@ export function AuthProvider({ children }) {
     signIn,
     signOut,
     resetPasswordForEmail,
-    updateUserPassword
+    updateUserPassword,
+    resendConfirmationEmail
   }), [user, session, loading]);
 
   return (

@@ -1,8 +1,56 @@
-import React from 'react';
-import { Settings as SettingsIcon, Sliders, Shield, Bell, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  Settings as SettingsIcon,
+  Sliders,
+  ShieldCheck,
+  User,
+  KeyRound,
+  LogOut,
+  CheckCircle2,
+  Save,
+  Database,
+  Info
+} from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './PlaceholderPage.css';
 
 export default function SettingsPage() {
+  const { user, signOut, isConfigured } = useAuth();
+  const navigate = useNavigate();
+
+  const [budgetLimit, setBudgetLimit] = useState(() => {
+    return localStorage.getItem('paisatrack_monthly_budget') || '45000';
+  });
+  const [currencySymbol, setCurrencySymbol] = useState(() => {
+    return localStorage.getItem('paisatrack_currency') || 'INR';
+  });
+  const [budgetAlerts, setBudgetAlerts] = useState(() => {
+    return localStorage.getItem('paisatrack_budget_alerts') !== 'false';
+  });
+  const [saveMessage, setSaveMessage] = useState('');
+
+  const handleSavePreferences = (e) => {
+    e.preventDefault();
+    localStorage.setItem('paisatrack_monthly_budget', budgetLimit);
+    localStorage.setItem('paisatrack_currency', currencySymbol);
+    localStorage.setItem('paisatrack_budget_alerts', String(budgetAlerts));
+    setSaveMessage('Preferences saved successfully!');
+    setTimeout(() => setSaveMessage(''), 3000);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/login');
+    } catch (err) {
+      console.error('Sign out error:', err);
+    }
+  };
+
+  const displayName = user?.user_metadata?.full_name || 'Personal Account';
+  const displayEmail = user?.email || 'Authenticated User';
+
   return (
     <div className="page-container">
       <div className="page-header-card card">
@@ -13,24 +61,104 @@ export default function SettingsPage() {
           <div>
             <h1 className="page-main-heading">Settings & Preferences</h1>
             <p className="page-main-subheading">
-              Manage personal budget limits, currency formatting, and notification rules
+              Manage personal budget limits, account security, and active database connection
             </p>
           </div>
         </div>
 
-        <span className="badge badge-demo">UI Preview</span>
+        <span className="badge badge-success" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          <ShieldCheck size={14} /> Production Ready
+        </span>
       </div>
 
+      {saveMessage && (
+        <div className="auth-alert auth-alert-success" role="alert" style={{ marginBottom: '1.5rem' }}>
+          <CheckCircle2 size={16} className="flex-shrink-0" />
+          <span>{saveMessage}</span>
+        </div>
+      )}
+
       <div className="placeholder-grid">
+        {/* Account & Profile Card */}
         <div className="placeholder-card card">
           <div className="card-section-title">
+            <User size={18} className="feature-item-icon" />
+            <span>Account & Identity</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+            <div className="form-field">
+              <label className="form-label">Full Name</label>
+              <input
+                type="text"
+                className="form-text-input"
+                value={displayName}
+                disabled
+              />
+            </div>
+
+            <div className="form-field">
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                className="form-text-input"
+                value={displayEmail}
+                disabled
+              />
+            </div>
+
+            <div className="form-field">
+              <label className="form-label">User ID (RLS Subject)</label>
+              <input
+                type="text"
+                className="form-text-input"
+                value={user?.id || 'Local Development User'}
+                disabled
+                style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ fontSize: '0.85rem' }}
+                onClick={() => navigate('/reset-password')}
+              >
+                <KeyRound size={15} />
+                <span>Reset Password</span>
+              </button>
+
+              {user && (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  style={{ fontSize: '0.85rem', color: 'var(--color-danger)' }}
+                  onClick={handleSignOut}
+                >
+                  <LogOut size={15} />
+                  <span>Sign Out</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Financial Preferences Card */}
+        <form onSubmit={handleSavePreferences} className="placeholder-card card">
+          <div className="card-section-title">
             <Sliders size={18} className="feature-item-icon" />
-            <span>Preferences & Currency</span>
+            <span>Financial Preferences</span>
           </div>
 
           <div className="form-field">
-            <label className="form-label">Default Currency Symbol</label>
-            <select className="form-select" defaultValue="INR">
+            <label className="form-label" htmlFor="currency-select">Default Currency</label>
+            <select
+              id="currency-select"
+              className="form-select"
+              value={currencySymbol}
+              onChange={(e) => setCurrencySymbol(e.target.value)}
+            >
               <option value="INR">₹ - Indian Rupee (INR)</option>
               <option value="USD">$ - US Dollar (USD)</option>
               <option value="EUR">€ - Euro (EUR)</option>
@@ -39,11 +167,15 @@ export default function SettingsPage() {
           </div>
 
           <div className="form-field">
-            <label className="form-label">Monthly Target Budget Limit (₹)</label>
+            <label className="form-label" htmlFor="budget-input">Monthly Target Budget Limit (₹)</label>
             <input
+              id="budget-input"
               type="number"
+              min="1"
+              max="10000000"
               className="form-text-input"
-              defaultValue={45000}
+              value={budgetLimit}
+              onChange={(e) => setBudgetLimit(e.target.value)}
               placeholder="e.g. 45000"
             />
           </div>
@@ -53,32 +185,50 @@ export default function SettingsPage() {
               <p className="toggle-title">Weekly Budget Alert</p>
               <p className="toggle-desc">Notify when 80% of weekly limit is reached</p>
             </div>
-            <input type="checkbox" defaultChecked />
+            <input
+              type="checkbox"
+              checked={budgetAlerts}
+              onChange={(e) => setBudgetAlerts(e.target.checked)}
+            />
           </div>
-        </div>
 
-        <div className="placeholder-card card">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ marginTop: '1rem', alignSelf: 'flex-start' }}
+          >
+            <Save size={16} />
+            <span>Save Preferences</span>
+          </button>
+        </form>
+
+        {/* Security & RLS Enforcement Card */}
+        <div className="placeholder-card card" style={{ gridColumn: '1 / -1' }}>
           <div className="card-section-title">
-            <Shield size={18} className="feature-item-icon" />
-            <span>Security & Data Persistence (Phase 2)</span>
+            <ShieldCheck size={18} className="feature-item-icon" />
+            <span>Database Security & Isolation Architecture</span>
           </div>
 
-          <p className="page-main-subheading">
-            In Phase 2, this section will integrate with Supabase Row-Level Security (RLS), encrypted credential storage, and session token rotation.
+          <p className="page-main-subheading" style={{ marginBottom: '1rem' }}>
+            PaisaTrack implements end-to-end security using PostgreSQL Row Level Security (RLS) on Supabase.
           </p>
 
-          <ul className="feature-list">
+          <ul className="feature-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem' }}>
             <li className="feature-item">
-              <CheckCircle size={16} className="feature-item-icon" />
-              <span>Multi-device synchronization</span>
+              <CheckCircle2 size={16} className="feature-item-icon" />
+              <span><strong>Row Level Security (RLS):</strong> Strictly verified on all SELECT, INSERT, UPDATE, DELETE</span>
             </li>
             <li className="feature-item">
-              <CheckCircle size={16} className="feature-item-icon" />
-              <span>Two-factor authentication support</span>
+              <CheckCircle2 size={16} className="feature-item-icon" />
+              <span><strong>Zero Cross-Tenant Leakage:</strong> Queries enforce <code>auth.uid() = user_id</code></span>
             </li>
             <li className="feature-item">
-              <CheckCircle size={16} className="feature-item-icon" />
-              <span>Zero-knowledge data backups</span>
+              <CheckCircle2 size={16} className="feature-item-icon" />
+              <span><strong>CSV Injection Hardened:</strong> Formulas sanitized against spreadsheet execution</span>
+            </li>
+            <li className="feature-item">
+              <CheckCircle2 size={16} className="feature-item-icon" />
+              <span><strong>Safe Client Token Storage:</strong> Encrypted browser session with auto-refresh</span>
             </li>
           </ul>
         </div>
