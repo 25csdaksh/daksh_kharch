@@ -20,6 +20,7 @@
   padding: var(--spacing-xl);
   max-height: 90vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   animation: slideUp 0.2s ease-out;
 }
 

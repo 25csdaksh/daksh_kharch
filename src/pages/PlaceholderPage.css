@@ -53,8 +53,10 @@
 
 .placeholder-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: var(--spacing-lg);
+  width: 100%;
+  min-width: 0;
 }
 
 .placeholder-card {
@@ -190,7 +192,7 @@
   }
 
   .placeholder-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-md);
   }
 

@@ -181,8 +181,10 @@
 /* Reports KPI Cards */
 .reports-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--spacing-lg);
+  width: 100%;
+  min-width: 0;
 }
 
 .kpi-card {
@@ -261,8 +263,10 @@
 /* Detailed Analytics Grid */
 .reports-analytics-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: var(--spacing-lg);
+  width: 100%;
+  min-width: 0;
 }
 
 /* Category Breakdown Table in Reports */
@@ -327,11 +331,11 @@
 
 @media (max-width: 1200px) {
   .reports-kpi-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .reports-analytics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -373,7 +377,7 @@
   }
 
   .reports-kpi-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -391,6 +395,6 @@
 
 @media (max-width: 480px) {
   .reports-kpi-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

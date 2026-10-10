@@ -52,19 +52,19 @@ export const WEEKLY_SPENDING_DATA = [
 ];
 
 export const CATEGORY_BREAKDOWN_DATA = [
-  { name: 'Groceries & Food', value: 9200, color: '#245C45', percentage: 37 },
-  { name: 'Housing & Utilities', value: 6500, color: '#407B63', percentage: 26 },
-  { name: 'Transportation', value: 3400, color: '#669C85', percentage: 14 },
-  { name: 'Entertainment & Leisure', value: 2800, color: '#D8B86A', percentage: 11 },
-  { name: 'Healthcare & Fitness', value: 1800, color: '#88B7A4', percentage: 7 },
-  { name: 'Other Discretionary', value: 1100, color: '#BACEC4', percentage: 5 }
+  { name: 'Food', value: 9200, color: '#10B981', percentage: 37 },
+  { name: 'Bills', value: 6500, color: '#EF4444', percentage: 26 },
+  { name: 'Transport', value: 3400, color: '#2563EB', percentage: 14 },
+  { name: 'Entertainment', value: 2800, color: '#F59E0B', percentage: 11 },
+  { name: 'Healthcare', value: 1800, color: '#06B6D4', percentage: 7 },
+  { name: 'Shopping', value: 1100, color: '#EC4899', percentage: 5 }
 ];
 
 export const RECENT_EXPENSES = [
   {
     id: 'exp-1',
     title: 'Whole Foods Market',
-    category: 'Groceries & Food',
+    category: 'Food',
     date: 'Today, 2:45 PM',
     amount: 850,
     paymentMethod: 'UPI',
@@ -73,16 +73,16 @@ export const RECENT_EXPENSES = [
   {
     id: 'exp-2',
     title: 'Metro Transit Card Recharge',
-    category: 'Transportation',
+    category: 'Transport',
     date: 'Yesterday, 9:10 AM',
     amount: 500,
-    paymentMethod: 'Debit Card',
+    paymentMethod: 'UPI',
     status: 'Completed'
   },
   {
     id: 'exp-3',
     title: 'Blue Tokai Coffee Roasters',
-    category: 'Entertainment & Leisure',
+    category: 'Entertainment',
     date: 'Oct 07, 4:30 PM',
     amount: 320,
     paymentMethod: 'UPI',
@@ -91,19 +91,19 @@ export const RECENT_EXPENSES = [
   {
     id: 'exp-4',
     title: 'Electricity & Utility Bill',
-    category: 'Housing & Utilities',
+    category: 'Bills',
     date: 'Oct 05, 11:15 AM',
     amount: 2150,
-    paymentMethod: 'Net Banking',
+    paymentMethod: 'Bank Transfer',
     status: 'Completed'
   },
   {
     id: 'exp-5',
     title: 'Pharmacy & Health Supplies',
-    category: 'Healthcare & Fitness',
+    category: 'Healthcare',
     date: 'Oct 04, 6:00 PM',
     amount: 680,
-    paymentMethod: 'Credit Card',
+    paymentMethod: 'Card',
     status: 'Completed'
   }
 ];

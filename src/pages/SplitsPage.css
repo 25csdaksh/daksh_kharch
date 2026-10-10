@@ -42,11 +42,12 @@
   flex-wrap: wrap;
 }
 
-/* Metric Cards Grid */
 .splits-metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
   gap: 1.25rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .split-stat-card {
@@ -154,8 +155,10 @@
 
 .simplify-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .simplify-item {
@@ -427,10 +430,9 @@
   border-color: var(--color-primary);
 }
 
-/* Responsive */
 @media (max-width: 968px) {
   .splits-main-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -457,7 +459,7 @@
   }
 
   .splits-metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -478,6 +480,6 @@
 
 @media (max-width: 480px) {
   .splits-metrics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

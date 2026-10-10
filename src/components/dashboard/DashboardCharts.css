@@ -336,6 +336,8 @@
 
 .expenses-table-wrapper {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .expenses-table {
