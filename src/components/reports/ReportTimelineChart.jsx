@@ -89,28 +89,28 @@ export default function ReportTimelineChart({
           </div>
         ) : (
           <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E7EBE5" />
+            <BarChart data={data} margin={{ top: 10, right: 8, left: -4, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
               <XAxis
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#727B73', fontSize: 11, fontWeight: 500 }}
+                tick={{ fill: '#64748B', fontSize: 11, fontWeight: 500 }}
                 interval={periodType === 'monthly' ? (data.length > 20 ? 2 : 1) : 0}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#727B73', fontSize: 11 }}
+                tick={{ fill: '#64748B', fontSize: 11 }}
                 tickFormatter={(v) => `₹${v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v}`}
               />
               <Tooltip
                 content={<CustomTimelineTooltip />}
-                cursor={{ fill: 'rgba(36, 92, 69, 0.05)', radius: 6 }}
+                cursor={{ fill: 'rgba(5, 150, 105, 0.06)', radius: 6 }}
               />
               <Bar
                 dataKey="amount"
-                fill="#245C45"
+                fill="#059669"
                 radius={[5, 5, 0, 0]}
                 maxBarSize={periodType === 'monthly' ? 16 : 36}
               />

@@ -458,3 +458,106 @@
     gap: var(--spacing-sm);
   }
 }
+
+/* Mobile Expenses Feed vs Desktop Table */
+.mobile-expenses-feed {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  gap: 12px;
+}
+
+.mobile-expense-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.mobile-expense-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mobile-expense-title {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-expense-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+.mobile-meta-dot {
+  color: var(--color-border);
+}
+
+.mobile-expense-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.mobile-expense-amount {
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.mobile-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .desktop-only-table {
+    display: none;
+  }
+
+  .mobile-expenses-feed {
+    display: flex;
+  }
+
+  .chart-card,
+  .budget-card,
+  .recent-expenses-card {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .chart-header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .chart-container-bar {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+}
+

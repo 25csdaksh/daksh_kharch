@@ -348,13 +348,44 @@
   .period-tab-btn {
     flex: 1;
     text-align: center;
+    padding: 0.5rem 0.25rem;
+    font-size: 11px;
   }
 
   .period-navigator-bar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: var(--spacing-sm);
   }
 
+  .navigator-controls {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navigator-range-label {
+    width: 100%;
+    text-align: center;
+  }
+
+  .reports-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-report-table th:nth-child(4),
+  .category-report-table td:nth-child(4),
+  .category-report-table th:nth-child(5),
+  .category-report-table td:nth-child(5) {
+    display: none;
+  }
+
+  .cat-progress-cell {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
   .reports-kpi-grid {
     grid-template-columns: 1fr;
   }

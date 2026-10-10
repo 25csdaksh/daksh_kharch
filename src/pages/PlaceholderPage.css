@@ -169,8 +169,25 @@
 }
 
 @media (max-width: 768px) {
+  .page-container {
+    gap: var(--spacing-md);
+  }
+
   .page-header-card {
     flex-direction: column;
     align-items: flex-start;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .placeholder-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .placeholder-card {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
   }
 }

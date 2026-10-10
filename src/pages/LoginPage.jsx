@@ -64,8 +64,9 @@ export default function LoginPage() {
       <div className="auth-card card">
         <div className="auth-brand-header">
           <div className="auth-brand-logo">
-            <img src="/hisabsetu-logo.png" alt="HisabSetu" />
+            <img src="/hisabsetu-emblem.png" alt="HisabSetu Emblem" />
           </div>
+          <span className="auth-brand-tagline">YOUR MONEY. A SMARTER YOU.</span>
           <h1 className="auth-page-title">Welcome to HisabSetu</h1>
           <p className="auth-page-subtitle">Sign in to manage your expense ledger & budgets</p>
         </div>

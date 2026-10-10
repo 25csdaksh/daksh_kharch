@@ -45,6 +45,17 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
         >
           <Menu size={22} />
         </button>
+
+        {/* Mobile Brand Mark */}
+        <div className="header-mobile-brand">
+          <img src="/hisabsetu-emblem.png" alt="HisabSetu" className="header-mobile-emblem" />
+          <div className="header-mobile-brand-text">
+            <span className="header-mobile-brand-title">HisabSetu</span>
+            <span className="header-mobile-brand-subtitle">{title}</span>
+          </div>
+        </div>
+
+        {/* Desktop Page Title */}
         <div className="header-page-title-group">
           <h1 className="header-title">{title}</h1>
           <span className="header-date">
@@ -118,10 +129,22 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
               </div>
               <div className="dropdown-divider" />
               {user ? (
-                <button className="dropdown-item dropdown-logout" onClick={handleSignOut}>
-                  <LogOut size={16} />
-                  <span>Sign Out</span>
-                </button>
+                <>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => {
+                      setShowDropdown(false);
+                      navigate('/settings');
+                    }}
+                  >
+                    <UserIcon size={16} />
+                    <span>Account & Settings</span>
+                  </button>
+                  <button className="dropdown-item dropdown-logout" onClick={handleSignOut}>
+                    <LogOut size={16} />
+                    <span>Sign Out</span>
+                  </button>
+                </>
               ) : (
                 <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/login'); }}>
                   <UserIcon size={16} />

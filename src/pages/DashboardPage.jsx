@@ -15,6 +15,7 @@ import CategoryBreakdownChart from '../components/dashboard/CategoryBreakdownCha
 import BudgetProgress from '../components/dashboard/BudgetProgress';
 import RecentExpenses from '../components/dashboard/RecentExpenses';
 import AddExpenseModal from '../components/common/AddExpenseModal';
+import { useAuth } from '../context/AuthContext';
 import { getDashboardMetrics, deleteExpense } from '../services/expenseService';
 import { formatCurrencyINR } from '../utils/dateUtils';
 import '../components/dashboard/DashboardCharts.css';
@@ -22,6 +23,7 @@ import './DashboardPage.css';
 
 export default function DashboardPage() {
   const { onOpenAddExpense } = useOutletContext() || {};
+  const { user } = useAuth();
 
   const [metrics, setMetrics] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -83,6 +85,8 @@ export default function DashboardPage() {
   const spentThisMonth = metrics?.month?.amount || 0;
   const remainingMonthBudget = Math.max(0, monthlyBudgetLimit - spentThisMonth);
 
+  const userGreetingName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Friend';
+
   return (
     <div className="dashboard-layout">
       {/* Top Banner with Quick Actions & Live Refresh */}
@@ -90,11 +94,11 @@ export default function DashboardPage() {
         <div className="welcome-text">
           <div className="welcome-tag">
             <span className="pulse-dot" />
-            <span>Live Expense Overview</span>
+            <span>Live Financial Pulse</span>
           </div>
-          <h2 className="welcome-heading">Financial Pulse & Live Ledger</h2>
+          <h2 className="welcome-heading">Welcome, {userGreetingName}</h2>
           <p className="welcome-description">
-            Real-time daily expenditure, weekly breakdown, and categorized budget monitoring.
+            YOUR MONEY. A SMARTER YOU. — Daily expenses, weekly trends & budget tracking
           </p>
         </div>
         <div className="welcome-action" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>

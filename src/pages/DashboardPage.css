@@ -78,22 +78,72 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .dashboard-layout {
+    gap: var(--spacing-md);
+  }
+
   .dashboard-welcome-banner {
-    flex-direction: column;
-    align-items: flex-start;
     padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    gap: var(--spacing-md);
   }
 
-  .welcome-action {
-    width: 100%;
+  .welcome-heading {
+    font-size: 1.25rem;
   }
 
-  .welcome-action .btn {
-    width: 100%;
+  .welcome-description {
+    font-size: 12px;
   }
 
   .dashboard-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .stat-card-title {
+    font-size: 12px;
+  }
+
+  .stat-card-amount {
+    font-size: 1.25rem;
+  }
+
+  .stat-card-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .welcome-action {
+    display: none; /* Accessible via header & bottom navigation on mobile */
+  }
+
+  .dashboard-charts-grid {
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .stat-card-number {
+    font-size: 1.15rem;
+  }
+
+  .stat-card-currency {
+    font-size: 0.95rem;
+  }
+
+  .stat-card-subtitle {
+    font-size: 10px;
   }
 }

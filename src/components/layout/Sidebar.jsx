@@ -58,11 +58,11 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
       <aside className={`sidebar ${isMobileOpen ? 'sidebar-mobile-open' : ''}`}>
         <div className="sidebar-brand">
           <div className="sidebar-brand-icon">
-            <img src="/hisabsetu-logo.png" alt="HisabSetu" className="brand-logo-img" />
+            <img src="/hisabsetu-emblem.png" alt="HisabSetu Emblem" className="brand-logo-img" />
           </div>
           <div className="sidebar-brand-text">
             <span className="brand-name">HisabSetu</span>
-            <span className="brand-badge">PRO</span>
+            <span className="brand-badge">YOUR MONEY. A SMARTER YOU.</span>
           </div>
         </div>
 

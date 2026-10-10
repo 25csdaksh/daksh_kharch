@@ -37,7 +37,7 @@ export default function StatCard({
           <span className="stat-card-number">{formattedAmount}</span>
         </div>
         {badgeText && (
-          <span className="badge badge-demo" title="Demonstration preview value">
+          <span className="badge badge-success">
             {badgeText}
           </span>
         )}

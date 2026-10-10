@@ -50,11 +50,11 @@ export default function CoverPage() {
       <header className="cover-navbar">
         <Link to="/" className="cover-nav-brand">
           <div className="cover-logo-icon">
-            <img src="/hisabsetu-logo.png" alt="HisabSetu" className="cover-logo-img" />
+            <img src="/hisabsetu-emblem.png" alt="HisabSetu Emblem" className="cover-logo-img" />
           </div>
           <span className="cover-brand-title">
             HisabSetu
-            <span className="cover-brand-badge">PRO</span>
+            <span className="cover-brand-badge">YOUR MONEY. A SMARTER YOU.</span>
           </span>
         </Link>
 
@@ -331,8 +331,8 @@ export default function CoverPage() {
       {/* 7. Footer */}
       <footer className="cover-footer">
         <div className="footer-brand-row">
-          <img src="/hisabsetu-logo.png" alt="HisabSetu" style={{ width: 22, height: 22, objectFit: 'contain' }} />
-          <span>HisabSetu — Intelligent Personal Expense & Budget Tracker</span>
+          <img src="/hisabsetu-emblem.png" alt="HisabSetu Emblem" style={{ width: 22, height: 22, objectFit: 'contain' }} />
+          <span>HisabSetu — YOUR MONEY. A SMARTER YOU.</span>
         </div>
         <p style={{ margin: 0 }}>
           © {new Date().getFullYear()} HisabSetu. Powered by Supabase PostgreSQL with strict Row Level Security.

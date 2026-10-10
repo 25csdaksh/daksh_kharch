@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import MobileBottomNav from './MobileBottomNav';
 import AddExpenseModal from '../common/AddExpenseModal';
 import './AppLayout.css';
 
@@ -47,6 +48,10 @@ export default function AppLayout() {
           <Outlet context={{ onOpenAddExpense: () => setIsAddExpenseOpen(true) }} />
         </main>
       </div>
+
+      <MobileBottomNav
+        onOpenAddExpense={() => setIsAddExpenseOpen(true)}
+      />
 
       <AddExpenseModal
         isOpen={isAddExpenseOpen}

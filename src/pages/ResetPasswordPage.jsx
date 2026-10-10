@@ -84,8 +84,9 @@ export default function ResetPasswordPage() {
       <div className="auth-card card">
         <div className="auth-brand-header">
           <div className="auth-brand-logo">
-            <img src="/hisabsetu-logo.png" alt="HisabSetu" />
+            <img src="/hisabsetu-emblem.png" alt="HisabSetu Emblem" />
           </div>
+          <span className="auth-brand-tagline">YOUR MONEY. A SMARTER YOU.</span>
           <h1 className="auth-page-title">
             {isRecoveryFlow ? 'Set New Password' : 'Reset Password'}
           </h1>

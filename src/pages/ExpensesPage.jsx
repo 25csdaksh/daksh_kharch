@@ -318,7 +318,8 @@ export default function ExpensesPage() {
           </div>
         ) : (
           <div className="expenses-table-wrapper">
-            <table className="expenses-table">
+            {/* Desktop Table View */}
+            <table className="expenses-table desktop-only-table">
               <thead>
                 <tr>
                   <th>Description / Merchant</th>
@@ -376,6 +377,53 @@ export default function ExpensesPage() {
                 ))}
               </tbody>
             </table>
+
+            {/* Mobile Native Card Feed */}
+            <div className="mobile-expenses-feed">
+              {expenses.map((expense) => (
+                <div key={expense.id} className="mobile-expense-item card">
+                  <div className="mobile-expense-left">
+                    <div className="expense-avatar-icon" aria-hidden="true">
+                      {getCategoryIcon(expense.category)}
+                    </div>
+                    <div className="mobile-expense-info">
+                      <span className="mobile-expense-title">
+                        {expense.description || `${expense.category} Expense`}
+                      </span>
+                      <div className="mobile-expense-meta">
+                        <span className="category-pill">{expense.category}</span>
+                        <span className="mobile-meta-dot">•</span>
+                        <span className="cell-date">{formatDateDisplay(expense.expense_date)}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mobile-expense-right">
+                    <span className="mobile-expense-amount">
+                      -{formatCurrencyINR(expense.amount)}
+                    </span>
+                    <div className="mobile-actions-row">
+                      <span className="payment-tag">{expense.payment_method}</span>
+                      <div className="action-buttons-group">
+                        <button
+                          className="btn-icon-action"
+                          onClick={() => handleEdit(expense)}
+                          aria-label={`Edit ${expense.description || expense.category}`}
+                        >
+                          <Pencil size={13} />
+                        </button>
+                        <button
+                          className="btn-icon-action btn-delete-action"
+                          onClick={() => handleDelete(expense)}
+                          aria-label={`Delete ${expense.description || expense.category}`}
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
