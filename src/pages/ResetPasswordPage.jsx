@@ -84,7 +84,7 @@ export default function ResetPasswordPage() {
       <div className="auth-card card">
         <div className="auth-brand-header">
           <div className="auth-brand-logo">
-            <KeyRound size={26} />
+            <img src="/hisabsetu-logo.png" alt="HisabSetu" />
           </div>
           <h1 className="auth-page-title">
             {isRecoveryFlow ? 'Set New Password' : 'Reset Password'}

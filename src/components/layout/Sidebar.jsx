@@ -56,7 +56,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
       <aside className={`sidebar ${isMobileOpen ? 'sidebar-mobile-open' : ''}`}>
         <div className="sidebar-brand">
           <div className="sidebar-brand-icon">
-            <Wallet size={24} />
+            <img src="/hisabsetu-logo.png" alt="HisabSetu" className="brand-logo-img" />
           </div>
           <div className="sidebar-brand-text">
             <span className="brand-name">HisabSetu</span>

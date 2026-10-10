@@ -60,7 +60,7 @@ export default function SignupPage() {
       <div className="auth-card card">
         <div className="auth-brand-header">
           <div className="auth-brand-logo">
-            <Wallet size={26} />
+            <img src="/hisabsetu-logo.png" alt="HisabSetu" />
           </div>
           <h1 className="auth-page-title">Create Account</h1>
           <p className="auth-page-subtitle">Start tracking your personal finances with HisabSetu</p>

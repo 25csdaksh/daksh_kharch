@@ -29,7 +29,7 @@ export default function CoverPage() {
       <header className="cover-navbar">
         <Link to="/" className="cover-nav-brand">
           <div className="cover-logo-icon">
-            <Wallet size={22} />
+            <img src="/hisabsetu-logo.png" alt="HisabSetu" className="cover-logo-img" />
           </div>
           <span className="cover-brand-title">
             HisabSetu
@@ -308,7 +308,7 @@ export default function CoverPage() {
       {/* 7. Footer */}
       <footer className="cover-footer">
         <div className="footer-brand-row">
-          <Wallet size={18} className="text-primary" />
+          <img src="/hisabsetu-logo.png" alt="HisabSetu" style={{ width: 22, height: 22, objectFit: 'contain' }} />
           <span>HisabSetu — Intelligent Personal Expense & Budget Tracker</span>
         </div>
         <p style={{ margin: 0 }}>

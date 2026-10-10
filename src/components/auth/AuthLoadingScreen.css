@@ -32,8 +32,10 @@
   margin-bottom: var(--spacing-md);
 }
 
-.auth-loading-brand-icon {
-  color: var(--color-primary);
+.auth-loading-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .auth-loading-spinner {

@@ -64,7 +64,7 @@ export default function LoginPage() {
       <div className="auth-card card">
         <div className="auth-brand-header">
           <div className="auth-brand-logo">
-            <Wallet size={26} />
+            <img src="/hisabsetu-logo.png" alt="HisabSetu" />
           </div>
           <h1 className="auth-page-title">Welcome to HisabSetu</h1>
           <p className="auth-page-subtitle">Sign in to manage your expense ledger & budgets</p>
