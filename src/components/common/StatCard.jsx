@@ -10,7 +10,8 @@ export default function StatCard({
   changePercentage,
   comparisonText,
   icon: Icon,
-  badgeText = 'Demo'
+  badgeText = 'Demo',
+  variant = 'default'
 }) {
   const isPositive = changePercentage > 0;
   const isNegative = changePercentage < 0;
@@ -21,18 +22,19 @@ export default function StatCard({
   }).format(amount);
 
   return (
-    <div className="stat-card card">
+    <div className={`stat-card card stat-card-${variant}`}>
+      <div className="stat-card-accent-bar" aria-hidden="true" />
       <div className="stat-card-header">
         <span className="stat-card-title">{title}</span>
         <div className="stat-card-header-right">
           {badgeText && (
-            <span className="badge badge-success stat-card-badge">
+            <span className={`stat-card-badge badge-${variant}`}>
               {badgeText}
             </span>
           )}
           {Icon && (
-            <div className="stat-card-icon" aria-hidden="true">
-              <Icon size={18} />
+            <div className={`stat-card-icon icon-wrap-${variant}`} aria-hidden="true">
+              <Icon size={17} />
             </div>
           )}
         </div>
@@ -48,9 +50,9 @@ export default function StatCard({
       <div className="stat-card-footer">
         {changePercentage !== undefined && (
           <span className={`stat-card-trend ${isPositive ? 'trend-up' : isNegative ? 'trend-down' : 'trend-neutral'}`}>
-            {isPositive && <TrendingUp size={14} aria-hidden="true" />}
-            {isNegative && <TrendingDown size={14} aria-hidden="true" />}
-            {isZero && <Minus size={14} aria-hidden="true" />}
+            {isPositive && <TrendingUp size={13} aria-hidden="true" />}
+            {isNegative && <TrendingDown size={13} aria-hidden="true" />}
+            {isZero && <Minus size={13} aria-hidden="true" />}
             <span>{Math.abs(changePercentage)}%</span>
           </span>
         )}

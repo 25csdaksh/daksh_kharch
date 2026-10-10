@@ -60,33 +60,40 @@ export default function WeeklySpendingChart({ data = [], isLoading = false }) {
             <p className="empty-state-subtitle">Your daily spending breakdown will appear here once you record expenses.</p>
           </div>
         ) : (
-          <ResponsiveContainer width="100%" height={210}>
-            <BarChart data={data} margin={{ top: 10, right: 4, left: -20, bottom: 0 }}>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={data} margin={{ top: 22, right: 14, left: 4, bottom: 4 }}>
+              <defs>
+                <linearGradient id="spendBarGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#10B981" />
+                  <stop offset="100%" stopColor="#059669" />
+                </linearGradient>
+              </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
               <XAxis
                 dataKey="day"
                 interval={0}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#64748B', fontSize: 10, fontWeight: 600 }}
+                tick={{ fill: '#64748B', fontSize: 11, fontWeight: 600 }}
               />
               <YAxis
-                width={32}
+                width={48}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#64748B', fontSize: 10, fontWeight: 500 }}
+                domain={[0, (dataMax) => (dataMax > 0 ? Math.ceil((dataMax * 1.35) / 50) * 50 : 100)]}
+                tick={{ fill: '#64748B', fontSize: 11, fontWeight: 500 }}
                 tickFormatter={(v) => `₹${v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v}`}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(5, 150, 105, 0.06)', radius: 6 }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(5, 150, 105, 0.05)', radius: 6 }} />
               <Bar
                 dataKey="amount"
-                radius={[6, 6, 0, 0]}
-                maxBarSize={30}
+                radius={[8, 8, 0, 0]}
+                maxBarSize={36}
               >
                 {data.map((entry, index) => (
                   <Cell
                     key={`bar-${index}`}
-                    fill={entry.amount > 0 ? '#059669' : '#E2E8F0'}
+                    fill={entry.amount > 0 ? 'url(#spendBarGrad)' : '#F1F5F9'}
                   />
                 ))}
               </Bar>

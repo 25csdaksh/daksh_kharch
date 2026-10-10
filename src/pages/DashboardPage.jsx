@@ -84,36 +84,66 @@ export default function DashboardPage() {
   const monthlyBudgetLimit = Number(localStorage.getItem('hisabsetu_monthly_budget') || localStorage.getItem('paisatrack_monthly_budget')) || 45000;
   const spentThisMonth = metrics?.month?.amount || 0;
   const remainingMonthBudget = Math.max(0, monthlyBudgetLimit - spentThisMonth);
+  const budgetUsagePercent = monthlyBudgetLimit > 0
+    ? Math.min(100, Math.round((spentThisMonth / monthlyBudgetLimit) * 100))
+    : 0;
 
   const userGreetingName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Friend';
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  };
+
   return (
     <div className="dashboard-layout">
-      {/* Top Banner with Quick Actions & Live Refresh */}
-      <section className="dashboard-welcome-banner card" aria-label="Financial Overview">
-        <div className="welcome-text">
-          <div className="welcome-tag">
-            <span className="pulse-dot" />
-            <span>Live Financial Pulse</span>
+      {/* Executive Financial Hero Banner */}
+      <section className="dashboard-hero-card" aria-label="Financial Overview">
+        <div className="hero-content">
+          <div className="hero-badge-row">
+            <div className="hero-live-badge">
+              <span className="hero-pulse-dot" />
+              <span>LIVE FINANCIAL PULSE</span>
+            </div>
+            <span className="hero-date-pill">
+              {new Date().toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
           </div>
-          <h2 className="welcome-heading">Welcome, {userGreetingName}</h2>
-          <p className="welcome-description">
-            YOUR MONEY. A SMARTER YOU. — Daily expenses, weekly trends & budget tracking
+
+          <h2 className="hero-greeting">
+            {getGreeting()}, <span className="hero-name-highlight">{userGreetingName}</span>
+          </h2>
+          <p className="hero-tagline">
+            Your personal wealth bridge. Real-time expense velocity, weekly analytics, and budget targets.
           </p>
+
+          <div className="hero-quick-stats">
+            <div className="hero-stat-pill">
+              <span className="stat-pill-label">Month Spend</span>
+              <span className="stat-pill-value">{formatCurrencyINR(spentThisMonth, false)}</span>
+            </div>
+            <div className="hero-stat-pill">
+              <span className="stat-pill-label">Budget Available</span>
+              <span className="stat-pill-value text-gold">{formatCurrencyINR(remainingMonthBudget, false)} left ({budgetUsagePercent}% used)</span>
+            </div>
+          </div>
         </div>
-        <div className="welcome-action" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+
+        <div className="hero-actions">
           <button
-            className="btn btn-outline"
+            className="hero-btn-sync"
             onClick={fetchMetrics}
             disabled={isLoading}
-            title="Refresh Metrics"
-            aria-label="Refresh live metrics"
+            title="Sync live ledger"
+            aria-label="Sync live ledger"
           >
-            <RefreshCw size={16} className={isLoading ? 'spinner-icon' : ''} />
-            <span>Refresh</span>
+            <RefreshCw size={15} className={isLoading ? 'spinner-icon' : ''} />
+            <span>Sync Ledger</span>
           </button>
           <button
-            className="btn btn-primary"
+            className="hero-btn-add"
             onClick={onOpenAddExpense}
             aria-label="Add New Expense Transaction"
           >
@@ -147,6 +177,7 @@ export default function DashboardPage() {
           }
           icon={CalendarDays}
           badgeText="Today"
+          variant="today"
         />
 
         <StatCard
@@ -159,6 +190,7 @@ export default function DashboardPage() {
           }
           icon={CalendarRange}
           badgeText="Weekly"
+          variant="week"
         />
 
         <StatCard
@@ -171,6 +203,7 @@ export default function DashboardPage() {
           }
           icon={TrendingDown}
           badgeText="Monthly"
+          variant="month"
         />
 
         <StatCard
@@ -179,6 +212,7 @@ export default function DashboardPage() {
           subtitle={`${formatCurrencyINR(remainingMonthBudget, false)} remaining`}
           icon={CreditCard}
           badgeText="Budget"
+          variant="budget"
         />
       </section>
 

@@ -8,6 +8,7 @@ import {
 } from 'recharts';
 import { PieChart as PieIcon, Layers } from 'lucide-react';
 import { formatCurrencyINR } from '../../utils/dateUtils';
+import { getCategoryIcon } from './RecentExpenses';
 
 const CustomPieTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -26,6 +27,7 @@ const CustomPieTooltip = ({ active, payload }) => {
 
 export default function CategoryBreakdownChart({ categories = [], isLoading = false, monthName = 'This Month' }) {
   const hasData = categories && categories.length > 0;
+  const totalSpend = categories.reduce((sum, c) => sum + (Number(c.value) || 0), 0);
 
   return (
     <div className="card chart-card">
@@ -57,14 +59,14 @@ export default function CategoryBreakdownChart({ categories = [], isLoading = fa
       ) : (
         <div className="category-chart-layout">
           <div className="pie-container">
-            <ResponsiveContainer width="100%" height={190}>
+            <ResponsiveContainer width="100%" height={210}>
               <PieChart>
                 <Pie
                   data={categories}
                   cx="50%"
                   cy="50%"
-                  innerRadius={42}
-                  outerRadius={68}
+                  innerRadius={50}
+                  outerRadius={75}
                   paddingAngle={3}
                   dataKey="value"
                 >
@@ -80,21 +82,32 @@ export default function CategoryBreakdownChart({ categories = [], isLoading = fa
                 <Tooltip content={<CustomPieTooltip />} />
               </PieChart>
             </ResponsiveContainer>
+            <div className="donut-center-badge">
+              <span className="donut-center-number">{categories.length}</span>
+              <span className="donut-center-sub">Categories</span>
+            </div>
           </div>
 
           <div className="category-legend">
             {categories.map((item) => (
               <div key={item.name} className="legend-item">
                 <div className="legend-indicator-group">
-                  <span
-                    className="legend-color-dot"
-                    style={{ backgroundColor: item.color }}
+                  <div
+                    className="legend-icon-badge"
+                    style={{ backgroundColor: `${item.color}18`, color: item.color }}
                     aria-hidden="true"
-                  />
+                  >
+                    {getCategoryIcon(item.name)}
+                  </div>
                   <span className="legend-label">{item.name}</span>
                 </div>
                 <div className="legend-values">
-                  <span className="legend-percent">{item.percentage}%</span>
+                  <span
+                    className="legend-percent"
+                    style={{ backgroundColor: `${item.color}15`, color: item.color }}
+                  >
+                    {item.percentage}%
+                  </span>
                   <span className="legend-amount">{formatCurrencyINR(item.value, false)}</span>
                 </div>
               </div>

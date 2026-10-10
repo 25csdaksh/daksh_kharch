@@ -1,5 +1,5 @@
 .stat-card {
-  padding: var(--spacing-lg);
+  padding: 1.25rem 1.4rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
@@ -9,6 +9,42 @@
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+}
+
+/* Top Accent Bars */
+.stat-card-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-border);
+}
+
+.stat-card-today .stat-card-accent-bar {
+  background: linear-gradient(90deg, #10B981, #059669);
+}
+
+.stat-card-week .stat-card-accent-bar {
+  background: linear-gradient(90deg, #3B82F6, #2563EB);
+}
+
+.stat-card-month .stat-card-accent-bar {
+  background: linear-gradient(90deg, #8B5CF6, #7C3AED);
+}
+
+.stat-card-budget .stat-card-accent-bar {
+  background: linear-gradient(90deg, #F59E0B, #D97706);
 }
 
 .stat-card-header {
@@ -21,9 +57,11 @@
 }
 
 .stat-card-title {
-  font-size: var(--font-size-sm);
+  font-size: 0.825rem;
   font-weight: 600;
   color: var(--color-muted);
+  text-transform: capitalize;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -38,49 +76,107 @@
   flex-shrink: 0;
 }
 
+/* Badges */
 .stat-card-badge {
   font-size: 10px;
-  padding: 2px 7px;
+  padding: 3px 8px;
   font-weight: 700;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
+.badge-today {
+  background-color: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-week {
+  background-color: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #BFDBFE;
+}
+
+.badge-month {
+  background-color: #F5F3FF;
+  color: #7C3AED;
+  border: 1px solid #DDD6FE;
+}
+
+.badge-budget {
+  background-color: #FFFBEB;
+  color: #D97706;
+  border: 1px solid #FDE68A;
+}
+
+/* Icons */
 .stat-card-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: var(--radius-md);
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover .stat-card-icon {
+  transform: scale(1.08);
+}
+
+.icon-wrap-today {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  color: #059669;
+}
+
+.icon-wrap-week {
+  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  color: #2563EB;
+}
+
+.icon-wrap-month {
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  color: #7C3AED;
+}
+
+.icon-wrap-budget {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  color: #D97706;
+}
+
+.icon-wrap-default {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .stat-card-value-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-top: var(--spacing-xs);
+  margin-top: 4px;
   width: 100%;
   min-width: 0;
 }
 
 .stat-card-amount {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: -0.02em;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.03em;
   display: flex;
   align-items: baseline;
   gap: 2px;
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
+  line-height: 1.15;
 }
 
 .stat-card-currency {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--color-muted);
 }
 
@@ -88,9 +184,9 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  font-size: var(--font-size-xs);
+  font-size: 0.8rem;
   color: var(--color-muted);
-  margin-top: var(--spacing-xs);
+  margin-top: 2px;
   flex-wrap: wrap;
 }
 
@@ -98,9 +194,10 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-weight: 600;
-  padding: 2px 6px;
+  font-weight: 700;
+  padding: 2px 7px;
   border-radius: var(--radius-sm);
+  font-size: 11px;
 }
 
 .trend-up {
@@ -118,8 +215,10 @@
   background-color: var(--color-bg);
 }
 
-.stat-card-comparison {
+.stat-card-comparison,
+.stat-card-subtitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
