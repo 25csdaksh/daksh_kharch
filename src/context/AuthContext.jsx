@@ -3,6 +3,17 @@ import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 const AuthContext = createContext(null);
 
+const getAuthRedirectUrl = (path) => {
+  const customSiteUrl = import.meta.env.VITE_SITE_URL;
+  if (customSiteUrl && customSiteUrl.trim()) {
+    return `${customSiteUrl.trim().replace(/\/$/, '')}${path}`;
+  }
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return `${window.location.origin}${path}`;
+  }
+  return `https://localhost${path}`;
+};
+
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
@@ -61,7 +72,7 @@ export function AuthProvider({ children }) {
         data: {
           full_name: fullName?.trim() || ''
         },
-        emailRedirectTo: `${window.location.origin}/login`
+        emailRedirectTo: getAuthRedirectUrl('/login')
       }
     });
 
@@ -102,7 +113,7 @@ export function AuthProvider({ children }) {
       throw new Error('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
     }
 
-    const redirectTo = `${window.location.origin}/reset-password`;
+    const redirectTo = getAuthRedirectUrl('/reset-password');
     const { data, error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
       redirectTo
     });
@@ -131,7 +142,7 @@ export function AuthProvider({ children }) {
     const { error } = await supabase.auth.resend({
       type: 'signup',
       email: email.trim(),
-      options: { emailRedirectTo: `${window.location.origin}/login` }
+      options: { emailRedirectTo: getAuthRedirectUrl('/login') }
     });
     if (error) throw error;
   };

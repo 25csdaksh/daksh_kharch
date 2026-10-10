@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HisabSetu</string>
+    <string name="title_activity_main">HisabSetu</string>
+    <string name="package_name">com.hisabsetu.app</string>
+    <string name="custom_url_scheme">com.hisabsetu.app</string>
+</resources>
