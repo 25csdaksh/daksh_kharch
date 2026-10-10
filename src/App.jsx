@@ -12,6 +12,10 @@ const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const ExpensesPage = lazy(() => import('./pages/ExpensesPage'));
 const ReportsPage = lazy(() => import('./pages/ReportsPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const SplitsPage = lazy(() => import('./pages/SplitsPage'));
+const CreateSplitPage = lazy(() => import('./pages/CreateSplitPage'));
+const SplitDetailPage = lazy(() => import('./pages/SplitDetailPage'));
+const SettlementsPage = lazy(() => import('./pages/SettlementsPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
@@ -40,6 +44,10 @@ function AppRoutes() {
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/splits" element={<SplitsPage />} />
+            <Route path="/splits/new" element={<CreateSplitPage />} />
+            <Route path="/splits/:id" element={<SplitDetailPage />} />
+            <Route path="/splits/settlements" element={<SettlementsPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>

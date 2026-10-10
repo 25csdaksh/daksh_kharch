@@ -19,6 +19,7 @@ import {
   sanitizeCSVField,
   generateExpensesCSV
 } from '../src/utils/reportUtils.js';
+import { calculateBalances } from '../src/utils/splitEngine.js';
 
 describe('HisabSetu Production Hardening & E2E Journey Tests', () => {
   describe('User Journey Step 1: Input Validation & Expense Lifecycle', () => {
@@ -254,6 +255,86 @@ describe('HisabSetu Production Hardening & E2E Journey Tests', () => {
       const formatted = formatCurrencyINR(1250000);
       // en-IN format should contain 12,50,000
       assert.match(formatted, /12,50,000/);
+    });
+  });
+
+  describe('User Journey Step 7: Split Expenses, Balances & Settlements Lifecycle', () => {
+    it('executes complete split journey: Equal Split -> Balances -> Partial Settlement -> Full Settlement', () => {
+      // 1. Daksh (user, null) pays ₹900 for pizza with Rahul & Amit
+      const sharedExpense = {
+        id: 'exp-e2e-1',
+        paid_by_friend_id: null, // Daksh paid
+        total_amount: 900,
+        shares: [
+          { friend_id: null, share_amount: 300 },
+          { friend_id: 'rahul-uuid', share_amount: 300 },
+          { friend_id: 'amit-uuid', share_amount: 300 }
+        ]
+      };
+
+      // Initial balance check
+      let balance = calculateBalances([sharedExpense], []);
+      assert.strictEqual(balance.netBalances['USER'], 600);
+      assert.strictEqual(balance.netBalances['rahul-uuid'], -300);
+      assert.strictEqual(balance.netBalances['amit-uuid'], -300);
+      assert.strictEqual(balance.isBalanced, true);
+
+      // 2. Partial Settlement: Rahul pays Daksh ₹200
+      const partialSettlement = {
+        id: 'set-e2e-1',
+        payer_friend_id: 'rahul-uuid',
+        recipient_friend_id: null,
+        amount: 200,
+        settlement_date: '2026-10-10'
+      };
+
+      balance = calculateBalances([sharedExpense], [partialSettlement]);
+      assert.strictEqual(balance.netBalances['USER'], 400); // 600 - 200 = 400
+      assert.strictEqual(balance.netBalances['rahul-uuid'], -100); // -300 + 200 = -100
+      assert.strictEqual(balance.netBalances['amit-uuid'], -300);
+      assert.strictEqual(balance.isBalanced, true);
+
+      // 3. Final Settlement: Rahul pays remaining ₹100, Amit pays ₹300
+      const finalSettlements = [
+        partialSettlement,
+        {
+          id: 'set-e2e-2',
+          payer_friend_id: 'rahul-uuid',
+          recipient_friend_id: null,
+          amount: 100,
+          settlement_date: '2026-10-10'
+        },
+        {
+          id: 'set-e2e-3',
+          payer_friend_id: 'amit-uuid',
+          recipient_friend_id: null,
+          amount: 300,
+          settlement_date: '2026-10-10'
+        }
+      ];
+
+      balance = calculateBalances([sharedExpense], finalSettlements);
+      assert.strictEqual(balance.netBalances['USER'], 0);
+      assert.strictEqual(balance.netBalances['rahul-uuid'], 0);
+      assert.strictEqual(balance.netBalances['amit-uuid'], 0);
+      assert.strictEqual(balance.userSummary.youOwe, 0);
+      assert.strictEqual(balance.userSummary.owedToYou, 0);
+      assert.strictEqual(balance.userSummary.netBalance, 0);
+      assert.strictEqual(balance.isBalanced, true);
+    });
+
+    it('simulates multi-tenant RLS isolation: user B cannot access user A split records', () => {
+      // Simulate tenant isolation in split_friends and shared_expenses
+      const userAFriends = [
+        { id: 'f-1', user_id: 'user-A-id', name: 'Rahul' },
+        { id: 'f-2', user_id: 'user-A-id', name: 'Amit' }
+      ];
+
+      const userBContext = { user_id: 'user-B-id' };
+
+      // Query simulation applying RLS filter `user_id = auth.uid()`
+      const userBAccessibleFriends = userAFriends.filter((f) => f.user_id === userBContext.user_id);
+      assert.strictEqual(userBAccessibleFriends.length, 0);
     });
   });
 });

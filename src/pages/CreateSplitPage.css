@@ -1,0 +1,187 @@
+/* ==========================================================================
+   HISABSETU CREATE SPLIT EXPENSE STYLES (60:30:10 RATIO)
+   ========================================================================== */
+
+.create-split-container {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.create-split-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.create-split-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+.create-split-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.create-split-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Split Method Selector Tabs */
+.split-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-secondary);
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+}
+
+.split-tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.split-tab-btn.active {
+  background: #FFFFFF;
+  color: var(--color-heading);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* Participant Select Row */
+.participant-select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.participant-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  transition: border-color var(--transition-speed);
+}
+
+.participant-select-row.selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.participant-check-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+/* Input allocations inside participant row */
+.share-input-control {
+  width: 120px;
+  height: 36px;
+  font-size: 0.85rem;
+  text-align: right;
+  padding: 0.35rem 0.65rem;
+}
+
+/* Live Preview Card */
+.split-preview-card {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.preview-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.preview-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.preview-breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.preview-breakdown-row:last-child {
+  border-bottom: none;
+}
+
+.preview-diff-pill {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.diff-balanced {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid rgba(5, 150, 105, 0.25);
+}
+
+.diff-unbalanced {
+  background: #FFF1F2;
+  color: #E11D48;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 868px) {
+  .create-split-layout {
+    grid-template-columns: 1fr;
+  }
+}

@@ -8,7 +8,8 @@ import {
   LogIn,
   LogOut,
   PlusCircle,
-  Wallet
+  Wallet,
+  Users
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { DEMO_METADATA } from '../../data/mockData';
@@ -30,6 +31,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/expenses', label: 'Expenses', icon: Receipt },
+    { path: '/splits', label: 'Split Bills', icon: Users },
     { path: '/reports', label: 'Reports', icon: BarChart3 },
     { path: '/settings', label: 'Settings', icon: Settings }
   ];
