@@ -8,9 +8,7 @@ import {
   LogIn,
   LogOut,
   PlusCircle,
-  Wallet,
-  ShieldCheck,
-  Sparkles
+  Wallet
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { DEMO_METADATA } from '../../data/mockData';
@@ -114,20 +112,6 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
         </nav>
 
         <div className="sidebar-footer">
-          <div className="demo-pill">
-            {user ? (
-              <>
-                <ShieldCheck size={14} className="text-primary" />
-                <span>Supabase Authenticated</span>
-              </>
-            ) : (
-              <>
-                <Sparkles size={14} />
-                <span>Demo Session</span>
-              </>
-            )}
-          </div>
-
           <div className="user-profile-preview">
             <div className="avatar-circle">{initials}</div>
             <div className="user-info">

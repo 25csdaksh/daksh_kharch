@@ -90,7 +90,7 @@ export default function DashboardPage() {
         <div className="welcome-text">
           <div className="welcome-tag">
             <span className="pulse-dot" />
-            <span>Live Supabase PostgreSQL Engine</span>
+            <span>Live Expense Overview</span>
           </div>
           <h2 className="welcome-heading">Financial Pulse & Live Ledger</h2>
           <p className="welcome-description">
