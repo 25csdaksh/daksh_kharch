@@ -68,7 +68,7 @@
 
 .badge-today {
   background-color: #FEF3C7;
-  color: #D97706;
+  color: #B88000;
   border: 1px solid #FDE68A;
 }
 
@@ -86,7 +86,7 @@
 
 .badge-budget {
   background-color: #FFFBEB;
-  color: #B45309;
+  color: #B88000;
   border: 1px solid #FDE68A;
 }
 
@@ -108,7 +108,7 @@
 
 .icon-wrap-today {
   background-color: #FEF3C7;
-  color: #D97706;
+  color: #B88000;
 }
 
 .icon-wrap-week {
@@ -123,7 +123,7 @@
 
 .icon-wrap-budget {
   background-color: #FFFBEB;
-  color: #B45309;
+  color: #B88000;
 }
 
 .icon-wrap-default {

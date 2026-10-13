@@ -3,7 +3,7 @@
      HISABSETU DESIGN SYSTEM (60 : 30 : 10 RULE)
      60% Dominant Base: #F8FAFC (Canvas) & #FFFFFF (Card Surfaces)
      30% Structural Contrast: #0A2540 & #0F2744 (Deep Dark Blue / Midnight Navy)
-     10% Vibrant Action Accent: #D97706 & #F59E0B (Rich Champagne Gold)
+     10% Vibrant Action Accent: Rich Golden Yellow Palette
      ========================================================================== */
 
   /* 60% Dominant Palette */
@@ -26,16 +26,16 @@
   --color-secondary-text: #334155;
 
   /* 10% Golden Energy Accent (CTAs, Badges, Highlights) */
-  --color-primary: #D97706;
-  --color-primary-hover: #B45309;
+  --color-primary: #E5A100;
+  --color-primary-hover: #D99B00;
   --color-primary-light: #FEF3C7;
-  --color-primary-glow: rgba(217, 119, 6, 0.28);
-  --color-accent: #D97706;
-  --color-accent-hover: #B45309;
+  --color-primary-glow: rgba(245, 176, 0, 0.3);
+  --color-accent: #F5B000;
+  --color-accent-hover: #D99B00;
   --color-accent-light: #FEF3C7;
-  --color-gold: #D97706;
+  --color-gold: #F5B000;
   --color-gold-light: #FEF3C7;
-  --color-gold-glow: rgba(245, 158, 11, 0.35);
+  --color-gold-glow: rgba(245, 176, 0, 0.35);
 
   /* Status Colors */
   --color-danger: #EF4444;
@@ -163,15 +163,17 @@ input, select, textarea {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.28);
-  border: 1px solid rgba(217, 119, 6, 0.2);
+  background: linear-gradient(135deg, #FFD000 0%, #F5B000 50%, #D99B00 100%);
+  color: #0A2540;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(245, 176, 0, 0.3);
+  border: 1px solid rgba(253, 230, 138, 0.6);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+  background: linear-gradient(135deg, #F5B000 0%, #E5A100 50%, #B88000 100%);
+  color: #0A2540;
+  box-shadow: 0 4px 14px rgba(245, 176, 0, 0.45);
   transform: translateY(-1px);
 }
 

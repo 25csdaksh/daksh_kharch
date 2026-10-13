@@ -200,17 +200,18 @@
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
   font-weight: 700;
-  color: #FFFFFF;
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  border: 1px solid rgba(253, 230, 138, 0.4);
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.45);
+  color: #0A2540;
+  background: linear-gradient(135deg, #FFD000 0%, #F5B000 50%, #D99B00 100%);
+  border: 1px solid rgba(253, 230, 138, 0.6);
+  box-shadow: 0 4px 14px rgba(245, 176, 0, 0.45);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .hero-btn-add:hover {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.6);
+  background: linear-gradient(135deg, #F5B000 0%, #E5A100 50%, #B88000 100%);
+  color: #0A2540;
+  box-shadow: 0 6px 18px rgba(245, 176, 0, 0.6);
   transform: translateY(-1px);
 }
 

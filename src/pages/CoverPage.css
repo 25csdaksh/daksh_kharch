@@ -113,12 +113,12 @@
 }
 
 .btn-cover-signup {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #FFD000 0%, #F5B000 50%, #D99B00 100%);
+  color: #0A2540;
   font-weight: 700;
   padding: 0.55rem 1.25rem;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 10px var(--color-primary-glow);
+  box-shadow: 0 2px 10px rgba(245, 176, 0, 0.3);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -126,8 +126,9 @@
 }
 
 .btn-cover-signup:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: var(--shadow-glow);
+  background: linear-gradient(135deg, #F5B000 0%, #E5A100 50%, #B88000 100%);
+  color: #0A2540;
+  box-shadow: 0 4px 14px rgba(245, 176, 0, 0.45);
   transform: translateY(-1px);
 }
 
@@ -231,13 +232,13 @@
 }
 
 .btn-hero-primary {
-  background-color: var(--color-primary);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #FFD000 0%, #F5B000 50%, #D99B00 100%);
+  color: #0A2540;
   font-size: 1.05rem;
   font-weight: 700;
   padding: 0.9rem 2rem;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 18px var(--color-primary-glow);
+  box-shadow: 0 4px 18px rgba(245, 176, 0, 0.35);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -245,8 +246,9 @@
 }
 
 .btn-hero-primary:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: 0 8px 24px var(--color-primary-glow);
+  background: linear-gradient(135deg, #F5B000 0%, #E5A100 50%, #B88000 100%);
+  color: #0A2540;
+  box-shadow: 0 8px 24px rgba(245, 176, 0, 0.45);
   transform: translateY(-2px);
 }
 
@@ -512,15 +514,15 @@
 .step-number {
   width: 40px;
   height: 40px;
-  background: var(--color-primary);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #FFD000 0%, #F5B000 50%, #D99B00 100%);
+  color: #0A2540;
   font-weight: 800;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.25rem;
-  box-shadow: 0 4px 12px var(--color-primary-glow);
+  box-shadow: 0 4px 12px rgba(245, 176, 0, 0.3);
 }
 
 .step-title {
