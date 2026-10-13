@@ -681,18 +681,98 @@
     overflow: hidden;
   }
 
-  .chart-header {
-    margin-bottom: 12px;
+  .chart-header,
+  .budget-card-header,
+  .recent-expenses-header {
+    margin-bottom: 10px;
     flex-wrap: wrap;
     gap: 8px;
+  }
+
+  .chart-title,
+  .budget-title,
+  .card-heading {
+    font-size: 0.95rem;
+  }
+
+  .chart-subtitle,
+  .budget-subtitle,
+  .card-subheading {
+    font-size: 11px;
+  }
+
+  .chart-icon-wrap,
+  .budget-icon-wrap {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .chart-icon-wrap svg,
+  .budget-icon-wrap svg {
+    width: 15px;
+    height: 15px;
   }
 
   .chart-container-bar {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    height: 210px;
+    height: 200px;
     overflow: hidden;
+  }
+
+  .budget-metrics {
+    gap: 4px;
+    padding: 6px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .budget-metric-item {
+    padding: 8px 4px;
+  }
+
+  .metric-label {
+    font-size: 9px;
+    letter-spacing: 0.2px;
+  }
+
+  .metric-value {
+    font-size: clamp(0.85rem, 3.6vw, 1.05rem);
+  }
+
+  .pie-container {
+    height: 180px;
+    max-width: 180px;
+  }
+
+  .donut-center-number {
+    font-size: 1.15rem;
+  }
+
+  .legend-item {
+    padding: 6px 10px;
+  }
+
+  .legend-label {
+    font-size: 12px;
+  }
+
+  .legend-amount {
+    font-size: 11.5px;
+  }
+
+  .mobile-expense-item {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .mobile-expense-title {
+    font-size: 12.5px;
+  }
+
+  .mobile-expense-amount {
+    font-size: 13px;
   }
 }
 

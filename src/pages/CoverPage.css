@@ -444,8 +444,8 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 1.5rem;
 }
 
 .feature-box {
@@ -633,26 +633,172 @@
     min-height: auto;
     background-position: center top;
   }
+
   .cover-hero-section {
-    padding: 3.25rem 1.25rem 3rem;
+    padding: 3rem 1.25rem 2.5rem;
   }
+
   .hero-trust-row {
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
+
   .hero-main-heading {
-    font-size: 2.15rem;
-    min-height: 2.9em;
+    font-size: clamp(1.85rem, 5.5vw, 2.5rem);
+    min-height: auto;
   }
+
   .preview-content {
     grid-template-columns: 1fr;
   }
+
   .steps-grid {
     grid-template-columns: 1fr;
   }
+
   .cover-nav-links {
     display: none;
   }
+
   .cta-banner-title {
     font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .cover-navbar {
+    padding: 0.65rem 1rem;
+  }
+
+  .cover-logo-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cover-brand-title {
+    font-size: 1.15rem;
+  }
+
+  .cover-brand-badge {
+    display: none;
+  }
+
+  .cover-nav-actions {
+    gap: 0.4rem;
+  }
+
+  .btn-cover-login {
+    padding: 0.45rem 0.85rem;
+    font-size: 12px;
+  }
+
+  .btn-cover-signup {
+    padding: 0.45rem 0.95rem;
+    font-size: 12px;
+  }
+
+  .cover-hero-section {
+    padding: 2.25rem 1rem 2rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-trust-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .trust-item {
+    justify-content: center;
+    font-size: 11.5px;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .cover-preview-section {
+    margin: 1rem auto 3rem;
+    padding: 0 1rem;
+  }
+
+  .preview-content {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .preview-metric-card {
+    padding: 0.85rem;
+  }
+
+  .preview-metric-value {
+    font-size: 1.35rem;
+  }
+
+  .cover-features-section {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.65rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .feature-box {
+    padding: 1.25rem;
+  }
+
+  .step-card {
+    padding: 1.25rem;
+  }
+
+  .cover-cta-banner {
+    margin: 1.5rem 1rem 3rem;
+    padding: 2.25rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-banner-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-banner-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-banner-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn-cta-white,
+  .btn-cta-transparent {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .cover-footer {
+    padding: 2rem 1rem;
   }
 }

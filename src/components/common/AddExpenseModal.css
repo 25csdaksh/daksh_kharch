@@ -119,9 +119,25 @@
   gap: var(--spacing-md);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .modal-backdrop {
+    padding: 8px;
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    padding: 1.25rem 1rem;
+    border-radius: 20px 20px 12px 12px;
+    max-height: 90vh;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
 }
 
