@@ -12,9 +12,11 @@ import {
   Receipt,
   Sparkles,
   AlertCircle,
-  RefreshCw
+  RefreshCw,
+  Target
 } from 'lucide-react';
 import { getReportAnalytics } from '../services/expenseService';
+import { getMonthlyBudgetOverview } from '../services/budgetService';
 import {
   getWeekBoundaries,
   getMonthBoundaries,
@@ -29,12 +31,14 @@ import {
 } from '../utils/dateUtils';
 import ReportTimelineChart from '../components/reports/ReportTimelineChart';
 import ReportCategoryTable from '../components/reports/ReportCategoryTable';
+import ReportBudgetTable from '../components/reports/ReportBudgetTable';
 import CategoryBreakdownChart from '../components/dashboard/CategoryBreakdownChart';
+import BudgetVsActualChart from '../components/budget/BudgetVsActualChart';
 import './ReportsPage.css';
 import '../components/dashboard/DashboardCharts.css';
 
 export default function ReportsPage() {
-  const [periodTab, setPeriodTab] = useState('weekly'); // 'weekly' | 'monthly' | 'yearly' | 'custom'
+  const [periodTab, setPeriodTab] = useState('weekly'); // 'weekly' | 'monthly' | 'yearly' | 'custom' | 'budget'
 
   // Navigation offsets
   const [weekOffset, setWeekOffset] = useState(0);
@@ -48,6 +52,7 @@ export default function ReportsPage() {
 
   // Report Data State
   const [reportData, setReportData] = useState(null);
+  const [budgetOverview, setBudgetOverview] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [downloadSuccess, setDownloadSuccess] = useState('');
@@ -57,7 +62,7 @@ export default function ReportsPage() {
     if (periodTab === 'weekly') {
       return getWeekBoundaries(weekOffset);
     }
-    if (periodTab === 'monthly') {
+    if (periodTab === 'monthly' || periodTab === 'budget') {
       return getMonthBoundaries(monthOffset);
     }
     if (periodTab === 'yearly') {
@@ -94,18 +99,37 @@ export default function ReportsPage() {
       setIsLoading(true);
       setError(null);
 
-      const data = await getReportAnalytics({
-        periodType: periodTab,
-        startDate: periodParams.startDate,
-        endDate: periodParams.endDate,
-        prevStartDate: periodParams.prevStartDate,
-        prevEndDate: periodParams.prevEndDate,
-        days: periodParams.days || [],
-        months: periodParams.months || [],
-        daysCount: periodParams.daysCount || (periodParams.days ? periodParams.days.length : 1)
-      });
-
-      setReportData(data);
+      if (periodTab === 'budget') {
+        const targetYear = periodParams.year;
+        const targetMonth = parseInt(periodParams.startDate.slice(5, 7), 10);
+        const [analyticsData, budgetData] = await Promise.all([
+          getReportAnalytics({
+            periodType: 'monthly',
+            startDate: periodParams.startDate,
+            endDate: periodParams.endDate,
+            prevStartDate: periodParams.prevStartDate,
+            prevEndDate: periodParams.prevEndDate,
+            days: periodParams.days || [],
+            months: [],
+            daysCount: periodParams.daysCount || 30
+          }),
+          getMonthlyBudgetOverview(targetYear, targetMonth)
+        ]);
+        setReportData(analyticsData);
+        setBudgetOverview(budgetData);
+      } else {
+        const data = await getReportAnalytics({
+          periodType: periodTab,
+          startDate: periodParams.startDate,
+          endDate: periodParams.endDate,
+          prevStartDate: periodParams.prevStartDate,
+          prevEndDate: periodParams.prevEndDate,
+          days: periodParams.days || [],
+          months: periodParams.months || [],
+          daysCount: periodParams.daysCount || (periodParams.days ? periodParams.days.length : 1)
+        });
+        setReportData(data);
+      }
     } catch (err) {
       console.error('Failed to load report analytics:', err);
       setError(err.message || 'Failed to generate financial report.');
@@ -120,29 +144,34 @@ export default function ReportsPage() {
     const handleExpenseChange = () => {
       fetchAnalytics();
     };
+    const handleBudgetChange = () => {
+      fetchAnalytics();
+    };
 
     window.addEventListener('expense:changed', handleExpenseChange);
+    window.addEventListener('budget:changed', handleBudgetChange);
     return () => {
       window.removeEventListener('expense:changed', handleExpenseChange);
+      window.removeEventListener('budget:changed', handleBudgetChange);
     };
   }, [fetchAnalytics]);
 
   // Navigation handlers
   const handlePrev = () => {
     if (periodTab === 'weekly') setWeekOffset((prev) => prev - 1);
-    if (periodTab === 'monthly') setMonthOffset((prev) => prev - 1);
+    if (periodTab === 'monthly' || periodTab === 'budget') setMonthOffset((prev) => prev - 1);
     if (periodTab === 'yearly') setYearOffset((prev) => prev - 1);
   };
 
   const handleNext = () => {
     if (periodTab === 'weekly') setWeekOffset((prev) => prev + 1);
-    if (periodTab === 'monthly') setMonthOffset((prev) => prev + 1);
+    if (periodTab === 'monthly' || periodTab === 'budget') setMonthOffset((prev) => prev + 1);
     if (periodTab === 'yearly') setYearOffset((prev) => prev + 1);
   };
 
   const handleResetCurrent = () => {
     if (periodTab === 'weekly') setWeekOffset(0);
-    if (periodTab === 'monthly') setMonthOffset(0);
+    if (periodTab === 'monthly' || periodTab === 'budget') setMonthOffset(0);
     if (periodTab === 'yearly') setYearOffset(0);
     if (periodTab === 'custom') {
       setCustomStartDate(todayStr);
@@ -152,7 +181,7 @@ export default function ReportsPage() {
 
   const isCurrentActive = useMemo(() => {
     if (periodTab === 'weekly') return weekOffset === 0;
-    if (periodTab === 'monthly') return monthOffset === 0;
+    if (periodTab === 'monthly' || periodTab === 'budget') return monthOffset === 0;
     if (periodTab === 'yearly') return yearOffset === 0;
     return false;
   }, [periodTab, weekOffset, monthOffset, yearOffset]);
@@ -226,6 +255,14 @@ export default function ReportsPage() {
               onClick={() => setPeriodTab('custom')}
             >
               Custom Range
+            </button>
+            <button
+              role="tab"
+              aria-selected={periodTab === 'budget'}
+              className={`period-tab-btn ${periodTab === 'budget' ? 'active' : ''}`}
+              onClick={() => setPeriodTab('budget')}
+            >
+              Budget vs Actual
             </button>
           </div>
         </div>
@@ -337,134 +374,262 @@ export default function ReportsPage() {
 
       {/* KPI Cards Grid */}
       <section className="reports-kpi-grid" aria-label="Period Key Performance Indicators">
-        {/* Total Expenditure */}
-        <div className="kpi-card card">
-          <div className="kpi-header">
-            <span className="kpi-title">Total Expenditure</span>
-            <div className="kpi-icon" aria-hidden="true">
-              <Coins size={16} />
+        {periodTab === 'budget' ? (
+          <>
+            {/* Total Budget Target */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">Monthly Target Budget</span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Target size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {budgetOverview?.hasTotalBudget ? formatCurrencyINR(budgetOverview.totalBudget, false) : 'Not Configured'}
+              </div>
+              <div className="kpi-footer">
+                <span>{budgetOverview?.hasTotalBudget ? 'Target ceiling' : 'No total ceiling set'}</span>
+              </div>
             </div>
-          </div>
-          <div className="kpi-amount">
-            {formatCurrencyINR(reportData?.totalExpenditure || 0)}
-          </div>
-          <div className="kpi-footer">
-            {periodTab !== 'custom' && reportData?.comparison && (
-              <span
-                className={`comparison-tag ${
-                  reportData.comparison.direction === 'increase'
-                    ? 'comparison-increase'
-                    : reportData.comparison.direction === 'decrease'
-                    ? 'comparison-decrease'
-                    : 'comparison-neutral'
-                }`}
-              >
-                {reportData.comparison.direction === 'increase' && <TrendingUp size={12} />}
-                {reportData.comparison.direction === 'decrease' && <TrendingDown size={12} />}
-                <span>{reportData.comparison.label}</span>
-              </span>
-            )}
-            {periodTab === 'custom' && (
-              <span>Selected custom date range</span>
-            )}
-          </div>
-        </div>
 
-        {/* Total Transactions */}
-        <div className="kpi-card card">
-          <div className="kpi-header">
-            <span className="kpi-title">Total Transactions</span>
-            <div className="kpi-icon" aria-hidden="true">
-              <Receipt size={16} />
+            {/* Actual Spending */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">Actual Expenditure</span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Coins size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {formatCurrencyINR(budgetOverview?.totalActualSpent || reportData?.totalExpenditure || 0, false)}
+              </div>
+              <div className="kpi-footer">
+                <span>{reportData?.transactionCount || 0} transactions in {periodParams.label}</span>
+              </div>
             </div>
-          </div>
-          <div className="kpi-amount">
-            {reportData?.transactionCount || 0}
-          </div>
-          <div className="kpi-footer">
-            <span>
-              {reportData?.previousCount !== undefined && periodTab !== 'custom'
-                ? `${reportData.previousCount} in prior period`
-                : 'Recorded transactions'}
-            </span>
-          </div>
-        </div>
 
-        {/* Average Spending */}
-        <div className="kpi-card card">
-          <div className="kpi-header">
-            <span className="kpi-title">
-              {periodTab === 'yearly' ? 'Avg Monthly Spend' : 'Avg Daily Spend'}
-            </span>
-            <div className="kpi-icon" aria-hidden="true">
-              <TrendingUp size={16} />
+            {/* Remaining / Overspending */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">
+                  {budgetOverview?.overallMetrics?.isOverBudget ? 'Over Budget' : 'Remaining Budget'}
+                </span>
+                <div className="kpi-icon" aria-hidden="true">
+                  {budgetOverview?.overallMetrics?.isOverBudget ? (
+                    <TrendingDown size={16} className="text-danger" />
+                  ) : (
+                    <TrendingUp size={16} className="text-success" />
+                  )}
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {budgetOverview?.hasTotalBudget ? (
+                  <span className={budgetOverview.overallMetrics.isOverBudget ? 'text-danger' : 'text-success'}>
+                    {budgetOverview.overallMetrics.isOverBudget
+                      ? `-${formatCurrencyINR(Math.abs(budgetOverview.overallMetrics.remaining), false)}`
+                      : formatCurrencyINR(budgetOverview.overallMetrics.remaining, false)}
+                  </span>
+                ) : (
+                  '—'
+                )}
+              </div>
+              <div className="kpi-footer">
+                <span>
+                  {budgetOverview?.hasTotalBudget
+                    ? budgetOverview.overallMetrics.isOverBudget
+                      ? 'Target limit exceeded'
+                      : 'Within monthly target'
+                    : 'Set budget to track'}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="kpi-amount">
-            {formatCurrencyINR(reportData?.averageSpending || 0)}
-          </div>
-          <div className="kpi-footer">
-            <span>
-              {periodTab === 'yearly' ? 'Across 12 months' : 'Per calendar day'}
-            </span>
-          </div>
-        </div>
 
-        {/* Peak Spending Metric */}
-        <div className="kpi-card card">
-          <div className="kpi-header">
-            <span className="kpi-title">
-              {periodTab === 'yearly'
-                ? 'Highest Month'
-                : periodTab === 'custom'
-                ? 'Top Category'
-                : 'Highest Day'}
-            </span>
-            <div className="kpi-icon" aria-hidden="true">
-              <Layers size={16} />
+            {/* Percentage Consumed */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">Target Consumption</span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Layers size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {budgetOverview?.hasTotalBudget ? `${budgetOverview.overallMetrics.roundedPercentage}%` : '—'}
+              </div>
+              <div className="kpi-footer">
+                <span
+                  className={`comparison-tag ${
+                    budgetOverview?.overallMetrics?.isOverBudget
+                      ? 'comparison-increase'
+                      : budgetOverview?.overallMetrics?.isNearLimit
+                      ? 'comparison-neutral'
+                      : 'comparison-decrease'
+                  }`}
+                >
+                  <span>{budgetOverview?.overallMetrics?.badgeText || 'No Budget'}</span>
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="kpi-amount" style={{ fontSize: 'var(--font-size-xl)' }}>
-            {periodTab === 'custom' && reportData?.topCategory
-              ? `${reportData.topCategory.name}`
-              : reportData?.highestMetric?.label || 'None'}
-          </div>
-          <div className="kpi-footer">
-            <span>
-              {periodTab === 'custom' && reportData?.topCategory
-                ? `${formatCurrencyINR(reportData.topCategory.value)} (${reportData.topCategory.percentage}%)`
-                : reportData?.highestMetric?.amount
-                ? `${formatCurrencyINR(reportData.highestMetric.amount)} peak spend`
-                : reportData?.highestMetric?.subtext || 'No spend recorded'}
-            </span>
-          </div>
-        </div>
+          </>
+        ) : (
+          <>
+            {/* Total Expenditure */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">Total Expenditure</span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Coins size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {formatCurrencyINR(reportData?.totalExpenditure || 0)}
+              </div>
+              <div className="kpi-footer">
+                {periodTab !== 'custom' && reportData?.comparison && (
+                  <span
+                    className={`comparison-tag ${
+                      reportData.comparison.direction === 'increase'
+                        ? 'comparison-increase'
+                        : reportData.comparison.direction === 'decrease'
+                        ? 'comparison-decrease'
+                        : 'comparison-neutral'
+                    }`}
+                  >
+                    {reportData.comparison.direction === 'increase' && <TrendingUp size={12} />}
+                    {reportData.comparison.direction === 'decrease' && <TrendingDown size={12} />}
+                    <span>{reportData.comparison.label}</span>
+                  </span>
+                )}
+                {periodTab === 'custom' && (
+                  <span>Selected custom date range</span>
+                )}
+              </div>
+            </div>
+
+            {/* Total Transactions */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">Total Transactions</span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Receipt size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {reportData?.transactionCount || 0}
+              </div>
+              <div className="kpi-footer">
+                <span>
+                  {reportData?.previousCount !== undefined && periodTab !== 'custom'
+                    ? `${reportData.previousCount} in prior period`
+                    : 'Recorded transactions'}
+                </span>
+              </div>
+            </div>
+
+            {/* Average Spending */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">
+                  {periodTab === 'yearly' ? 'Avg Monthly Spend' : 'Avg Daily Spend'}
+                </span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <TrendingUp size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount">
+                {formatCurrencyINR(reportData?.averageSpending || 0)}
+              </div>
+              <div className="kpi-footer">
+                <span>
+                  {periodTab === 'yearly' ? 'Across 12 months' : 'Per calendar day'}
+                </span>
+              </div>
+            </div>
+
+            {/* Peak Spending Metric */}
+            <div className="kpi-card card">
+              <div className="kpi-header">
+                <span className="kpi-title">
+                  {periodTab === 'yearly'
+                    ? 'Highest Month'
+                    : periodTab === 'custom'
+                    ? 'Top Category'
+                    : 'Highest Day'}
+                </span>
+                <div className="kpi-icon" aria-hidden="true">
+                  <Layers size={16} />
+                </div>
+              </div>
+              <div className="kpi-amount" style={{ fontSize: 'var(--font-size-xl)' }}>
+                {periodTab === 'custom' && reportData?.topCategory
+                  ? `${reportData.topCategory.name}`
+                  : reportData?.highestMetric?.label || 'None'}
+              </div>
+              <div className="kpi-footer">
+                <span>
+                  {periodTab === 'custom' && reportData?.topCategory
+                    ? `${formatCurrencyINR(reportData.topCategory.value)} (${reportData.topCategory.percentage}%)`
+                    : reportData?.highestMetric?.amount
+                    ? `${formatCurrencyINR(reportData.highestMetric.amount)} peak spend`
+                    : reportData?.highestMetric?.subtext || 'No spend recorded'}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </section>
 
-      {/* Visual Analytics Grid: Timeline Chart + Category Pie Chart */}
-      <section className="reports-analytics-grid" aria-label="Visual Analytics Charts">
-        <ReportTimelineChart
-          data={reportData?.timelineChartData || []}
-          isLoading={isLoading}
-          periodType={periodTab}
-          periodLabel={periodParams.label}
-        />
+      {/* Visual Analytics Grid */}
+      {periodTab === 'budget' ? (
+        <>
+          <section className="reports-analytics-grid" aria-label="Budget Visual Analytics">
+            <BudgetVsActualChart
+              items={budgetOverview?.categoryBreakdown || []}
+              monthLabel={periodParams.label}
+              isLoading={isLoading}
+            />
 
-        <CategoryBreakdownChart
-          categories={reportData?.categories || []}
-          isLoading={isLoading}
-          monthName={periodParams.label}
-        />
-      </section>
+            <CategoryBreakdownChart
+              categories={reportData?.categories || []}
+              isLoading={isLoading}
+              monthName={periodParams.label}
+            />
+          </section>
 
-      {/* Detailed Category Table */}
-      <section aria-label="Category Distribution Breakdown">
-        <ReportCategoryTable
-          categories={reportData?.categories || []}
-          isLoading={isLoading}
-          totalSpend={reportData?.totalExpenditure || 0}
-        />
-      </section>
+          {/* Detailed Budget vs Actual Table */}
+          <section aria-label="Budget Reconciliation Ledger">
+            <ReportBudgetTable
+              overview={budgetOverview}
+              isLoading={isLoading}
+            />
+          </section>
+        </>
+      ) : (
+        <>
+          <section className="reports-analytics-grid" aria-label="Visual Analytics Charts">
+            <ReportTimelineChart
+              data={reportData?.timelineChartData || []}
+              isLoading={isLoading}
+              periodType={periodTab}
+              periodLabel={periodParams.label}
+            />
+
+            <CategoryBreakdownChart
+              categories={reportData?.categories || []}
+              isLoading={isLoading}
+              monthName={periodParams.label}
+            />
+          </section>
+
+          {/* Detailed Category Table */}
+          <section aria-label="Category Distribution Breakdown">
+            <ReportCategoryTable
+              categories={reportData?.categories || []}
+              isLoading={isLoading}
+              totalSpend={reportData?.totalExpenditure || 0}
+            />
+          </section>
+        </>
+      )}
     </div>
   );
 }

@@ -1,0 +1,110 @@
+.occurrence-history-modal {
+  max-width: 560px;
+  width: 92%;
+}
+
+.history-loading-wrap,
+.history-empty-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  gap: 8px;
+}
+
+.occurrence-timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.occurrence-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: all var(--transition-speed);
+}
+
+.occurrence-item-card.occ-paid {
+  border-left: 3px solid #10B981;
+}
+
+.occurrence-item-card.occ-pending {
+  border-left: 3px solid #F59E0B;
+}
+
+.occ-status-icon-box {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.occ-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.occ-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.occ-date-title {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.occ-sub-line {
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.occ-paid-meta {
+  color: var(--color-muted);
+}
+
+.occ-expense-ref {
+  font-size: 0.68rem;
+  color: var(--color-muted);
+  font-family: monospace;
+}
+
+.occ-actions {
+  flex-shrink: 0;
+}
+
+.btn-revert-occ {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-speed);
+}
+
+.btn-revert-occ:hover {
+  color: var(--color-danger);
+  border-color: #FECACA;
+  background: #FEF2F2;
+}

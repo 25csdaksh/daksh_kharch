@@ -1,0 +1,139 @@
+.budget-chart-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.budget-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.chart-header-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.chart-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: #ECFDF5;
+  color: #064E3B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chart-legend-pills {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.legend-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pill-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.bg-budget {
+  background-color: #064E3B;
+}
+
+.bg-actual {
+  background-color: #F5B000;
+}
+
+.budget-chart-body {
+  width: 100%;
+  min-height: 280px;
+}
+
+.budget-chart-tooltip {
+  background: #0F172A;
+  color: #F8FAFC;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--font-size-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid #334155;
+  min-width: 160px;
+}
+
+.tooltip-cat-title {
+  font-weight: 800;
+  font-size: var(--font-size-sm);
+  color: #F1F5F9;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.tooltip-metric-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.tooltip-variance-line {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed #334155;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.dot-budget {
+  background-color: #10B981;
+}
+
+.dot-actual {
+  background-color: #F5B000;
+}
+
+.dot-danger {
+  background-color: #EF4444;
+}
+
+@media (max-width: 768px) {
+  .budget-chart-card {
+    padding: var(--spacing-md);
+  }
+
+  .chart-legend-pills {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

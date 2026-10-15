@@ -1,0 +1,57 @@
+.recurring-modal {
+  max-width: 580px;
+  width: 92%;
+}
+
+.presets-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.presets-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.presets-scroll-grid {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.preset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--color-bg);
+  color: var(--color-heading);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all var(--transition-speed);
+}
+
+.preset-chip:hover {
+  background: #FEF3C7;
+  border-color: #FDE68A;
+  color: #0A2540;
+  transform: translateY(-1px);
+}
+
+.preset-icon {
+  color: #064E3B;
+}

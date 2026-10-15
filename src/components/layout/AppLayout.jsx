@@ -18,6 +18,10 @@ export default function AppLayout() {
         return 'Dashboard Overview';
       case '/expenses':
         return 'Expense Ledger';
+      case '/budgets':
+        return 'Smart Budget Manager';
+      case '/recurring':
+        return 'Recurring Bills & Subscriptions';
       case '/reports':
         return 'Financial Reports & Analytics';
       case '/settings':

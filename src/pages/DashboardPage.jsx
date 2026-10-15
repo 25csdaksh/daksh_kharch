@@ -7,7 +7,9 @@ import {
   CreditCard,
   PlusCircle,
   RefreshCw,
-  AlertCircle
+  AlertCircle,
+  Target,
+  ArrowRight
 } from 'lucide-react';
 import StatCard from '../components/common/StatCard';
 import WeeklySpendingChart from '../components/dashboard/WeeklySpendingChart';
@@ -17,7 +19,11 @@ import RecentExpenses from '../components/dashboard/RecentExpenses';
 import AddExpenseModal from '../components/common/AddExpenseModal';
 import { useAuth } from '../context/AuthContext';
 import { getDashboardMetrics, deleteExpense } from '../services/expenseService';
+import { getMonthlyBudgetOverview } from '../services/budgetService';
+import { getDueDashboardData } from '../services/recurringService';
+import { getCurrentMonthYear } from '../utils/budgetUtils';
 import { formatCurrencyINR } from '../utils/dateUtils';
+import { Link } from 'react-router-dom';
 import '../components/dashboard/DashboardCharts.css';
 import './DashboardPage.css';
 
@@ -26,6 +32,8 @@ export default function DashboardPage() {
   const { user } = useAuth();
 
   const [metrics, setMetrics] = useState(null);
+  const [budgetOverview, setBudgetOverview] = useState(null);
+  const [recurringSummary, setRecurringSummary] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -38,8 +46,21 @@ export default function DashboardPage() {
     try {
       setIsLoading(true);
       setError(null);
-      const data = await getDashboardMetrics();
-      setMetrics(data);
+      const { year, month } = getCurrentMonthYear();
+      const [metricsData, budgetData, recurringData] = await Promise.all([
+        getDashboardMetrics(),
+        getMonthlyBudgetOverview(year, month).catch((err) => {
+          console.warn('Could not load budget overview:', err);
+          return null;
+        }),
+        getDueDashboardData().catch((err) => {
+          console.warn('Could not load recurring bills summary:', err);
+          return null;
+        })
+      ]);
+      setMetrics(metricsData);
+      setBudgetOverview(budgetData);
+      setRecurringSummary(recurringData?.summary || null);
     } catch (err) {
       console.error('Dashboard fetch error:', err);
       setError(err.message || 'Failed to load live dashboard metrics.');
@@ -55,10 +76,20 @@ export default function DashboardPage() {
     const handleExpenseChange = () => {
       fetchMetrics();
     };
+    const handleBudgetChange = () => {
+      fetchMetrics();
+    };
+    const handleRecurringChange = () => {
+      fetchMetrics();
+    };
 
     window.addEventListener('expense:changed', handleExpenseChange);
+    window.addEventListener('budget:changed', handleBudgetChange);
+    window.addEventListener('recurring:changed', handleRecurringChange);
     return () => {
       window.removeEventListener('expense:changed', handleExpenseChange);
+      window.removeEventListener('budget:changed', handleBudgetChange);
+      window.removeEventListener('recurring:changed', handleRecurringChange);
     };
   }, [fetchMetrics]);
 
@@ -81,11 +112,13 @@ export default function DashboardPage() {
     }
   };
 
-  const monthlyBudgetLimit = Number(localStorage.getItem('hisabsetu_monthly_budget') || localStorage.getItem('paisatrack_monthly_budget')) || 45000;
+  const hasBudget = Boolean(budgetOverview?.hasTotalBudget);
+  const monthlyBudgetLimit = budgetOverview ? budgetOverview.totalBudget : 0;
   const spentThisMonth = metrics?.month?.amount || 0;
-  const remainingMonthBudget = Math.max(0, monthlyBudgetLimit - spentThisMonth);
+  const remainingMonthBudget = monthlyBudgetLimit - spentThisMonth;
+  const isOverBudget = spentThisMonth > monthlyBudgetLimit && hasBudget;
   const budgetUsagePercent = monthlyBudgetLimit > 0
-    ? Math.min(100, Math.round((spentThisMonth / monthlyBudgetLimit) * 100))
+    ? Math.round((spentThisMonth / monthlyBudgetLimit) * 100)
     : 0;
 
   const userGreetingName = user?.user_metadata?.full_name?.split(' ')[0] || user?.email?.split('@')[0] || 'Friend';
@@ -126,7 +159,13 @@ export default function DashboardPage() {
             </div>
             <div className="hero-stat-pill">
               <span className="stat-pill-label">Budget Available</span>
-              <span className="stat-pill-value text-gold">{formatCurrencyINR(remainingMonthBudget, false)} left ({budgetUsagePercent}% used)</span>
+              <span className="stat-pill-value text-gold">
+                {hasBudget
+                  ? isOverBudget
+                    ? `Over by ${formatCurrencyINR(spentThisMonth - monthlyBudgetLimit, false)}`
+                    : `${formatCurrencyINR(remainingMonthBudget, false)} left (${budgetUsagePercent}% used)`
+                  : 'Set a target budget'}
+              </span>
             </div>
           </div>
         </div>
@@ -162,6 +201,29 @@ export default function DashboardPage() {
               Retry
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Bill Reminders Alert Callout */}
+      {(recurringSummary?.overdueCount > 0 || recurringSummary?.dueTodayCount > 0) && (
+        <div className="critical-alerts-strip" style={{ marginBottom: 0 }}>
+          {recurringSummary?.overdueCount > 0 ? (
+            <Link to="/recurring" className="bill-alert-pill alert-danger" style={{ textDecoration: 'none' }}>
+              <AlertCircle size={18} className="text-danger flex-shrink-0" />
+              <div className="alert-text">
+                <strong>Bill Reminder:</strong> You have {recurringSummary.overdueCount} overdue bill(s) ({formatCurrencyINR(recurringSummary.overdueAmount, false)}). Tap to review and pay.
+              </div>
+              <ArrowRight size={16} className="text-danger flex-shrink-0" />
+            </Link>
+          ) : (
+            <Link to="/recurring" className="bill-alert-pill alert-warning" style={{ textDecoration: 'none' }}>
+              <AlertCircle size={18} className="text-warning flex-shrink-0" />
+              <div className="alert-text">
+                <strong>Bill Due Today:</strong> {recurringSummary.dueTodayCount} bill(s) totaling {formatCurrencyINR(recurringSummary.dueTodayAmount, false)} are due today.
+              </div>
+              <ArrowRight size={16} className="text-warning flex-shrink-0" />
+            </Link>
+          )}
         </div>
       )}
 
@@ -207,11 +269,17 @@ export default function DashboardPage() {
         />
 
         <StatCard
-          title="Monthly Budget Limit"
-          amount={monthlyBudgetLimit}
-          subtitle={`${formatCurrencyINR(remainingMonthBudget, false)} remaining`}
-          icon={CreditCard}
-          badgeText="Budget"
+          title="Monthly Target Budget"
+          amount={hasBudget ? monthlyBudgetLimit : 0}
+          subtitle={
+            hasBudget
+              ? isOverBudget
+                ? `Exceeded by ${formatCurrencyINR(spentThisMonth - monthlyBudgetLimit, false)}`
+                : `${formatCurrencyINR(Math.max(0, remainingMonthBudget), false)} remaining`
+              : 'Tap to configure budget'
+          }
+          icon={Target}
+          badgeText={hasBudget ? (isOverBudget ? 'Exceeded' : 'Active') : 'Not Set'}
           variant="budget"
         />
       </section>
@@ -226,6 +294,7 @@ export default function DashboardPage() {
           <BudgetProgress
             spentAmount={spentThisMonth}
             totalBudget={monthlyBudgetLimit}
+            hasBudget={hasBudget}
             monthName={metrics?.month?.monthName || 'This Month'}
             isLoading={isLoading}
           />
