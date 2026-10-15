@@ -1,0 +1,180 @@
+/* HisabSetu — Report Export Modal Styles */
+
+.report-export-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1050;
+  overflow-y: auto;
+}
+
+.report-export-modal-container {
+  background: var(--bg-card, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+[data-theme='dark'] .report-export-modal-container {
+  background: var(--bg-card, #0F172A);
+  border-color: var(--border-color, #1E293B);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.report-export-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  background: var(--bg-secondary, #F8FAFC);
+}
+
+[data-theme='dark'] .report-export-header {
+  background: #0B132B;
+  border-bottom-color: #1E293B;
+}
+
+.report-export-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme='dark'] .report-export-title {
+  color: #F8FAFC;
+}
+
+.report-export-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.export-format-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.export-format-card {
+  padding: 12px;
+  border: 2px solid var(--border-color, #E2E8F0);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s ease;
+  background: var(--bg-card, #FFFFFF);
+}
+
+[data-theme='dark'] .export-format-card {
+  background: #131F37;
+  border-color: #1E293B;
+}
+
+.export-format-card.selected {
+  border-color: #064E3B;
+  background: rgba(6, 78, 59, 0.06);
+}
+
+[data-theme='dark'] .export-format-card.selected {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.export-format-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.export-format-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.export-format-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+}
+
+[data-theme='dark'] .export-format-name {
+  color: #F8FAFC;
+}
+
+.export-format-desc {
+  font-size: 11px;
+  color: var(--text-secondary, #64748B);
+}
+
+.report-export-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-color, #E2E8F0);
+  background: var(--bg-secondary, #F8FAFC);
+}
+
+[data-theme='dark'] .report-export-footer {
+  background: #0B132B;
+  border-top-color: #1E293B;
+}
+
+.btn-export-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: #064E3B;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-export-download:hover {
+  background: #059669;
+}
+
+.btn-export-download:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

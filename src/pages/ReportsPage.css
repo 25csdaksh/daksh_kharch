@@ -398,3 +398,174 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Primary Reports View Tabs */
+.reports-primary-nav {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-secondary, #F1F5F9);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #E2E8F0);
+  width: fit-content;
+  overflow-x: auto;
+}
+
+[data-theme='dark'] .reports-primary-nav {
+  background: #131F37;
+  border-color: #1E293B;
+}
+
+.reports-primary-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary, #64748B);
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.reports-primary-tab-btn.active {
+  background: var(--bg-card, #FFFFFF);
+  color: var(--text-primary, #0F172A);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .reports-primary-tab-btn.active {
+  background: #0F172A;
+  color: #F8FAFC;
+}
+
+/* Export Hub Cards Grid */
+.export-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.export-hub-card {
+  background: var(--bg-card, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+[data-theme='dark'] .export-hub-card {
+  background: var(--bg-card, #0F172A);
+  border-color: var(--border-color, #1E293B);
+}
+
+.export-hub-card:hover {
+  border-color: #064E3B;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.export-hub-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.export-hub-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(6, 78, 59, 0.08);
+  color: #064E3B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .export-hub-icon-badge {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34D399;
+}
+
+.export-hub-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+}
+
+[data-theme='dark'] .export-hub-card-title {
+  color: #F8FAFC;
+}
+
+.export-hub-card-desc {
+  font-size: 12px;
+  color: var(--text-secondary, #64748B);
+  margin: 3px 0 0 0;
+  line-height: 1.4;
+}
+
+.export-hub-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color, #E2E8F0);
+}
+
+[data-theme='dark'] .export-hub-actions {
+  border-top-color: #1E293B;
+}
+
+.btn-card-export {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-color, #CBD5E1);
+  background: var(--bg-card, #FFFFFF);
+  color: var(--text-primary, #0F172A);
+  transition: all 0.15s ease;
+}
+
+[data-theme='dark'] .btn-card-export {
+  background: #131F37;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+.btn-card-export:hover {
+  border-color: #064E3B;
+  color: #064E3B;
+}
+
+[data-theme='dark'] .btn-card-export:hover {
+  border-color: #10B981;
+  color: #34D399;
+}
+
+.btn-card-export-pdf {
+  background: #064E3B;
+  color: #FFFFFF;
+  border-color: #064E3B;
+}
+
+.btn-card-export-pdf:hover {
+  background: #059669;
+  color: #FFFFFF;
+}
+

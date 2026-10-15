@@ -1,0 +1,195 @@
+/* HisabSetu — Backup & Restore Section Styles */
+
+.backup-restore-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.backup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .backup-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.backup-card {
+  background: var(--bg-card, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .backup-card {
+  background: var(--bg-card, #0F172A);
+  border-color: var(--border-color, #1E293B);
+}
+
+.backup-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backup-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-export {
+  background: rgba(6, 78, 59, 0.1);
+  color: #064E3B;
+}
+
+[data-theme='dark'] .icon-export {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+}
+
+.icon-import {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563EB;
+}
+
+[data-theme='dark'] .icon-import {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60A5FA;
+}
+
+.backup-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+}
+
+[data-theme='dark'] .backup-card-title {
+  color: #F8FAFC;
+}
+
+.backup-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary, #64748B);
+  margin: 2px 0 0 0;
+  line-height: 1.4;
+}
+
+.backup-table-checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: var(--bg-secondary, #F8FAFC);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary, #64748B);
+}
+
+[data-theme='dark'] .backup-table-checklist {
+  background: #131F37;
+}
+
+.backup-check-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Restore File Drop Area */
+.restore-file-dropzone {
+  border: 2px dashed var(--border-color, #CBD5E1);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-secondary, #F8FAFC);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme='dark'] .restore-file-dropzone {
+  background: #131F37;
+  border-color: #334155;
+}
+
+.restore-file-dropzone:hover {
+  border-color: #059669;
+  background: rgba(6, 78, 59, 0.04);
+}
+
+/* Preview Modal / Drawer */
+.restore-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.restore-preview-table th {
+  text-align: left;
+  padding: 6px 10px;
+  background: var(--bg-secondary, #F1F5F9);
+  color: var(--text-secondary, #64748B);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+}
+
+[data-theme='dark'] .restore-preview-table th {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+.restore-preview-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  color: var(--text-primary, #0F172A);
+}
+
+[data-theme='dark'] .restore-preview-table td {
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+.restore-warning-box {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 12px;
+  color: #B45309;
+  line-height: 1.4;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+[data-theme='dark'] .restore-warning-box {
+  color: #FBBF24;
+}
+
+.restore-results-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 13px;
+  color: #059669;
+}
