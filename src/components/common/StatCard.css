@@ -8,8 +8,7 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  box-sizing: border-box;
-  background-color: #FFFFFF;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -278,4 +277,26 @@
   .stat-card-title {
     font-size: 0.7rem;
   }
+}
+
+[data-theme='dark'] .badge-month {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .icon-wrap-month {
+  background-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .badge-week {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+[data-theme='dark'] .icon-wrap-week {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
 }

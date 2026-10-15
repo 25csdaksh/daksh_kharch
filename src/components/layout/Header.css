@@ -131,7 +131,7 @@
   height: 38px;
   border-radius: 10px;
   border: 1px solid var(--color-border);
-  background-color: #FFFFFF;
+  background-color: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,10 +140,29 @@
 }
 
 .header-icon-btn:hover {
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-hover);
   border-color: var(--color-border-hover);
   color: var(--color-heading);
   transform: translateY(-1px);
+}
+
+.theme-toggle-icon-sun {
+  color: #F5B000;
+  transition: transform var(--transition-speed);
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon-sun {
+  transform: rotate(45deg) scale(1.1);
+}
+
+.theme-toggle-icon-moon {
+  color: #64748B;
+  transition: transform var(--transition-speed);
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon-moon {
+  transform: rotate(-15deg) scale(1.1);
+  color: #1E293B;
 }
 
 .notification-dot {

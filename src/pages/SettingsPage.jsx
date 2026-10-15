@@ -9,14 +9,19 @@ import {
   CheckCircle2,
   Save,
   Database,
-  Info
+  Info,
+  Sun,
+  Moon,
+  Palette
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import './PlaceholderPage.css';
 
 export default function SettingsPage() {
   const { user, signOut, isConfigured } = useAuth();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
 
   const [budgetLimit, setBudgetLimit] = useState(() => {
@@ -148,7 +153,60 @@ export default function SettingsPage() {
         <form onSubmit={handleSavePreferences} className="placeholder-card card">
           <div className="card-section-title">
             <Sliders size={18} className="feature-item-icon" />
-            <span>Financial Preferences</span>
+            <span>Preferences & Appearance</span>
+          </div>
+
+          <div className="form-field">
+            <label className="form-label">Theme / Display Mode</label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <button
+                type="button"
+                onClick={() => setTheme('light')}
+                className={`theme-toggle-option-btn ${theme === 'light' ? 'active' : ''}`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
+                  border: theme === 'light' ? '2px solid #F5B000' : '1px solid var(--color-border)',
+                  backgroundColor: theme === 'light' ? 'rgba(245, 176, 0, 0.1)' : 'var(--color-bg)',
+                  color: 'var(--color-heading)',
+                  fontWeight: theme === 'light' ? 700 : 500,
+                  fontSize: '0.875rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <Sun size={17} style={{ color: '#F5B000' }} />
+                <span>Light Mode</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setTheme('dark')}
+                className={`theme-toggle-option-btn ${theme === 'dark' ? 'active' : ''}`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
+                  border: theme === 'dark' ? '2px solid #F5B000' : '1px solid var(--color-border)',
+                  backgroundColor: theme === 'dark' ? 'rgba(245, 176, 0, 0.15)' : 'var(--color-bg)',
+                  color: 'var(--color-heading)',
+                  fontWeight: theme === 'dark' ? 700 : 500,
+                  fontSize: '0.875rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <Moon size={17} style={{ color: '#38BDF8' }} />
+                <span>Dark Mode</span>
+              </button>
+            </div>
           </div>
 
           <div className="form-field">

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Menu, Search, Bell, Plus, Calendar, LogOut, User as UserIcon } from 'lucide-react';
+import { Menu, Search, Bell, Plus, Calendar, LogOut, User as UserIcon, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { DEMO_METADATA } from '../../data/mockData';
 import './Header.css';
 
 export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = 'Dashboard Preview' }) {
   const { user, signOut, isConfigured } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -97,6 +99,16 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
         >
           <Plus size={16} />
           <span className="btn-text">Add Expense</span>
+        </button>
+
+        <button
+          id="theme-toggle-header-btn"
+          className="header-icon-btn theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+          title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+        >
+          {isDark ? <Sun size={18} className="theme-toggle-icon-sun" /> : <Moon size={18} className="theme-toggle-icon-moon" />}
         </button>
 
         <button

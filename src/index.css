@@ -82,6 +82,60 @@
   --transition-speed: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+[data-theme='dark'] {
+  /* ==========================================================================
+     HISABSETU PROFESSIONAL DARK THEME (60 : 30 : 10 RULE)
+     60% Canvas: #090D16 & Surfaces: #0F172A (Deep Slate Obsidian)
+     30% Structural Contrast: #1E293B & #334155 (Subtle Borders & Elevation)
+     10% Vibrant Action Accent: HisabSetu Signature Gold #F5B000 / #E5A100
+     ========================================================================== */
+
+  /* 60% Dominant Base Palette */
+  --color-bg: #090D16;
+  --color-surface: #0F172A;
+  --color-surface-hover: #1E293B;
+  --color-border: #1E293B;
+  --color-border-hover: #334155;
+
+  /* 30% Structural Contrast & Typography */
+  --color-text: #E2E8F0;
+  --color-heading: #F8FAFC;
+  --color-muted: #94A3B8;
+  --color-brand-deep: #0B132B;
+  --color-brand-blue: #1C2541;
+  --color-navy: #38BDF8;
+  --color-navy-light: rgba(56, 189, 248, 0.12);
+  --color-secondary: #1E293B;
+  --color-secondary-hover: #334155;
+  --color-secondary-text: #CBD5E1;
+
+  /* 10% Gold Energy Accent */
+  --color-primary: #F5B000;
+  --color-primary-hover: #E5A100;
+  --color-primary-light: rgba(245, 176, 0, 0.15);
+  --color-primary-glow: rgba(245, 176, 0, 0.35);
+  --color-accent: #F5B000;
+  --color-accent-hover: #E5A100;
+  --color-accent-light: rgba(245, 176, 0, 0.15);
+  --color-gold: #F5B000;
+  --color-gold-light: rgba(245, 176, 0, 0.15);
+  --color-gold-glow: rgba(245, 176, 0, 0.35);
+
+  /* Status Colors */
+  --color-danger: #F87171;
+  --color-danger-light: rgba(239, 68, 68, 0.15);
+  --color-warning: #FBBF24;
+  --color-warning-light: rgba(245, 158, 11, 0.15);
+  --color-info: #60A5FA;
+  --color-info-light: rgba(59, 130, 246, 0.15);
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.35), 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -1px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.7), 0 4px 10px -2px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 8px 24px -4px rgba(245, 176, 0, 0.35);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -481,5 +535,238 @@ input, select, textarea {
 [data-theme='dark'] .modal-body textarea:focus {
   border-color: #10B981;
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* ==========================================================================
+   GLOBAL EXECUTIVE KPI CARDS (UNIVERSAL TYPOGRAPHY & BOX HIERARCHY)
+   Resolves unstyled/plain text boxes in Recurring, Reports, Dashboard, etc.
+   ========================================================================== */
+
+.kpi-card {
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  gap: 8px;
+}
+
+.kpi-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.kpi-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-speed);
+}
+
+.kpi-card:hover .kpi-icon {
+  transform: scale(1.05);
+}
+
+.kpi-amount {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--color-heading);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0.25rem 0 0.45rem 0;
+  font-feature-settings: "tnum";
+}
+
+.kpi-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  margin-top: auto;
+}
+
+/* Specific KPI status variations */
+.kpi-amount.text-danger,
+.kpi-footer .text-danger {
+  color: var(--color-danger) !important;
+}
+
+.kpi-amount.text-warning,
+.kpi-footer .text-warning {
+  color: var(--color-warning) !important;
+}
+
+.kpi-amount.text-success,
+.kpi-footer .text-success {
+  color: #10B981 !important;
+}
+
+/* ==========================================================================
+   GLOBAL DARK MODE POLISH FOR APPLICATION COMPONENTS
+   ========================================================================== */
+
+[data-theme='dark'] .card,
+[data-theme='dark'] .placeholder-card,
+[data-theme='dark'] .page-header-card {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme='dark'] select,
+[data-theme='dark'] textarea {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] input:not([type="checkbox"]):not([type="radio"]):focus,
+[data-theme='dark'] select:focus,
+[data-theme='dark'] textarea:focus {
+  border-color: var(--color-primary);
+  background-color: #16243D;
+  box-shadow: 0 0 0 3px rgba(245, 176, 0, 0.25);
+}
+
+[data-theme='dark'] .btn-secondary,
+[data-theme='dark'] .btn-outline {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .btn-secondary:hover,
+[data-theme='dark'] .btn-outline:hover {
+  background-color: #1E293B;
+  border-color: #334155;
+  color: #FFFFFF;
+}
+
+/* Tables in Dark Mode */
+[data-theme='dark'] table {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] th {
+  background-color: #131E32;
+  color: #94A3B8;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] td {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] tr:hover td {
+  background-color: rgba(30, 41, 59, 0.4);
+}
+
+/* Header & Navigation in Dark Mode */
+[data-theme='dark'] .app-header {
+  background-color: rgba(15, 23, 42, 0.88);
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .header-icon-btn {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .header-icon-btn:hover {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .search-input {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .search-input:focus {
+  background-color: #16243D;
+  border-color: var(--color-primary);
+}
+
+[data-theme='dark'] .header-user-dropdown {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .dropdown-item:hover {
+  background-color: #1E293B;
+  color: #FFFFFF;
+}
+
+/* Sidebar in Dark Mode */
+[data-theme='dark'] .sidebar {
+  background-color: #0A0F1D;
+  border-right-color: #1E293B;
+}
+
+[data-theme='dark'] .sidebar-brand {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .sidebar-brand-icon {
+  background-color: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .nav-item {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .nav-item:hover {
+  background-color: #131E32;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .nav-item-active {
+  background-color: rgba(245, 176, 0, 0.12);
+  color: #F5B000;
+  box-shadow: inset 3px 0 0 #F5B000;
+}
+
+[data-theme='dark'] .sidebar-footer {
+  border-top-color: #1E293B;
+}
+
+[data-theme='dark'] .user-profile-preview {
+  background-color: #131E32;
+  border-color: #1E293B;
 }
 

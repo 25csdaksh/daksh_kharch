@@ -3,27 +3,32 @@
   background-color: var(--color-surface);
   border-right: 1px solid var(--color-border);
   height: 100vh;
-  position: sticky;
+  position: fixed;
+  left: 0;
   top: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: 1.15rem 0.85rem;
   z-index: 100;
   transition: transform var(--transition-speed);
   box-shadow: 1px 0 3px rgba(16, 24, 40, 0.02);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .sidebar-brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0.25rem 0.5rem 1.25rem 0.5rem;
+  padding: 0.25rem 0.5rem 1rem 0.5rem;
   background: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #F1F5F9;
+  border-bottom: 1px solid var(--color-border);
   box-shadow: none;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  flex-shrink: 0;
 }
 
 .sidebar-brand-icon {
@@ -70,7 +75,8 @@
 }
 
 .sidebar-action {
-  margin: 0 0 var(--spacing-lg) 0;
+  margin: 0 0 var(--spacing-md) 0;
+  flex-shrink: 0;
 }
 
 .btn-add-expense {
@@ -97,8 +103,16 @@
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-section-title {
@@ -108,14 +122,14 @@
   letter-spacing: 0.6px;
   color: #94A3B8;
   padding: var(--spacing-xs) 0.75rem;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0.65rem 0.85rem;
+  padding: 0.55rem 0.85rem;
   border-radius: 10px;
   color: #475569;
   font-size: var(--font-size-sm);
@@ -140,8 +154,10 @@
 }
 
 .sidebar-footer {
-  padding-top: var(--spacing-md);
-  border-top: 1px solid #F1F5F9;
+  margin-top: auto;
+  flex-shrink: 0;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
