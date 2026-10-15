@@ -122,7 +122,8 @@ export async function createExpense(expensePayload) {
     category: expensePayload.category,
     description: expensePayload.description?.trim() || null,
     expense_date: expensePayload.expense_date,
-    payment_method: expensePayload.payment_method
+    payment_method: expensePayload.payment_method,
+    ...(expensePayload.account_id !== undefined ? { account_id: expensePayload.account_id || null } : {})
   };
 
   const { data, error } = await supabase
@@ -137,6 +138,9 @@ export async function createExpense(expensePayload) {
   }
 
   notifyExpenseChange();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('account:changed'));
+  }
   return data;
 }
 
@@ -161,7 +165,8 @@ export async function updateExpense(id, updates) {
     category: updates.category,
     description: updates.description?.trim() || null,
     expense_date: updates.expense_date,
-    payment_method: updates.payment_method
+    payment_method: updates.payment_method,
+    ...(updates.account_id !== undefined ? { account_id: updates.account_id || null } : {})
   };
 
   const { data, error } = await supabase
@@ -177,6 +182,9 @@ export async function updateExpense(id, updates) {
   }
 
   notifyExpenseChange();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('account:changed'));
+  }
   return data;
 }
 
@@ -201,6 +209,9 @@ export async function deleteExpense(id) {
   }
 
   notifyExpenseChange();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('account:changed'));
+  }
   return true;
 }
 

@@ -1,0 +1,65 @@
+.transfer-modal {
+  max-width: 520px;
+}
+
+.transfer-accounts-flow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--bg-surface-secondary, #F8FAFC);
+  border: 1px solid var(--border-color, #E2E8F0);
+}
+
+.transfer-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-arrow-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color, #E2E8F0);
+  color: #064E3B;
+  flex-shrink: 0;
+}
+
+.transfer-impact-box {
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
+  background: rgba(6, 78, 59, 0.06);
+  border: 1px solid rgba(6, 78, 59, 0.15);
+  margin-top: 1rem;
+  font-size: 0.825rem;
+  line-height: 1.45;
+  color: #064E3B;
+}
+
+.transfer-impact-title {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.transfer-warning-box {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #92400E;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}

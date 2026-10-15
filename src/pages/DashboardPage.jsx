@@ -21,6 +21,7 @@ import { useAuth } from '../context/AuthContext';
 import { getDashboardMetrics, deleteExpense } from '../services/expenseService';
 import { getMonthlyBudgetOverview } from '../services/budgetService';
 import { getDueDashboardData } from '../services/recurringService';
+import { getAccountsSummary } from '../services/accountService';
 import { getCurrentMonthYear } from '../utils/budgetUtils';
 import { formatCurrencyINR } from '../utils/dateUtils';
 import { Link } from 'react-router-dom';
@@ -34,6 +35,7 @@ export default function DashboardPage() {
   const [metrics, setMetrics] = useState(null);
   const [budgetOverview, setBudgetOverview] = useState(null);
   const [recurringSummary, setRecurringSummary] = useState(null);
+  const [accountsSummary, setAccountsSummary] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -47,7 +49,7 @@ export default function DashboardPage() {
       setIsLoading(true);
       setError(null);
       const { year, month } = getCurrentMonthYear();
-      const [metricsData, budgetData, recurringData] = await Promise.all([
+      const [metricsData, budgetData, recurringData, accountsData] = await Promise.all([
         getDashboardMetrics(),
         getMonthlyBudgetOverview(year, month).catch((err) => {
           console.warn('Could not load budget overview:', err);
@@ -56,11 +58,16 @@ export default function DashboardPage() {
         getDueDashboardData().catch((err) => {
           console.warn('Could not load recurring bills summary:', err);
           return null;
+        }),
+        getAccountsSummary().catch((err) => {
+          console.warn('Could not load accounts summary:', err);
+          return null;
         })
       ]);
       setMetrics(metricsData);
       setBudgetOverview(budgetData);
       setRecurringSummary(recurringData?.summary || null);
+      setAccountsSummary(accountsData?.summary || null);
     } catch (err) {
       console.error('Dashboard fetch error:', err);
       setError(err.message || 'Failed to load live dashboard metrics.');
@@ -82,14 +89,19 @@ export default function DashboardPage() {
     const handleRecurringChange = () => {
       fetchMetrics();
     };
+    const handleAccountChange = () => {
+      fetchMetrics();
+    };
 
     window.addEventListener('expense:changed', handleExpenseChange);
     window.addEventListener('budget:changed', handleBudgetChange);
     window.addEventListener('recurring:changed', handleRecurringChange);
+    window.addEventListener('account:changed', handleAccountChange);
     return () => {
       window.removeEventListener('expense:changed', handleExpenseChange);
       window.removeEventListener('budget:changed', handleBudgetChange);
       window.removeEventListener('recurring:changed', handleRecurringChange);
+      window.removeEventListener('account:changed', handleAccountChange);
     };
   }, [fetchMetrics]);
 
@@ -167,6 +179,16 @@ export default function DashboardPage() {
                   : 'Set a target budget'}
               </span>
             </div>
+            {accountsSummary && (
+              <Link to="/accounts" style={{ textDecoration: 'none' }}>
+                <div className="hero-stat-pill" style={{ cursor: 'pointer' }}>
+                  <span className="stat-pill-label">Wallets & Net Worth</span>
+                  <span className="stat-pill-value" style={{ color: '#10B981' }}>
+                    {formatCurrencyINR(accountsSummary.netWorth, false)}
+                  </span>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
 

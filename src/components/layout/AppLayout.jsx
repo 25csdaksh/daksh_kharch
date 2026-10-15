@@ -16,6 +16,8 @@ export default function AppLayout() {
       case '/':
       case '/dashboard':
         return 'Dashboard Overview';
+      case '/accounts':
+        return 'Wallets & Accounts';
       case '/expenses':
         return 'Expense Ledger';
       case '/budgets':

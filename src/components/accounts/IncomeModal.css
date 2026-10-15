@@ -1,0 +1,34 @@
+.income-modal {
+  max-width: 480px;
+}
+
+.income-source-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.source-chip {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  background: var(--bg-surface-secondary, #F1F5F9);
+  color: var(--text-primary, #0F172A);
+  border: 1px solid var(--border-color, #E2E8F0);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.source-chip:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: #10B981;
+  color: #065F46;
+}
+
+.source-chip.active {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+}

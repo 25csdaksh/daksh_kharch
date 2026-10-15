@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, AlertCircle, Calendar, CreditCard, ShieldCheck } from 'lucide-react';
 import { ALLOWED_PAYMENT_METHODS, getTodayLocalDateString, formatCurrencyINR } from '../../utils/dateUtils';
 import { markOccurrencePaid } from '../../services/recurringService';
+import { getAccounts } from '../../services/accountService';
 import './MarkPaidModal.css';
 
 export default function MarkPaidModal({
@@ -13,8 +14,18 @@ export default function MarkPaidModal({
   const [amount, setAmount] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('UPI');
+  const [accountId, setAccountId] = useState('');
+  const [accounts, setAccounts] = useState([]);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      getAccounts({ includeArchived: false })
+        .then((data) => setAccounts(data || []))
+        .catch(console.warn);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen && occurrence) {
@@ -25,6 +36,7 @@ export default function MarkPaidModal({
       setAmount(String(defaultAmount));
       setPaymentDate(getTodayLocalDateString());
       setPaymentMethod(occurrence.schedule?.payment_method || 'UPI');
+      setAccountId('');
     }
   }, [isOpen, occurrence]);
 
@@ -52,7 +64,8 @@ export default function MarkPaidModal({
         occurrenceId: occurrence.id,
         actualPaidAmount: numAmount,
         actualPaymentDate: paymentDate,
-        paymentMethod
+        paymentMethod,
+        accountId: accountId || null
       });
 
       if (onSuccess) onSuccess();
@@ -168,6 +181,25 @@ export default function MarkPaidModal({
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className="form-group" style={{ marginBottom: '1rem' }}>
+            <label className="form-label" htmlFor="paid-account-select">
+              Debit Account / Wallet (Optional)
+            </label>
+            <select
+              id="paid-account-select"
+              className="form-control"
+              value={accountId}
+              onChange={(e) => setAccountId(e.target.value)}
+            >
+              <option value="">None / Unassigned Account</option>
+              {accounts.map((acc) => (
+                <option key={acc.id} value={acc.id}>
+                  {acc.name} ({acc.type.replace('_', ' ')})
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Safe Accounting Guarantee Notice */}

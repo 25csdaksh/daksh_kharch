@@ -400,7 +400,8 @@ export async function markOccurrencePaid({
   occurrenceId,
   actualPaidAmount,
   actualPaymentDate,
-  paymentMethod
+  paymentMethod,
+  accountId
 }) {
   if (!isSupabaseConfigured || !supabase) {
     throw new Error('Supabase is not configured.');
@@ -450,7 +451,8 @@ export async function markOccurrencePaid({
     category: schedule.category,
     payment_method: finalPaymentMethod,
     expense_date: finalPaymentDate,
-    description: `[Recurring Bill] ${schedule.title}`
+    description: `[Recurring Bill] ${schedule.title}`,
+    ...(accountId ? { account_id: accountId } : {})
   };
 
   const { data: createdExpense, error: expenseError } = await supabase

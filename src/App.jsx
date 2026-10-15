@@ -9,6 +9,7 @@ import AuthLoadingScreen from './components/auth/AuthLoadingScreen';
 // Code-split route components for performance and optimal bundle sizes
 const CoverPage = lazy(() => import('./pages/CoverPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const AccountsPage = lazy(() => import('./pages/AccountsPage'));
 const ExpensesPage = lazy(() => import('./pages/ExpensesPage'));
 const BudgetPage = lazy(() => import('./pages/BudgetPage'));
 const RecurringPage = lazy(() => import('./pages/RecurringPage'));
@@ -45,6 +46,7 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/accounts" element={<AccountsPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/budgets" element={<BudgetPage />} />
             <Route path="/recurring" element={<RecurringPage />} />

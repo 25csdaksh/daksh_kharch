@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, AlertCircle, PlusCircle, CheckCircle2, Loader2, Save } from 'lucide-react';
 import { createExpense, updateExpense } from '../../services/expenseService';
+import { getAccounts } from '../../services/accountService';
 import {
   ALLOWED_CATEGORIES,
   ALLOWED_PAYMENT_METHODS,
@@ -22,13 +23,24 @@ export default function AddExpenseModal({
     category: 'Food',
     expense_date: getTodayLocalDateString(),
     payment_method: 'UPI',
+    account_id: '',
     description: ''
   });
 
+  const [accounts, setAccounts] = useState([]);
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successNotice, setSuccessNotice] = useState('');
+
+  // Fetch active accounts for selection
+  useEffect(() => {
+    if (isOpen) {
+      getAccounts({ includeArchived: false })
+        .then((data) => setAccounts(data || []))
+        .catch((err) => console.warn('Could not load accounts in AddExpenseModal:', err));
+    }
+  }, [isOpen]);
 
   // Hydrate form when opening or editing
   useEffect(() => {
@@ -38,6 +50,7 @@ export default function AddExpenseModal({
         category: expenseToEdit.category || 'Food',
         expense_date: expenseToEdit.expense_date || getTodayLocalDateString(),
         payment_method: expenseToEdit.payment_method || 'UPI',
+        account_id: expenseToEdit.account_id || '',
         description: expenseToEdit.description || ''
       });
     } else {
@@ -46,6 +59,7 @@ export default function AddExpenseModal({
         category: 'Food',
         expense_date: getTodayLocalDateString(),
         payment_method: 'UPI',
+        account_id: '',
         description: ''
       });
     }
@@ -223,6 +237,25 @@ export default function AddExpenseModal({
               </select>
               {errors.payment_method && <span className="field-error-msg">{errors.payment_method}</span>}
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="expense-account">Wallet / Account (Optional)</label>
+            <select
+              id="expense-account"
+              name="account_id"
+              value={formData.account_id}
+              onChange={handleChange}
+              className="form-input"
+              disabled={isSubmitting}
+            >
+              <option value="">None / Unassigned Account</option>
+              {accounts.map((acc) => (
+                <option key={acc.id} value={acc.id}>
+                  {acc.name} ({acc.type.replace('_', ' ')})
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
