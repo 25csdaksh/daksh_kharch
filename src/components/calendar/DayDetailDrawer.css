@@ -1,0 +1,158 @@
+.day-detail-drawer {
+  background: var(--bg-surface, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px; /* clean, modern, mostly square-cornered */
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.day-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.day-detail-title-group h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.day-detail-title-group p {
+  font-size: 0.775rem;
+  color: var(--text-secondary, #64748B);
+  margin: 0.15rem 0 0 0;
+}
+
+.day-summary-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface-secondary, #F8FAFC);
+  border-radius: 6px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.day-stat-pill {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-stat-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary, #64748B);
+}
+
+.day-stat-value {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+}
+
+.day-stat-value.expense { color: #DC2626; }
+.day-stat-value.income { color: #059669; }
+.day-stat-value.transfer { color: #2563EB; }
+.day-stat-value.bill { color: #B45309; }
+
+.day-transactions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.day-tx-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #E2E8F0);
+  background: #FFFFFF;
+  gap: 0.75rem;
+}
+
+.day-tx-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.day-tx-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.day-tx-icon-box.expense { background: rgba(220, 38, 38, 0.1); color: #DC2626; }
+.day-tx-icon-box.income { background: rgba(16, 185, 129, 0.1); color: #059669; }
+.day-tx-icon-box.transfer { background: rgba(37, 99, 235, 0.1); color: #2563EB; }
+.day-tx-icon-box.bill { background: rgba(245, 158, 11, 0.12); color: #B45309; }
+
+.day-tx-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.day-tx-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.day-tx-sub {
+  font-size: 0.725rem;
+  color: var(--text-secondary, #64748B);
+}
+
+.day-tx-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.day-tx-amount {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.day-tx-amount.expense { color: #DC2626; }
+.day-tx-amount.income { color: #059669; }
+.day-tx-amount.transfer { color: #2563EB; }
+.day-tx-amount.bill { color: #B45309; }
+
+.btn-pay-bill-inline {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 4px;
+  background: #064E3B;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: opacity 0.15s ease;
+}
+
+.btn-pay-bill-inline:hover {
+  opacity: 0.9;
+}

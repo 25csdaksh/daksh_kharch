@@ -1,0 +1,99 @@
+.calendar-page-container {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  overflow-x: clip;
+  padding-bottom: 96px; /* Android bottom nav buffer */
+}
+
+@media (max-width: 768px) {
+  .calendar-page-container {
+    padding: 1rem 0.75rem 100px 0.75rem;
+  }
+}
+
+.calendar-header-titles h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.calendar-header-titles p {
+  color: var(--text-secondary, #64748B);
+  font-size: 0.875rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.calendar-kpi-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-kpi-card {
+  background: var(--bg-surface, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px; /* mostly square-cornered */
+  padding: 1rem 1.15rem;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.calendar-kpi-card.spend::before { background: #DC2626; }
+.calendar-kpi-card.income::before { background: #10B981; }
+.calendar-kpi-card.net::before { background: #064E3B; }
+.calendar-kpi-card.bills::before { background: #F59E0B; }
+
+.cal-kpi-label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary, #64748B);
+}
+
+.cal-kpi-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin-top: 0.25rem;
+  line-height: 1.2;
+}
+
+.cal-kpi-value.spend { color: #DC2626; }
+.cal-kpi-value.income { color: #059669; }
+.cal-kpi-value.bills { color: #B45309; }
+
+.cal-kpi-sub {
+  font-size: 0.725rem;
+  color: var(--text-muted, #94A3B8);
+  margin-top: 0.25rem;
+}
+
+.calendar-main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .calendar-main-layout.has-drawer {
+    grid-template-columns: 1fr 360px;
+  }
+}

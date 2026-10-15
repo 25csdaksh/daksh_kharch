@@ -10,6 +10,8 @@ import AuthLoadingScreen from './components/auth/AuthLoadingScreen';
 const CoverPage = lazy(() => import('./pages/CoverPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const AccountsPage = lazy(() => import('./pages/AccountsPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
+const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 const ExpensesPage = lazy(() => import('./pages/ExpensesPage'));
 const BudgetPage = lazy(() => import('./pages/BudgetPage'));
 const RecurringPage = lazy(() => import('./pages/RecurringPage'));
@@ -46,6 +48,8 @@ function AppRoutes() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/accounts" element={<AccountsPage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/budgets" element={<BudgetPage />} />

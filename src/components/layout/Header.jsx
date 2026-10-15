@@ -73,9 +73,9 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
             const input = e.currentTarget.elements.headerSearchInput;
             const query = input?.value?.trim();
             if (query) {
-              navigate(`/expenses?search=${encodeURIComponent(query)}`);
+              navigate(`/search?q=${encodeURIComponent(query)}`);
             } else {
-              navigate('/expenses');
+              navigate('/search');
             }
           }}
         >

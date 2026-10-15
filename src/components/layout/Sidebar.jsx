@@ -11,7 +11,9 @@ import {
   Wallet,
   Users,
   Target,
-  Repeat
+  Repeat,
+  Search,
+  Calendar
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { DEMO_METADATA } from '../../data/mockData';
@@ -32,6 +34,8 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/search', label: 'Search & Filters', icon: Search },
+    { path: '/calendar', label: 'Financial Calendar', icon: Calendar },
     { path: '/accounts', label: 'Wallets & Accounts', icon: Wallet },
     { path: '/expenses', label: 'Expenses', icon: Receipt },
     { path: '/budgets', label: 'Budgets', icon: Target },

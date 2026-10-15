@@ -1,0 +1,306 @@
+.calendar-grid-wrapper {
+  background: var(--bg-surface, #FFFFFF);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 8px; /* clean, modern, mostly square-cornered */
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.calendar-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.month-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.current-month-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+  min-width: 170px;
+  letter-spacing: -0.01em;
+}
+
+.nav-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #E2E8F0);
+  background: #FFFFFF;
+  color: var(--text-primary, #0F172A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-arrow-btn:hover {
+  background: var(--bg-surface-secondary, #F8FAFC);
+  border-color: #CBD5E1;
+}
+
+.btn-today-nav {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #E2E8F0);
+  background: #FFFFFF;
+  color: var(--text-secondary, #64748B);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-today-nav:hover {
+  background: rgba(6, 78, 59, 0.08);
+  color: #064E3B;
+  border-color: #064E3B;
+}
+
+.view-toggle-pills {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface-secondary, #F1F5F9);
+  padding: 3px;
+  border-radius: 6px;
+  gap: 2px;
+}
+
+.view-pill-btn {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #64748B);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.15s ease;
+}
+
+.view-pill-btn.active {
+  background: #FFFFFF;
+  color: #064E3B;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  font-weight: 700;
+}
+
+.calendar-legend-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--bg-surface-secondary, #F8FAFC);
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  font-size: 0.75rem;
+  color: var(--text-secondary, #64748B);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.expense { background: #DC2626; }
+.legend-dot.income { background: #10B981; }
+.legend-dot.transfer { background: #2563EB; }
+.legend-dot.pending-bill { background: #F59E0B; }
+
+/* Calendar Table / Grid */
+.calendar-days-header-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--bg-surface-secondary, #F8FAFC);
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+}
+
+.day-col-header {
+  padding: 0.65rem 0.25rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary, #64748B);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.calendar-grid-cells {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--border-color, #E2E8F0);
+  gap: 1px;
+}
+
+.calendar-cell {
+  background: var(--bg-surface, #FFFFFF);
+  min-height: 85px;
+  padding: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .calendar-cell {
+    min-height: 65px;
+    padding: 0.25rem;
+  }
+}
+
+.calendar-cell:hover {
+  background: #F8FAFC;
+}
+
+.calendar-cell.outside-month {
+  background: #FAFAFA;
+  opacity: 0.45;
+  cursor: default;
+}
+
+.calendar-cell.is-today {
+  background: rgba(6, 78, 59, 0.03);
+}
+
+.calendar-cell.is-today .cell-day-num {
+  background: #064E3B;
+  color: #FFFFFF;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-weight: 800;
+}
+
+.calendar-cell.is-selected {
+  outline: 2px solid #064E3B;
+  outline-offset: -2px;
+  background: rgba(6, 78, 59, 0.06);
+}
+
+.cell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cell-day-num {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary, #0F172A);
+}
+
+.cell-dots-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cell-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.cell-dot.expense { background: #DC2626; }
+.cell-dot.income { background: #10B981; }
+.cell-dot.transfer { background: #2563EB; }
+.cell-dot.pending-bill { background: #F59E0B; }
+
+.cell-amounts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.cell-amount-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 3px;
+  border-radius: 3px;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-amount-pill.expense {
+  background: rgba(220, 38, 38, 0.08);
+  color: #DC2626;
+}
+
+.cell-amount-pill.income {
+  background: rgba(16, 185, 129, 0.08);
+  color: #059669;
+}
+
+.cell-amount-pill.pending-bill {
+  background: rgba(245, 158, 11, 0.15);
+  color: #B45309;
+}
+
+/* Agenda / List View for mobile */
+.calendar-agenda-view {
+  display: flex;
+  flex-direction: column;
+  divide-y: 1px solid var(--border-color, #E2E8F0);
+}
+
+.agenda-day-card {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--border-color, #E2E8F0);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.agenda-day-card:hover {
+  background: #F8FAFC;
+}
+
+.agenda-day-card.has-activity {
+  background: #FFFFFF;
+}
+
+.agenda-day-date {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agenda-day-totals {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.825rem;
+  font-weight: 700;
+}
