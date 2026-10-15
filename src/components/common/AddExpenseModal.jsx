@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, AlertCircle, PlusCircle, CheckCircle2, Loader2, Save } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { X, AlertCircle, PlusCircle, CheckCircle2, Loader2, Save, ScanLine } from 'lucide-react';
 import { createExpense, updateExpense } from '../../services/expenseService';
 import { getAccounts } from '../../services/accountService';
 import {
@@ -16,6 +17,7 @@ export default function AddExpenseModal({
   expenseToEdit = null,
   onSuccess
 }) {
+  const navigate = useNavigate();
   const isEditMode = Boolean(expenseToEdit?.id);
 
   const [formData, setFormData] = useState({
@@ -147,6 +149,29 @@ export default function AddExpenseModal({
             <X size={20} />
           </button>
         </div>
+
+        {!isEditMode && (
+          <button
+            type="button"
+            className="btn btn-outline"
+            onClick={() => {
+              onClose();
+              navigate('/receipt-scanner');
+            }}
+            style={{
+              width: '100%',
+              justifyContent: 'center',
+              marginBottom: '1rem',
+              backgroundColor: 'rgba(245, 176, 0, 0.08)',
+              borderColor: 'rgba(245, 176, 0, 0.4)',
+              color: 'var(--color-heading)',
+              fontWeight: '700'
+            }}
+          >
+            <ScanLine size={16} style={{ color: '#F5B000' }} />
+            <span>Scan Receipt with AI (Auto-Fill)</span>
+          </button>
+        )}
 
         {serverError && (
           <div className="modal-error-banner" role="alert">

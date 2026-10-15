@@ -14,7 +14,8 @@ import {
   Repeat,
   PiggyBank,
   Search,
-  Calendar
+  Calendar,
+  ScanLine
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { DEMO_METADATA } from '../../data/mockData';
@@ -39,6 +40,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
     { path: '/calendar', label: 'Financial Calendar', icon: Calendar },
     { path: '/accounts', label: 'Wallets & Accounts', icon: Wallet },
     { path: '/expenses', label: 'Expenses', icon: Receipt },
+    { path: '/receipt-scanner', label: 'Receipt Scanner', icon: ScanLine },
     { path: '/budgets', label: 'Budgets', icon: Target },
     { path: '/recurring', label: 'Recurring Bills', icon: Repeat },
     { path: '/goals', label: 'Savings Goals', icon: PiggyBank },

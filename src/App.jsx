@@ -23,6 +23,7 @@ const SplitsPage = lazy(() => import('./pages/SplitsPage'));
 const CreateSplitPage = lazy(() => import('./pages/CreateSplitPage'));
 const SplitDetailPage = lazy(() => import('./pages/SplitDetailPage'));
 const SettlementsPage = lazy(() => import('./pages/SettlementsPage'));
+const ReceiptScannerPage = lazy(() => import('./pages/ReceiptScannerPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
@@ -61,6 +62,7 @@ function AppRoutes() {
             <Route path="/splits/new" element={<CreateSplitPage />} />
             <Route path="/splits/:id" element={<SplitDetailPage />} />
             <Route path="/splits/settlements" element={<SettlementsPage />} />
+            <Route path="/receipt-scanner" element={<ReceiptScannerPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
