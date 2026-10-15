@@ -28,6 +28,8 @@ export default function AppLayout() {
         return 'Smart Budget Manager';
       case '/recurring':
         return 'Recurring Bills & Subscriptions';
+      case '/goals':
+        return 'Savings Goals & Progress Tracking';
       case '/reports':
         return 'Financial Reports & Analytics';
       case '/settings':

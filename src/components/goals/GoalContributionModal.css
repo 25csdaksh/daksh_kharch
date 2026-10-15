@@ -1,0 +1,114 @@
+/* HisabSetu — Goal Contribution Modal Styles */
+
+.contrib-modal-container {
+  max-width: 500px;
+}
+
+.contrib-type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  background: var(--bg-secondary, #F1F5F9);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #E2E8F0);
+}
+
+[data-theme='dark'] .contrib-type-toggle {
+  background: #131F37;
+  border-color: #1E293B;
+}
+
+.contrib-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary, #64748B);
+  transition: all 0.15s ease;
+}
+
+.contrib-toggle-btn.active-contrib {
+  background: #064E3B;
+  color: #FFFFFF;
+}
+
+.contrib-toggle-btn.active-withdraw {
+  background: #DC2626;
+  color: #FFFFFF;
+}
+
+.contrib-goal-summary-banner {
+  background: var(--bg-secondary, #F8FAFC);
+  border: 1px solid var(--border-color, #E2E8F0);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme='dark'] .contrib-goal-summary-banner {
+  background: #131F37;
+  border-color: #1E293B;
+}
+
+.contrib-summary-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.contrib-summary-goal-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, #0F172A);
+}
+
+[data-theme='dark'] .contrib-summary-goal-title {
+  color: #F8FAFC;
+}
+
+.contrib-summary-goal-sub {
+  font-size: 11px;
+  color: var(--text-secondary, #64748B);
+  margin-top: 2px;
+}
+
+.contrib-summary-right {
+  text-align: right;
+}
+
+.contrib-summary-saved {
+  font-size: 15px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.contrib-summary-remaining {
+  font-size: 11px;
+  color: var(--text-secondary, #64748B);
+}
+
+.contrib-info-box {
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: var(--text-primary, #0F172A);
+  line-height: 1.4;
+}
+
+[data-theme='dark'] .contrib-info-box {
+  color: #E2E8F0;
+}

@@ -15,6 +15,7 @@ const CalendarPage = lazy(() => import('./pages/CalendarPage'));
 const ExpensesPage = lazy(() => import('./pages/ExpensesPage'));
 const BudgetPage = lazy(() => import('./pages/BudgetPage'));
 const RecurringPage = lazy(() => import('./pages/RecurringPage'));
+const GoalsPage = lazy(() => import('./pages/GoalsPage'));
 const ReportsPage = lazy(() => import('./pages/ReportsPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const SplitsPage = lazy(() => import('./pages/SplitsPage'));
@@ -54,6 +55,7 @@ function AppRoutes() {
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/budgets" element={<BudgetPage />} />
             <Route path="/recurring" element={<RecurringPage />} />
+            <Route path="/goals" element={<GoalsPage />} />
             <Route path="/splits" element={<SplitsPage />} />
             <Route path="/splits/new" element={<CreateSplitPage />} />
             <Route path="/splits/:id" element={<SplitDetailPage />} />

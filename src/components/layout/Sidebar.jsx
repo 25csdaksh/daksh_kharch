@@ -12,6 +12,7 @@ import {
   Users,
   Target,
   Repeat,
+  PiggyBank,
   Search,
   Calendar
 } from 'lucide-react';
@@ -40,6 +41,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
     { path: '/expenses', label: 'Expenses', icon: Receipt },
     { path: '/budgets', label: 'Budgets', icon: Target },
     { path: '/recurring', label: 'Recurring Bills', icon: Repeat },
+    { path: '/goals', label: 'Savings Goals', icon: PiggyBank },
     { path: '/splits', label: 'Split Bills', icon: Users },
     { path: '/reports', label: 'Reports', icon: BarChart3 },
     { path: '/settings', label: 'Settings', icon: Settings }
