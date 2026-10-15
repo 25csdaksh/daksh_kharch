@@ -1,7 +1,20 @@
 .occurrence-history-modal {
   max-width: 560px;
   width: 92%;
+  background-color: #FFFFFF !important;
+  opacity: 1 !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
+  padding: 24px;
 }
+
+[data-theme='dark'] .occurrence-history-modal {
+  background-color: #0F172A !important;
+  border-color: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
 
 .history-loading-wrap,
 .history-empty-wrap {
