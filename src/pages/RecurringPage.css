@@ -439,3 +439,121 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   RECURRING BILLS 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .recurring-badge-tag {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .btn-notification-toggle {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .btn-notification-toggle:hover {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-notification-toggle.active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .bill-alert-pill.alert-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+}
+
+[data-theme='dark'] .bill-alert-pill.alert-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #FDE68A;
+}
+
+[data-theme='dark'] .alert-action-btn {
+  background: #0F172A;
+  color: #F8FAFC;
+  border: 1px solid #1E293B;
+}
+
+[data-theme='dark'] .recurring-tabs-row {
+  background: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .rec-tab-btn {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .rec-tab-btn:hover {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .rec-tab-btn.active {
+  background: #0F172A;
+  color: #F8FAFC;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .preset-recommend-card {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .preset-recommend-card:hover {
+  border-color: #F5B000;
+  background: rgba(245, 176, 0, 0.12);
+}
+
+[data-theme='dark'] .preset-card-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .preset-card-amount {
+  color: #34D399;
+}
+
+[data-theme='dark'] .bill-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .bill-card.card-paused {
+  background: #0A0F1D;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .bill-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .bill-amount-row {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .amount-val {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-mark-paid {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .btn-mark-paid:hover {
+  background: #10B981;
+  color: #0A2540;
+}
+

@@ -179,9 +179,51 @@
   border: 1px solid rgba(225, 29, 72, 0.25);
 }
 
-/* Responsive */
 @media (max-width: 868px) {
   .create-split-layout {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   CREATE SPLIT 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .split-tab-btn.active {
+  background: #0F172A;
+  color: #F8FAFC;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .participant-select-row {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .participant-select-row.selected {
+  border-color: #F5B000;
+  background: rgba(245, 176, 0, 0.15);
+}
+
+[data-theme='dark'] .split-preview-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .preview-breakdown-row {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .diff-balanced {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .diff-unbalanced {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+

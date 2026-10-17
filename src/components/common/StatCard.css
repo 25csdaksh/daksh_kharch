@@ -279,6 +279,50 @@
   }
 }
 
+[data-theme='dark'] .stat-card {
+  background-color: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .stat-card:hover {
+  border-color: #334155;
+  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .stat-card-title {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .stat-card-amount {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .stat-card-currency {
+  color: #64748B;
+}
+
+[data-theme='dark'] .badge-today {
+  background-color: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+  border-color: rgba(245, 176, 0, 0.35);
+}
+
+[data-theme='dark'] .icon-wrap-today {
+  background-color: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+}
+
+[data-theme='dark'] .badge-budget {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .icon-wrap-budget {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+}
+
 [data-theme='dark'] .badge-month {
   background-color: #1E293B;
   color: #F8FAFC;
@@ -299,4 +343,24 @@
 [data-theme='dark'] .icon-wrap-week {
   background-color: rgba(56, 189, 248, 0.15);
   color: #38BDF8;
+}
+
+[data-theme='dark'] .trend-up {
+  color: #F87171;
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme='dark'] .trend-down {
+  color: #34D399;
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme='dark'] .trend-neutral {
+  color: #94A3B8;
+  background-color: #1E293B;
+}
+
+[data-theme='dark'] .stat-card-comparison,
+[data-theme='dark'] .stat-card-subtitle {
+  color: #94A3B8;
 }

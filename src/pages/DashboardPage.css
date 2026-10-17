@@ -24,6 +24,12 @@
   border: 1px solid rgba(253, 230, 138, 0.22);
 }
 
+[data-theme='dark'] .dashboard-hero-card {
+  background: linear-gradient(135deg, #090E1B 0%, #0F172A 50%, #16243D 100%);
+  border: 1px solid rgba(245, 176, 0, 0.25);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.65), 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+}
+
 .dashboard-hero-card::before {
   content: '';
   position: absolute;

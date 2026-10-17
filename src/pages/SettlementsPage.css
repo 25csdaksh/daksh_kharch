@@ -51,13 +51,14 @@
   text-transform: uppercase;
   color: var(--color-muted);
   border-bottom: 1px solid var(--color-border);
-  background: #FFFFFF;
+  background: var(--color-surface);
 }
 
 .settlements-table td {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--color-border);
   font-size: var(--font-size-sm);
+  color: var(--color-text);
 }
 
 .settlements-table tr:last-child td {
@@ -74,3 +75,25 @@
 .settlement-flow-arrow {
   color: var(--color-primary);
 }
+
+/* Dark theme overrides */
+[data-theme='dark'] .settlements-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .settlements-table th {
+  background: #131E32;
+  color: #94A3B8;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .settlements-table td {
+  border-bottom-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .settlements-table tr:hover td {
+  background: rgba(30, 41, 59, 0.4);
+}
+

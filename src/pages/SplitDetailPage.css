@@ -70,3 +70,24 @@
 .detail-shares-table tr:last-child td {
   border-bottom: none;
 }
+
+[data-theme='dark'] .split-detail-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .detail-shares-table th {
+  background: #131E32;
+  color: #94A3B8;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .detail-shares-table td {
+  border-bottom-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .detail-shares-table tr:hover td {
+  background: rgba(30, 41, 59, 0.4);
+}
+

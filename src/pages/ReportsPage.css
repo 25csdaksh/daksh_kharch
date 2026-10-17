@@ -569,3 +569,89 @@
   color: #FFFFFF;
 }
 
+/* ==========================================================================
+   REPORTS PAGE 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .reports-header-card,
+[data-theme='dark'] .category-report-table-card {
+  background-color: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .reports-main-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .period-tabs {
+  background-color: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .period-tab-btn {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .period-tab-btn:hover {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .period-tab-btn.active {
+  background-color: #0F172A;
+  color: #F5B000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .period-navigator-bar {
+  border-top-color: #1E293B;
+}
+
+[data-theme='dark'] .nav-arrow-btn {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .nav-arrow-btn:hover:not(:disabled) {
+  background-color: #1E293B;
+  border-color: #F5B000;
+  color: #F5B000;
+}
+
+[data-theme='dark'] .current-period-display {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .custom-date-field {
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .custom-date-input {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .comparison-increase {
+  color: #F87171;
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme='dark'] .comparison-decrease {
+  color: #34D399;
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme='dark'] .btn-card-export-pdf {
+  background: #F5B000;
+  color: #0A2540;
+  border-color: #F5B000;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .btn-card-export-pdf:hover {
+  background: #E5A100;
+  color: #0A2540;
+}
+
+

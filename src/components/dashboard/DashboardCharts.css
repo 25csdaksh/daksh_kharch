@@ -820,3 +820,185 @@
   }
 }
 
+/* ==========================================================================
+   DASHBOARD & LEDGER CHARTS 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .chart-card,
+[data-theme='dark'] .budget-card,
+[data-theme='dark'] .recent-expenses-card {
+  background-color: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .chart-title,
+[data-theme='dark'] .budget-title,
+[data-theme='dark'] .card-heading {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .chart-subtitle,
+[data-theme='dark'] .budget-subtitle,
+[data-theme='dark'] .card-subheading {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .chart-icon-wrap,
+[data-theme='dark'] .budget-icon-wrap {
+  background-color: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+}
+
+/* Recharts Tooltip */
+[data-theme='dark'] .chart-tooltip {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='dark'] .tooltip-day {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .tooltip-amount {
+  color: #F5B000;
+}
+
+[data-theme='dark'] .tooltip-sub {
+  color: #94A3B8;
+}
+
+/* Budget Metrics Box in Dark Mode */
+[data-theme='dark'] .budget-metrics {
+  background-color: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .budget-metric-item {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .metric-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .metric-value {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .budget-progress-track {
+  background-color: #1E293B;
+}
+
+[data-theme='dark'] .btn-manage-budget-link {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .btn-manage-budget-link:hover {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme='dark'] .budget-unconfigured-cta {
+  background: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .donut-center-number {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .donut-center-sub {
+  color: #64748B;
+}
+
+[data-theme='dark'] .legend-item {
+  background-color: #131E32;
+  border-color: #1E293B;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .legend-item:hover {
+  background-color: #1E293B;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .legend-label {
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .legend-amount {
+  color: #F8FAFC;
+}
+
+/* Recent Expenses Table Dark Mode */
+[data-theme='dark'] .expenses-table th {
+  background-color: #131E32;
+  color: #94A3B8;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .expenses-table td {
+  border-bottom-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .expense-row:hover {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme='dark'] .cell-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .payment-tag {
+  background-color: #1E293B;
+  color: #CBD5E1;
+}
+
+[data-theme='dark'] .category-pill {
+  background-color: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .cell-amount {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-icon-action {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .btn-icon-action:hover {
+  background-color: rgba(245, 176, 0, 0.15);
+  border-color: #F5B000;
+  color: #F5B000;
+}
+
+[data-theme='dark'] .btn-delete-action:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: #F87171;
+  color: #F87171;
+}
+
+/* Mobile Expense Item Feed in Dark Mode */
+[data-theme='dark'] .mobile-expense-item {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .mobile-expense-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .mobile-expense-amount {
+  color: #F8FAFC;
+}
+
+

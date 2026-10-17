@@ -289,3 +289,59 @@
 .transfers-table tr:last-child td {
   border-bottom: none;
 }
+
+/* ==========================================================================
+   ACCOUNTS PAGE 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .accounts-header-titles h1,
+[data-theme='dark'] .section-group-title,
+[data-theme='dark'] .transfers-header h3 {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .account-kpi-card,
+[data-theme='dark'] .accounts-transfers-card {
+  background: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .kpi-title {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .kpi-amount {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .tab-pill-btn {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .tab-pill-btn:hover {
+  background: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .tab-pill-btn.active {
+  background: #F5B000;
+  color: #0A2540;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .transfers-table th {
+  background: #131E32;
+  color: #94A3B8;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .transfers-table td {
+  border-bottom-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .transfers-table tr:hover td {
+  background: rgba(30, 41, 59, 0.4);
+}
+

@@ -483,3 +483,59 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ==========================================================================
+   SPLITS PAGE 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .simplify-banner {
+  background: linear-gradient(135deg, #0B1924 0%, #0F172A 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme='dark'] .simplify-title {
+  color: #34D399;
+}
+
+[data-theme='dark'] .simplify-item {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .simplify-flow {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .splits-panel {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .split-stat-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .split-stat-info h3 {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .split-item {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .split-item:hover {
+  background: #131E32;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .split-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .split-amount {
+  color: #F8FAFC;
+}
+

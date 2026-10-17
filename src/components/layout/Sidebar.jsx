@@ -15,14 +15,18 @@ import {
   PiggyBank,
   Search,
   Calendar,
-  ScanLine
+  ScanLine,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { DEMO_METADATA } from '../../data/mockData';
 import './Sidebar.css';
 
 export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile }) {
   const { user, signOut, isConfigured } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -127,6 +131,20 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
         </nav>
 
         <div className="sidebar-footer">
+          <button
+            type="button"
+            className="sidebar-theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+            title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+          >
+            <div className="sidebar-theme-icon-wrap">
+              {isDark ? <Sun size={15} className="theme-toggle-icon-sun" /> : <Moon size={15} className="theme-toggle-icon-moon" />}
+            </div>
+            <span className="sidebar-theme-label">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+            <span className="sidebar-theme-badge">{isDark ? 'ON' : 'OFF'}</span>
+          </button>
+
           <div className="user-profile-preview">
             <div className="avatar-circle">{initials}</div>
             <div className="user-info">

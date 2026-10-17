@@ -512,7 +512,7 @@ export default function CreateSplitPage() {
             <span>Split Preview</span>
           </div>
 
-          <div style={{ padding: '0.75rem 1rem', background: '#FFFFFF', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+          <div style={{ padding: '0.75rem 1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
             <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Total Bill Amount
             </div>

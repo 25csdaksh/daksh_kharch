@@ -116,17 +116,31 @@
   border: 1px solid var(--color-border);
   border-radius: 10px;
   font-size: var(--font-size-sm);
-  background-color: #F8FAFC;
+  background-color: var(--color-bg);
   color: var(--color-heading);
   transition: all var(--transition-speed);
 }
 
 .form-select:focus,
 .form-text-input:focus {
-  background-color: #FFFFFF;
+  background-color: var(--color-surface);
   border-color: var(--color-primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+  box-shadow: 0 0 0 3px rgba(245, 176, 0, 0.2);
+}
+
+[data-theme='dark'] .form-select,
+[data-theme='dark'] .form-text-input {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .form-select:focus,
+[data-theme='dark'] .form-text-input:focus {
+  background-color: #16243D;
+  border-color: #F5B000;
+  box-shadow: 0 0 0 3px rgba(245, 176, 0, 0.25);
 }
 
 .settings-toggle-row {

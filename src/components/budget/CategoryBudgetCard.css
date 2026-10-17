@@ -246,3 +246,91 @@
   font-style: italic;
   padding: 4px 0;
 }
+
+/* ==========================================================================
+   CATEGORY BUDGET CARD 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .category-budget-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .category-budget-card.card-border-danger {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: #141726;
+}
+
+[data-theme='dark'] .category-name {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .category-amounts-row {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .col-val {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .col-val.text-slate {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .cat-progress-track {
+  background: #1E293B;
+}
+
+[data-theme='dark'] .btn-set-budget {
+  background: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+  border-color: rgba(245, 176, 0, 0.35);
+}
+
+[data-theme='dark'] .btn-set-budget:hover {
+  background: rgba(245, 176, 0, 0.25);
+}
+
+[data-theme='dark'] .icon-action-btn {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .icon-action-btn:hover {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .category-status-badge.badge-healthy {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .category-status-badge.badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+[data-theme='dark'] .category-status-badge.badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+[data-theme='dark'] .category-status-badge.badge-neutral {
+  background: #1E293B;
+  color: #CBD5E1;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .category-status-badge.badge-unbudgeted {
+  background: #131E32;
+  color: #94A3B8;
+  border-color: #1E293B;
+}
+

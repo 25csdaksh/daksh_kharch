@@ -193,3 +193,50 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* ==========================================================================
+   AUTH PAGES 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .auth-card {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='dark'] .auth-brand-logo {
+  background: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .auth-page-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .auth-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .auth-input {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .auth-input:focus {
+  background-color: #16243D;
+  border-color: #F5B000;
+  box-shadow: 0 0 0 3px rgba(245, 176, 0, 0.25);
+}
+
+[data-theme='dark'] .auth-alert-error {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+}
+
+[data-theme='dark'] .auth-footer {
+  border-top-color: #1E293B;
+}
+

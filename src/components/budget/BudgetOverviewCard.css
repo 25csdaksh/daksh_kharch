@@ -257,11 +257,55 @@
     gap: var(--spacing-sm);
   }
 
-  .overview-metric-box {
-    padding: var(--spacing-md);
-  }
-
   .metric-box-value {
     font-size: var(--font-size-xl);
   }
 }
+
+/* ==========================================================================
+   BUDGET OVERVIEW CARD 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .budget-overview-card {
+  background: linear-gradient(135deg, #0F172A 0%, #131E32 100%);
+  border-color: #1E293B;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='dark'] .overview-eyebrow {
+  color: #34D399;
+}
+
+[data-theme='dark'] .overview-heading {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .overview-metric-box {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .metric-box-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .metric-box-value {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .metric-box-sub {
+  color: #64748B;
+}
+
+[data-theme='dark'] .budget-alert-pill.alert-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #FDE68A;
+}
+
+[data-theme='dark'] .budget-alert-pill.alert-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+}
+

@@ -316,11 +316,66 @@
     grid-template-columns: 1fr;
   }
 
-  .action-buttons-group {
-    width: 100%;
-  }
-
   .action-buttons-group .btn {
     flex: 1;
   }
 }
+
+/* ==========================================================================
+   BUDGET PAGE 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .budget-badge-tag {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .month-navigation-bar {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .btn-month-nav {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .btn-month-nav:hover {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-return-today {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .filter-tabs-bar {
+  background: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .filter-tab {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .filter-tab:hover {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .filter-tab.active {
+  background: #0F172A;
+  color: #F8FAFC;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .budget-error-card {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #FCA5A5;
+}
+

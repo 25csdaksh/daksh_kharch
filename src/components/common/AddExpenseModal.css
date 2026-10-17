@@ -219,3 +219,47 @@
   padding-top: var(--spacing-md);
   border-top: 1px solid var(--color-border);
 }
+
+/* ==========================================================================
+   ADD EXPENSE MODAL 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .modal-content {
+  background-color: #0F172A;
+  border: 1px solid #1E293B;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .modal-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .modal-subtitle {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .form-group label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .form-input {
+  background-color: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .form-input:focus {
+  background-color: #16243D;
+  border-color: #F5B000;
+  box-shadow: 0 0 0 3px rgba(245, 176, 0, 0.25);
+}
+
+[data-theme='dark'] .modal-actions {
+  border-top-color: #1E293B;
+}
+
+[data-theme='dark'] .input-error {
+  border-color: #F87171 !important;
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+

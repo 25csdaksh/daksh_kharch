@@ -193,3 +193,75 @@
   color: #DC2626;
   border-color: #FCA5A5;
 }
+
+/* ==========================================================================
+   ACCOUNT CARD 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .account-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .account-card:hover {
+  border-color: #334155;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .account-card-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .account-card-balance-block {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .balance-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .balance-value {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-card-action {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #E2E8F0;
+}
+
+[data-theme='dark'] .btn-card-action:hover {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-card-action.primary-action {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .btn-card-action.primary-action:hover {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme='dark'] .btn-icon-only {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .btn-icon-only:hover {
+  background: #1E293B;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-icon-only.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #F87171;
+}
+
