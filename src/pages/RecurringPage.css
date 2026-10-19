@@ -194,7 +194,7 @@
   text-align: center;
   padding: var(--spacing-2xl);
   gap: var(--spacing-md);
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAF7F2 100%);
   border: 2px dashed #CBD5E1;
   border-radius: var(--radius-xl);
 }
@@ -288,7 +288,7 @@
 
 .bill-card.card-paused {
   opacity: 0.75;
-  background: #F8FAFC;
+  background: var(--bg-surface-secondary, #FAF7F2);
 }
 
 .bill-card-header {

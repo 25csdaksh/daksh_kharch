@@ -274,7 +274,7 @@
 .transfers-table th {
   text-align: left;
   padding: 0.75rem 0.85rem;
-  background: var(--bg-surface-secondary, #F8FAFC);
+  background: var(--bg-surface-secondary, #FAF7F2);
   color: var(--text-secondary, #64748B);
   font-weight: 600;
   border-bottom: 1px solid var(--border-color, #E2E8F0);

@@ -180,7 +180,7 @@
 
 /* Empty State Card */
 .budget-empty-state-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAF7F2 100%);
   border: 2px dashed #CBD5E1;
   border-radius: var(--radius-xl);
   padding: var(--spacing-2xl);

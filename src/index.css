@@ -1,27 +1,32 @@
 :root {
   /* ==========================================================================
      HISABSETU DESIGN SYSTEM (60 : 30 : 10 RULE)
-     60% Dominant Base: #F8FAFC (Canvas) & #FFFFFF (Card Surfaces)
-     30% Structural Contrast: #2D080E & #4A0E17 (Deep Royal Burgundy / Rich Wine)
-     10% Vibrant Action Accent: Rich Golden Yellow Palette (#F5B000 / #E5A100)
+     60% Dominant Base: #FAF7F2 (Ivory White Canvas & Layout Background)
+     30% Structural Contrast: #FFFFFF (Luminous Pearl White Cards, Sidebar, Header & Surfaces)
+     10% Vibrant Action Accent: Rich Golden Yellow Palette (#F5B000 / #E5A100) & Royal Burgundy (#4A0E17)
      ========================================================================== */
 
-  /* 60% Dominant Base Palette */
-  --color-bg: #F8FAFC;
-  --bg-canvas: #F8FAFC;
+  /* 60% Dominant Base Palette - Ivory White */
+  --color-bg: #FAF7F2;
+  --bg-canvas: #FAF7F2;
+  --color-surface-hover: #F2ECE4;
+  --color-secondary: #F3EDE4;
+  --bg-surface-secondary: #F5EFE6;
+  --color-secondary-hover: #ECE4D8;
+  --color-ivory: #FAF7F2;
+  --color-ivory-light: #FDFBF7;
+  --color-ivory-warm: #F6F0E7;
+
+  /* 30% Structural Contrast & Hierarchy - Pearl White Surfaces & Containers */
   --color-surface: #FFFFFF;
   --bg-surface: #FFFFFF;
   --bg-card: #FFFFFF;
-  --color-surface-hover: #F1F5F9;
-  --color-secondary: #F1F5F9;
-  --bg-surface-secondary: #F8FAFC;
-  --color-secondary-hover: #E2E8F0;
-
-  /* 30% Structural Contrast & Hierarchy */
-  --color-border: #E2E8F0;
-  --border-color: #E2E8F0;
-  --color-border-hover: #CBD5E1;
-  --border-color-hover: #CBD5E1;
+  --color-pearl: #FFFFFF;
+  --color-pearl-surface: #FFFFFF;
+  --color-border: #E8E2D6;
+  --border-color: #E8E2D6;
+  --color-border-hover: #D6CEBE;
+  --border-color-hover: #D6CEBE;
   --color-text: #1E293B;
   --text-primary: #0F172A;
   --color-heading: #0F172A;
@@ -87,10 +92,10 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Shadows (Clean Neo-Bank Ambient Elevation) */
-  --shadow-sm: 0 1px 3px 0 rgba(16, 24, 40, 0.05), 0 1px 2px 0 rgba(16, 24, 40, 0.03);
-  --shadow-md: 0 4px 16px -2px rgba(16, 24, 40, 0.07), 0 2px 6px -1px rgba(16, 24, 40, 0.04);
-  --shadow-lg: 0 12px 28px -4px rgba(16, 24, 40, 0.09), 0 4px 10px -2px rgba(16, 24, 40, 0.04);
+  /* Shadows (Clean Neo-Bank Ambient Elevation with warm pearl depth) */
+  --shadow-sm: 0 1px 3px 0 rgba(45, 35, 25, 0.04), 0 1px 2px 0 rgba(45, 35, 25, 0.02);
+  --shadow-md: 0 4px 16px -2px rgba(45, 35, 25, 0.06), 0 2px 6px -1px rgba(45, 35, 25, 0.03);
+  --shadow-lg: 0 12px 28px -4px rgba(45, 35, 25, 0.08), 0 4px 10px -2px rgba(45, 35, 25, 0.03);
   --shadow-glow: 0 8px 20px -4px rgba(245, 176, 0, 0.25);
 
   /* Layout Constants */
