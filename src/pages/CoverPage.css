@@ -212,7 +212,7 @@
 }
 
 .hero-main-heading .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), #0284c7);
+  background: linear-gradient(135deg, var(--color-primary), #881337);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

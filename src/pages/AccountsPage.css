@@ -79,7 +79,7 @@
 }
 
 .account-kpi-card.liquid-assets::before {
-  background: #2563EB;
+  background: #881337;
 }
 
 .account-kpi-card.liabilities::before {
@@ -129,8 +129,8 @@
 }
 
 .kpi-icon-pill.blue {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563EB;
+  background: rgba(136, 19, 55, 0.1);
+  color: #881337;
 }
 
 .kpi-icon-pill.red {
@@ -321,8 +321,8 @@
 }
 
 [data-theme='dark'] .kpi-icon-pill.blue {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38BDF8;
+  background: rgba(136, 19, 55, 0.2);
+  color: #FDA4AF;
 }
 
 [data-theme='dark'] .kpi-icon-pill.red {

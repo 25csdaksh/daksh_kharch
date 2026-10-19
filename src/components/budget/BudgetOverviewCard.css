@@ -17,7 +17,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #064E3B 0%, #0A2540 50%, #F5B000 100%);
+  background: linear-gradient(90deg, #064E3B 0%, #4A0E17 50%, #F5B000 100%);
 }
 
 .budget-overview-header {
@@ -39,7 +39,7 @@
   width: 48px;
   height: 48px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #064E3B 0%, #0F2744 100%);
+  background: linear-gradient(135deg, #064E3B 0%, #4A0E17 100%);
   color: #F5B000;
   display: flex;
   align-items: center;

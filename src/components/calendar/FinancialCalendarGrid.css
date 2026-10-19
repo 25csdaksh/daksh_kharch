@@ -125,7 +125,7 @@
 
 .legend-dot.expense { background: #DC2626; }
 .legend-dot.income { background: #10B981; }
-.legend-dot.transfer { background: #2563EB; }
+.legend-dot.transfer { background: #881337; }
 .legend-dot.pending-bill { background: #F59E0B; }
 
 /* Calendar Table / Grid */
@@ -226,7 +226,7 @@
 
 .cell-dot.expense { background: #DC2626; }
 .cell-dot.income { background: #10B981; }
-.cell-dot.transfer { background: #2563EB; }
+.cell-dot.transfer { background: #881337; }
 .cell-dot.pending-bill { background: #F59E0B; }
 
 .cell-amounts-stack {

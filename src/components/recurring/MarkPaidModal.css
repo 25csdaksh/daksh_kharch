@@ -54,18 +54,18 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  background: #EFF6FF;
-  border: 1px solid #BFDBFE;
+  background: #FDF2F4;
+  border: 1px solid #FECDD3;
   border-radius: var(--radius-md);
   padding: 10px 14px;
   font-size: var(--font-size-xs);
-  color: #1E3A8A;
+  color: #881337;
   margin-top: var(--spacing-sm);
   line-height: 1.4;
 }
 
 .callout-shield-icon {
-  color: #2563EB;
+  color: #881337;
   flex-shrink: 0;
   margin-top: 1px;
 }

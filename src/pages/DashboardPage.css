@@ -13,21 +13,21 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, #0A192F 0%, #0F2744 45%, #1E3A8A 100%);
+  background: linear-gradient(135deg, #2D080E 0%, #4A0E17 45%, #6B1426 100%);
   padding: 1.75rem 2.25rem;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-xl);
-  box-shadow: 0 12px 32px -4px rgba(10, 37, 64, 0.35), 0 4px 12px -2px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(253, 230, 138, 0.22);
+  box-shadow: 0 12px 32px -4px rgba(74, 14, 23, 0.4), 0 4px 12px -2px rgba(45, 8, 14, 0.2);
+  border: 1px solid rgba(253, 230, 138, 0.28);
 }
 
 [data-theme='dark'] .dashboard-hero-card {
-  background: linear-gradient(135deg, #090E1B 0%, #0F172A 50%, #16243D 100%);
+  background: linear-gradient(135deg, #180306 0%, #2B060C 50%, #3D0912 100%);
   border: 1px solid rgba(245, 176, 0, 0.25);
-  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.65), 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(43, 6, 12, 0.35);
 }
 
 .dashboard-hero-card::before {
@@ -38,7 +38,7 @@
   width: 240px;
   height: 240px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.25) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .hero-name-highlight {
-  background: linear-gradient(135deg, #93C5FD 0%, #FDE68A 100%);
+  background: linear-gradient(135deg, #FDA4AF 0%, #FDE68A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

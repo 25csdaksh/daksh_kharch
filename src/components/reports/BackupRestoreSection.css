@@ -62,13 +62,13 @@
 }
 
 .icon-import {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563EB;
+  background: rgba(136, 19, 55, 0.1);
+  color: #881337;
 }
 
 [data-theme='dark'] .icon-import {
-  background: rgba(59, 130, 246, 0.15);
-  color: #60A5FA;
+  background: rgba(244, 63, 94, 0.15);
+  color: #FDA4AF;
 }
 
 .backup-card-title {

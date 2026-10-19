@@ -61,7 +61,7 @@
 
 .day-stat-value.expense { color: #DC2626; }
 .day-stat-value.income { color: #059669; }
-.day-stat-value.transfer { color: #2563EB; }
+.day-stat-value.transfer { color: #881337; }
 .day-stat-value.bill { color: #B45309; }
 
 .day-transactions-stack {
@@ -102,7 +102,7 @@
 
 .day-tx-icon-box.expense { background: rgba(220, 38, 38, 0.1); color: #DC2626; }
 .day-tx-icon-box.income { background: rgba(16, 185, 129, 0.1); color: #059669; }
-.day-tx-icon-box.transfer { background: rgba(37, 99, 235, 0.1); color: #2563EB; }
+.day-tx-icon-box.transfer { background: rgba(136, 19, 55, 0.1); color: #881337; }
 .day-tx-icon-box.bill { background: rgba(245, 158, 11, 0.12); color: #B45309; }
 
 .day-tx-meta {
@@ -137,7 +137,7 @@
 
 .day-tx-amount.expense { color: #DC2626; }
 .day-tx-amount.income { color: #059669; }
-.day-tx-amount.transfer { color: #2563EB; }
+.day-tx-amount.transfer { color: #881337; }
 .day-tx-amount.bill { color: #B45309; }
 
 .btn-pay-bill-inline {
