@@ -76,3 +76,22 @@
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
+
+[data-theme='dark'] .transfer-arrow-icon {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #F5B000;
+}
+
+[data-theme='dark'] .transfer-impact-box {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #6EE7B7;
+}
+
+[data-theme='dark'] .transfer-warning-box {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #FDE68A;
+}
+

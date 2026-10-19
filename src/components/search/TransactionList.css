@@ -196,3 +196,68 @@
   background: var(--bg-surface-secondary, #F8FAFC);
   border-color: #CBD5E1;
 }
+
+/* ==========================================================================
+   TRANSACTION LIST 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .transaction-search-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .transaction-search-card:hover {
+  border-color: #334155;
+  background: #131E32;
+}
+
+[data-theme='dark'] .card-main-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .card-meta-row {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .tag-badge {
+  background: #1E293B;
+  color: #CBD5E1;
+}
+
+[data-theme='dark'] .tag-badge.account-tag {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme='dark'] .tag-badge.recurring-tag {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FDE68A;
+}
+
+[data-theme='dark'] .tag-badge.split-tag {
+  background: rgba(139, 92, 246, 0.15);
+  color: #C4B5FD;
+}
+
+[data-theme='dark'] .btn-load-more {
+  background: #0F172A;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .btn-load-more:hover {
+  background: #131E32;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .search-empty-state {
+  background: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .search-empty-icon {
+  background: #131E32;
+  color: #94A3B8;
+}
+

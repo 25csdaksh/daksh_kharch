@@ -70,3 +70,25 @@
 .metric-value.net {
   color: #064E3B;
 }
+
+/* ==========================================================================
+   SEARCH PAGE 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .search-metrics-summary-bar {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .metric-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .metric-value {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .metric-value.net {
+  color: #34D399;
+}
+

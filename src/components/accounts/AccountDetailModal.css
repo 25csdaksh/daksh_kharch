@@ -169,3 +169,38 @@
   padding: 2.5rem 1rem;
   color: var(--text-muted, #94A3B8);
 }
+
+[data-theme='dark'] .detail-tab-btn {
+  background: #131E32;
+  color: #94A3B8;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .detail-tab-btn:hover {
+  background: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .detail-tab-btn.active {
+  background: #F5B000;
+  color: #0A2540;
+}
+
+[data-theme='dark'] .timeline-item {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .timeline-item:hover {
+  background: #162032;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .timeline-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .timeline-subtitle {
+  color: #94A3B8;
+}
+

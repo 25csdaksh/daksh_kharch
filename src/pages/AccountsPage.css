@@ -315,6 +315,31 @@
   color: #F8FAFC;
 }
 
+[data-theme='dark'] .kpi-icon-pill.emerald {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+}
+
+[data-theme='dark'] .kpi-icon-pill.blue {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+}
+
+[data-theme='dark'] .kpi-icon-pill.red {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+}
+
+[data-theme='dark'] .accounts-empty-state {
+  background: #0B111E;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .empty-icon-circle {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+}
+
 [data-theme='dark'] .tab-pill-btn {
   color: #94A3B8;
 }

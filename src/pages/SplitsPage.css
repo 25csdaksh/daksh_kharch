@@ -226,7 +226,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  background: #FFFFFF;
+  background: var(--color-surface);
 }
 
 .splits-panel-title {
@@ -507,9 +507,29 @@
   color: #F8FAFC;
 }
 
+[data-theme='dark'] .simplify-action-btn {
+  background: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+  border-color: rgba(245, 176, 0, 0.35);
+}
+
+[data-theme='dark'] .simplify-action-btn:hover {
+  background: #F5B000;
+  color: #0A2540;
+}
+
 [data-theme='dark'] .splits-panel {
   background: #0F172A;
   border-color: #1E293B;
+}
+
+[data-theme='dark'] .splits-panel-header {
+  background: #0F172A;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .splits-panel-title {
+  color: #F8FAFC;
 }
 
 [data-theme='dark'] .split-stat-card {
@@ -517,25 +537,63 @@
   border-color: #1E293B;
 }
 
-[data-theme='dark'] .split-stat-info h3 {
+[data-theme='dark'] .split-stat-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .split-stat-value {
   color: #F8FAFC;
 }
 
-[data-theme='dark'] .split-item {
-  background: #0F172A;
-  border-color: #1E293B;
+[data-theme='dark'] .split-stat-sub {
+  color: #64748B;
 }
 
-[data-theme='dark'] .split-item:hover {
-  background: #131E32;
-  border-color: #334155;
+[data-theme='dark'] .split-expense-card {
+  border-bottom-color: #1E293B;
 }
 
-[data-theme='dark'] .split-title {
+[data-theme='dark'] .split-expense-card:hover {
+  background-color: #131E32;
+}
+
+[data-theme='dark'] .split-exp-title {
   color: #F8FAFC;
 }
 
-[data-theme='dark'] .split-amount {
+[data-theme='dark'] .split-exp-amount {
   color: #F8FAFC;
 }
+
+[data-theme='dark'] .split-exp-subtitle {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .badge-paid-by-you {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+}
+
+[data-theme='dark'] .badge-paid-by-friend {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+}
+
+[data-theme='dark'] .friend-card {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .friend-name {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .friend-sub {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .friend-avatar {
+  background: rgba(245, 176, 0, 0.15);
+  color: #F5B000;
+}
+
 

@@ -156,3 +156,61 @@
 .btn-pay-bill-inline:hover {
   opacity: 0.9;
 }
+
+/* ==========================================================================
+   DAY DETAIL DRAWER 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .day-detail-drawer {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .day-detail-header {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .day-detail-title-group h3 {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .day-detail-title-group p {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .day-summary-badges-row {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .day-stat-label {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .day-stat-value {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .day-tx-item {
+  background: #131E32;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .day-tx-item:hover {
+  background: #162032;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .day-tx-title {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .day-tx-sub {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .btn-pay-bill-inline {
+  background: #F5B000;
+  color: #0A2540;
+}
+

@@ -984,4 +984,83 @@ input, select, textarea {
   color: #94A3B8;
 }
 
+/* ==========================================================================
+   GLOBAL CONTRAST INSURANCE & FAILSAFE ACCESSIBILITY RULES
+   Principle:
+   - Elements with Light / White backgrounds MUST have dark, crisp text
+   - Elements with Dark backgrounds MUST have light, crisp text
+   ========================================================================== */
+
+/* 1. Yellow / Gold buttons always have high-contrast dark text in ALL themes */
+.btn-primary,
+.header-add-btn,
+.btn-cover-signup,
+.btn-hero-primary,
+.btn-gold,
+[data-theme='dark'] .btn-primary,
+[data-theme='dark'] .header-add-btn,
+[data-theme='dark'] .btn-cover-signup,
+[data-theme='dark'] .btn-hero-primary,
+[data-theme='dark'] .btn-gold {
+  color: #0A2540 !important;
+}
+
+.btn-primary *,
+.header-add-btn *,
+.btn-cover-signup *,
+.btn-hero-primary *,
+.btn-gold *,
+[data-theme='dark'] .btn-primary *,
+[data-theme='dark'] .header-add-btn *,
+[data-theme='dark'] .btn-cover-signup *,
+[data-theme='dark'] .btn-hero-primary *,
+[data-theme='dark'] .btn-gold * {
+  color: #0A2540 !important;
+}
+
+/* 2. Light / White surfaces always enforce dark text */
+.bg-white,
+.btn-white,
+.btn-cta-white,
+[data-theme='dark'] .btn-cta-white {
+  background-color: #FFFFFF !important;
+  color: #0A2540 !important;
+}
+
+.btn-cta-white * {
+  color: #0A2540 !important;
+}
+
+/* 3. Dark banners & buttons always enforce light text */
+.bg-dark,
+.btn-dark,
+.btn-cta-transparent,
+.cover-cta-banner,
+.cover-cta-banner * {
+  color: #FFFFFF !important;
+}
+
+.btn-cta-transparent {
+  color: #FFFFFF !important;
+}
+
+/* 4. Global fallback heading and paragraph readability in dark mode */
+[data-theme='dark'] h1:not([class*="gradient"]):not(.btn *):not(.badge *),
+[data-theme='dark'] h2:not([class*="gradient"]):not(.btn *):not(.badge *),
+[data-theme='dark'] h3:not([class*="gradient"]):not(.btn *):not(.badge *),
+[data-theme='dark'] h4:not([class*="gradient"]):not(.btn *):not(.badge *),
+[data-theme='dark'] h5:not([class*="gradient"]):not(.btn *):not(.badge *),
+[data-theme='dark'] h6:not([class*="gradient"]):not(.btn *):not(.badge *) {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] p:not(.btn *):not(.badge *):not([class*="text-"]) {
+  color: #CBD5E1;
+}
+
+[data-theme='dark'] label:not(.btn *):not(.badge *) {
+  color: #94A3B8;
+}
+
+
 

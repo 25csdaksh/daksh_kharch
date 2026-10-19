@@ -14,13 +14,17 @@ import {
   Smartphone,
   Layers,
   ChevronRight,
-  Coins
+  Coins,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import './CoverPage.css';
 
 export default function CoverPage() {
   const { user } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const fullTextPart1 = 'The Smart Bridge Between Your Expenses & Savings — ';
@@ -65,6 +69,14 @@ export default function CoverPage() {
         </nav>
 
         <div className="cover-nav-actions">
+          <button
+            className="cover-theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+            title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           {user ? (
             <button
               className="btn btn-cover-signup"

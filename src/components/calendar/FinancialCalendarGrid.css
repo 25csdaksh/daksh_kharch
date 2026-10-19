@@ -304,3 +304,109 @@
   font-size: 0.825rem;
   font-weight: 700;
 }
+
+/* ==========================================================================
+   FINANCIAL CALENDAR GRID 60:30:10 DARK THEME
+   ========================================================================== */
+
+[data-theme='dark'] .financial-calendar-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .calendar-top-header {
+  background: #0F172A;
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .current-month-heading {
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .nav-arrow-btn {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+[data-theme='dark'] .nav-arrow-btn:hover {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .btn-today-nav {
+  background: #131E32;
+  border-color: #1E293B;
+  color: #CBD5E1;
+}
+
+[data-theme='dark'] .btn-today-nav:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+[data-theme='dark'] .view-toggle-pills {
+  background: #0B111E;
+}
+
+[data-theme='dark'] .view-pill-btn {
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .view-pill-btn.active {
+  background: #131E32;
+  color: #F5B000;
+}
+
+[data-theme='dark'] .calendar-legend-bar {
+  background: #0B111E;
+  border-bottom-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .calendar-weekday-bar {
+  background: #131E32;
+  border-bottom-color: #1E293B;
+  color: #94A3B8;
+}
+
+[data-theme='dark'] .calendar-day-cell {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+[data-theme='dark'] .calendar-day-cell:hover {
+  background: #131E32;
+}
+
+[data-theme='dark'] .calendar-day-cell.other-month {
+  background: #0A0F1D;
+  opacity: 0.45;
+}
+
+[data-theme='dark'] .calendar-day-cell.is-selected {
+  border-color: #F5B000;
+  box-shadow: 0 0 0 2px rgba(245, 176, 0, 0.25);
+}
+
+[data-theme='dark'] .day-num {
+  color: #CBD5E1;
+}
+
+[data-theme='dark'] .agenda-day-card {
+  border-bottom-color: #1E293B;
+}
+
+[data-theme='dark'] .agenda-day-card:hover {
+  background: #131E32;
+}
+
+[data-theme='dark'] .agenda-day-card.has-activity {
+  background: #0F172A;
+}
+
+[data-theme='dark'] .agenda-day-date {
+  color: #F8FAFC;
+}
+
