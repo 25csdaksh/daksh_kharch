@@ -55,6 +55,12 @@ export default function SettingsPage() {
 
   const displayName = user?.user_metadata?.full_name || 'Personal Account';
   const displayEmail = user?.email || 'Authenticated User';
+  const initials = displayName
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2) || 'HS';
 
   return (
     <div className="page-container">
@@ -86,13 +92,44 @@ export default function SettingsPage() {
       <div className="placeholder-grid">
         {/* Account & Profile Card */}
         <div className="placeholder-card card">
-          <div className="card-section-title">
-            <User size={18} className="feature-item-icon" />
-            <span>Account & Identity</span>
+          <div className="card-section-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <User size={18} className="feature-item-icon" />
+              <span>Account & Profile</span>
+            </div>
+            <span className="badge badge-primary" style={{ fontSize: '11px', padding: '2px 8px' }}>
+              {user ? 'Verified' : 'Local'}
+            </span>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-            <div className="form-field">
+          {/* Profile Header Preview Banner */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            padding: '12px',
+            background: 'var(--color-bg)',
+            borderRadius: '12px',
+            border: '1px solid var(--color-border)',
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box'
+          }}>
+            <div className="avatar-circle" style={{ width: 44, height: 44, fontSize: '15px' }}>
+              {initials}
+            </div>
+            <div style={{ minWidth: 0, flex: 1 }}>
+              <strong style={{ display: 'block', fontSize: '14px', color: 'var(--color-heading)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {displayName}
+              </strong>
+              <span style={{ display: 'block', fontSize: '12px', color: 'var(--color-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {displayEmail}
+              </span>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem', width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+            <div className="form-field" style={{ width: '100%', boxSizing: 'border-box' }}>
               <label className="form-label">Full Name</label>
               <input
                 type="text"
@@ -102,7 +139,7 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div className="form-field">
+            <div className="form-field" style={{ width: '100%', boxSizing: 'border-box' }}>
               <label className="form-label">Email Address</label>
               <input
                 type="email"
@@ -112,7 +149,7 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div className="form-field">
+            <div className="form-field" style={{ width: '100%', boxSizing: 'border-box' }}>
               <label className="form-label">User ID (RLS Subject)</label>
               <input
                 type="text"
@@ -123,11 +160,11 @@ export default function SettingsPage() {
               />
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap', width: '100%' }}>
               <button
                 type="button"
                 className="btn btn-outline"
-                style={{ fontSize: '0.85rem' }}
+                style={{ fontSize: '0.85rem', flex: '1 1 auto', minWidth: '130px', justifyContent: 'center' }}
                 onClick={() => navigate('/reset-password')}
               >
                 <KeyRound size={15} />
@@ -138,7 +175,7 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  style={{ fontSize: '0.85rem', color: 'var(--color-danger)' }}
+                  style={{ fontSize: '0.85rem', color: 'var(--color-danger)', flex: '1 1 auto', minWidth: '110px', justifyContent: 'center' }}
                   onClick={handleSignOut}
                 >
                   <LogOut size={15} />

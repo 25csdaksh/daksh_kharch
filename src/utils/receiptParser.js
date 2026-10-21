@@ -246,7 +246,7 @@ export function extractReceiptDate(text, lines) {
     /\b(20\d{2})[-/.](0[1-9]|1[0-2])[-/.](0[1-9]|[12]\d|3[01])\b/, // YYYY-MM-DD
     /\b(0[1-9]|[12]\d|3[01])[-/.](0[1-9]|1[0-2])[-/.](20\d{2})\b/, // DD/MM/YYYY
     /\b(0[1-9]|[12]\d|3[01])[-/.](0[1-9]|1[0-2])[-/.]([12]\d)\b/,   // DD/MM/YY
-    /\b(0[1-9]|[12]\d|3[01])\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(20\d{2})\b/i // DD Mon YYYY
+    /\b(0[1-9]|[12]\d|3[01])[-/\s]+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[-/\s]+(20\d{2})\b/i // DD Mon YYYY / DD-Mon-YYYY
   ];
 
   const monthMap = {

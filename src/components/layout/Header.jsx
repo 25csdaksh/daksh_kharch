@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu, Search, Bell, Plus, Calendar, LogOut, User as UserIcon, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -10,7 +10,31 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
   const { user, signOut, isConfigured } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
+  const userMenuRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setShowDropdown(false);
+      }
+    }
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showDropdown]);
 
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'short',
@@ -120,7 +144,7 @@ export default function Header({ onToggleMobileMenu, onOpenAddExpense, title = '
           <span className="notification-dot" />
         </button>
 
-        <div className="header-user-menu-wrapper">
+        <div className="header-user-menu-wrapper" ref={userMenuRef}>
           <div
             className="header-user-avatar"
             title={`Logged in as ${displayName}`}

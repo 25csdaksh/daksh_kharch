@@ -249,13 +249,15 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  width: 220px;
+  width: 230px;
+  max-width: calc(100vw - 20px);
+  box-sizing: border-box;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   padding: var(--spacing-sm);
-  z-index: 100;
+  z-index: 1050;
   animation: fadeIn 0.15s ease-out;
 }
 
@@ -437,8 +439,12 @@
   }
 
   .header-user-dropdown {
-    right: -6px;
-    width: min(240px, calc(100vw - 24px));
+    right: 0;
+    left: auto;
+    width: min(250px, calc(100vw - 20px));
+    max-width: calc(100vw - 16px);
+    box-sizing: border-box;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
   }
 }
 

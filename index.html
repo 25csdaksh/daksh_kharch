@@ -4,9 +4,20 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/hisabsetu-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#0A2540" />
+    <meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#090D16" media="(prefers-color-scheme: dark)" />
     <meta name="description" content="HisabSetu - Your intelligent personal expense tracking and financial analytics bridge." />
     <title>HisabSetu — Personal Expense & Budget Tracker</title>
+    <!-- Instant Theme Initializer: prevents theme flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('hisabsetu_theme');
+          var theme = saved === 'dark' || saved === 'light' ? saved : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
     <!-- Google Fonts: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

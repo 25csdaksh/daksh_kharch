@@ -145,7 +145,22 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
             <span className="sidebar-theme-badge">{isDark ? 'ON' : 'OFF'}</span>
           </button>
 
-          <div className="user-profile-preview">
+          <div
+            className="user-profile-preview"
+            onClick={() => {
+              navigate('/settings');
+              if (onCloseMobile) onCloseMobile();
+            }}
+            role="button"
+            tabIndex={0}
+            title="View Account & Profile Settings"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                navigate('/settings');
+                if (onCloseMobile) onCloseMobile();
+              }
+            }}
+          >
             <div className="avatar-circle">{initials}</div>
             <div className="user-info">
               <span className="user-name" title={displayName}>{displayName}</span>
@@ -153,8 +168,12 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
             </div>
             {user && (
               <button
+                type="button"
                 className="btn-logout-sidebar"
-                onClick={handleSignOut}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSignOut();
+                }}
                 title="Sign Out"
                 aria-label="Sign Out"
               >
