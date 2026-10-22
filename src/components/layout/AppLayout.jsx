@@ -30,6 +30,8 @@ export default function AppLayout() {
         return 'Recurring Bills & Subscriptions';
       case '/goals':
         return 'Savings Goals & Progress Tracking';
+      case '/ledger':
+        return 'My Ledger — મારું ખાતું / ઉધાર ખાતું';
       case '/reports':
         return 'Financial Reports & Analytics';
       case '/settings':
@@ -37,6 +39,12 @@ export default function AppLayout() {
       case '/login':
         return 'Authentication & Profile';
       default:
+        if (pathname.startsWith('/ledger/')) {
+          return 'Account Statement — ખાતાવહી';
+        }
+        if (pathname.startsWith('/splits/')) {
+          return 'Split Group Details';
+        }
         return 'HisabSetu Dashboard';
     }
   };
