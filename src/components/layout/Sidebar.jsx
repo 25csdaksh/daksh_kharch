@@ -41,7 +41,7 @@ export default function Sidebar({ onOpenAddExpense, isMobileOpen, onCloseMobile 
 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/ledger', label: 'My Ledger | મારું ખાતું', icon: HandCoins },
+    { path: '/ledger', label: 'My Ledger', icon: HandCoins },
     { path: '/search', label: 'Search & Filters', icon: Search },
     { path: '/calendar', label: 'Financial Calendar', icon: Calendar },
     { path: '/accounts', label: 'Wallets & Accounts', icon: Wallet },

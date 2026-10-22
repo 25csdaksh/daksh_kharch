@@ -192,11 +192,11 @@ export default function RecordTransactionModal({
             <div>
               <h2 className="ledger-modal-title">Record Ledger Transaction</h2>
               <p className="ledger-modal-subtitle">
-                {entryType === 'lend' && 'Money Lent — મેં પૈસા આપ્યા (Rahul owes me)'}
-                {entryType === 'borrow' && 'Money Borrowed — મેં પૈસા લીધા (I owe Amit)'}
-                {entryType === 'repay_received' && 'Receive Repayment — પૈસા પરત મળ્યા'}
-                {entryType === 'repay_paid' && 'Pay Repayment — મેં પૈસા પરત આપ્યા'}
-                {entryType === 'adjustment' && 'Adjustment — ખાતામાં રકમ સુધારો'}
+                {entryType === 'lend' && 'Money Lent (Person owes you)'}
+                {entryType === 'borrow' && 'Money Borrowed (You owe person)'}
+                {entryType === 'repay_received' && 'Receive Repayment (Settlement received)'}
+                {entryType === 'repay_paid' && 'Pay Repayment (Settlement paid)'}
+                {entryType === 'adjustment' && 'Adjustment (Manual correction)'}
               </p>
             </div>
           </div>
@@ -221,7 +221,7 @@ export default function RecordTransactionModal({
           {/* Person Selection */}
           <div className="ledger-form-field">
             <label className="ledger-form-label" htmlFor="select-contact">
-              Select Person (ખાતું પસંદ કરો) <span className="required-star">*</span>
+              Select Person <span className="required-star">*</span>
             </label>
             <select
               id="select-contact"
@@ -243,12 +243,12 @@ export default function RecordTransactionModal({
           {selectedContact && contactBalance && (
             <div className="ledger-contact-quick-badge">
               <div className="quick-badge-col">
-                <span className="badge-col-label">Receivable (લેવાના):</span>
+                <span className="badge-col-label">Receivable:</span>
                 <span className="badge-col-val text-emerald">{formatLedgerINR(contactBalance.receivable)}</span>
               </div>
               <div className="quick-badge-divider" />
               <div className="quick-badge-col">
-                <span className="badge-col-label">Payable (આપવાના):</span>
+                <span className="badge-col-label">Payable:</span>
                 <span className="badge-col-val text-danger">{formatLedgerINR(contactBalance.payable)}</span>
               </div>
               <div className="quick-badge-divider" />
@@ -270,14 +270,14 @@ export default function RecordTransactionModal({
                 className={`type-tab-btn ${entryType === 'lend' ? 'tab-active-lend' : ''}`}
                 onClick={() => setEntryType('lend')}
               >
-                Lend (મેં આપ્યા)
+                Lend
               </button>
               <button
                 type="button"
                 className={`type-tab-btn ${entryType === 'borrow' ? 'tab-active-borrow' : ''}`}
                 onClick={() => setEntryType('borrow')}
               >
-                Borrow (મેં લીધા)
+                Borrow
               </button>
               <button
                 type="button"
@@ -306,7 +306,7 @@ export default function RecordTransactionModal({
           {/* Amount */}
           <div className="ledger-form-field">
             <label className="ledger-form-label" htmlFor="tx-amount">
-              Amount (રકમ) <span className="required-star">*</span>
+              Amount <span className="required-star">*</span>
             </label>
             <div className="ledger-input-wrap">
               <IndianRupee size={16} className="ledger-field-icon" />
@@ -375,7 +375,7 @@ export default function RecordTransactionModal({
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 >
-                  <option value="Cash">Cash (રોકડ)</option>
+                  <option value="Cash">Cash</option>
                   <option value="UPI">UPI (GPay / PhonePe / Paytm)</option>
                   <option value="Bank Transfer">Bank Transfer (NEFT / IMPS)</option>
                   <option value="Cheque">Cheque</option>
@@ -430,7 +430,7 @@ export default function RecordTransactionModal({
           {entryType === 'adjustment' && (
             <div className="ledger-form-field">
               <label className="ledger-form-label" htmlFor="tx-adj-reason">
-                Adjustment Reason (સુધારાનું કારણ) <span className="required-star">*</span>
+                Adjustment Reason <span className="required-star">*</span>
               </label>
               <input
                 id="tx-adj-reason"
@@ -481,7 +481,7 @@ export default function RecordTransactionModal({
                   <span>Recording...</span>
                 </>
               ) : (
-                <span>Confirm & Record (નોંધ કરો)</span>
+                <span>Confirm & Record</span>
               )}
             </button>
           </div>

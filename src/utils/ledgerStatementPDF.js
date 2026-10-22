@@ -35,7 +35,7 @@ export function generateLedgerStatementPDF({ contact, balance, entries, userName
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(100, 116, 139);
-  doc.text('Personal Finance & Account Ledger — મારું ખાતું', 14, 26);
+  doc.text('Personal Finance & Account Ledger', 14, 26);
 
   // Statement Metadata (Right-aligned)
   doc.setFontSize(14);
@@ -85,11 +85,11 @@ export function generateLedgerStatementPDF({ contact, balance, entries, userName
 
   // Summary KPI Cards
   const kpis = [
-    { label: 'Total Lent (મેં આપ્યા)', value: formatPdfCurrency(balance.totalLent) },
-    { label: 'Total Repaid (પરત મળ્યા)', value: formatPdfCurrency(balance.totalRepaidReceived) },
-    { label: 'Total Borrowed (મેં લીધા)', value: formatPdfCurrency(balance.totalBorrowed) },
+    { label: 'Total Lent', value: formatPdfCurrency(balance.totalLent) },
+    { label: 'Total Repaid', value: formatPdfCurrency(balance.totalRepaidReceived) },
+    { label: 'Total Borrowed', value: formatPdfCurrency(balance.totalBorrowed) },
     {
-      label: balance.netBalance >= 0 ? 'Net Receivable (લેવાના)' : 'Net Payable (આપવાના)',
+      label: balance.netBalance >= 0 ? 'Net Receivable' : 'Net Payable',
       value: formatPdfCurrency(Math.abs(balance.netBalance)),
       highlight: true
     }

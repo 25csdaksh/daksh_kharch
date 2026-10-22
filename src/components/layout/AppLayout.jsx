@@ -31,7 +31,7 @@ export default function AppLayout() {
       case '/goals':
         return 'Savings Goals & Progress Tracking';
       case '/ledger':
-        return 'My Ledger — મારું ખાતું / ઉધાર ખાતું';
+        return 'My Ledger — Personal Accounts';
       case '/reports':
         return 'Financial Reports & Analytics';
       case '/settings':
@@ -40,7 +40,7 @@ export default function AppLayout() {
         return 'Authentication & Profile';
       default:
         if (pathname.startsWith('/ledger/')) {
-          return 'Account Statement — ખાતાવહી';
+          return 'Account Statement';
         }
         if (pathname.startsWith('/splits/')) {
           return 'Split Group Details';

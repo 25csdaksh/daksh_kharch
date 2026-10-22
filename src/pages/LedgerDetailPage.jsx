@@ -200,7 +200,7 @@ export default function LedgerDetailPage() {
           aria-label="Back to My Ledger"
         >
           <ArrowLeft size={16} />
-          <span>Back to Ledger (પાછા જાઓ)</span>
+          <span>Back to Ledger</span>
         </button>
 
         <div className="detail-nav-actions">
@@ -296,7 +296,7 @@ export default function LedgerDetailPage() {
         {/* Hero Balance Summary Box */}
         <div className="contact-hero-balance-box">
           <div className="balance-box-header">
-            <span className="balance-box-label">Net Balance (ચોખ્ખો હિસાબ)</span>
+            <span className="balance-box-label">Net Balance</span>
             <span
               className={`balance-status-tag ${
                 balance.status === 'receivable'
@@ -306,9 +306,9 @@ export default function LedgerDetailPage() {
                   : 'status-settled'
               }`}
             >
-              {balance.status === 'receivable' && 'They Owe You (મારે લેવાના)'}
-              {balance.status === 'payable' && 'You Owe (મારે આપવાના)'}
-              {balance.status === 'settled' && 'Account Settled (ચૂકવાઈ ગયું)'}
+              {balance.status === 'receivable' && 'They Owe You'}
+              {balance.status === 'payable' && 'You Owe'}
+              {balance.status === 'settled' && 'Account Settled'}
             </span>
           </div>
 
@@ -332,7 +332,7 @@ export default function LedgerDetailPage() {
       {/* 3. Accounting Stats Bar */}
       <div className="ledger-stats-bar card">
         <div className="stat-card">
-          <span className="stat-card-label">Total Lent (મેં આપ્યા)</span>
+          <span className="stat-card-label">Total Lent</span>
           <span className="stat-card-val text-emerald">
             {formatLedgerINR(balance.totalLent)}
           </span>
@@ -340,7 +340,7 @@ export default function LedgerDetailPage() {
         </div>
 
         <div className="stat-card">
-          <span className="stat-card-label">Repayments Received (પરત મળ્યા)</span>
+          <span className="stat-card-label">Repayments Received</span>
           <span className="stat-card-val text-emerald font-semibold">
             {formatLedgerINR(balance.totalRepaidReceived)}
           </span>
@@ -348,7 +348,7 @@ export default function LedgerDetailPage() {
         </div>
 
         <div className="stat-card">
-          <span className="stat-card-label">Total Borrowed (મેં લીધા)</span>
+          <span className="stat-card-label">Total Borrowed</span>
           <span className="stat-card-val text-danger">
             {formatLedgerINR(balance.totalBorrowed)}
           </span>
@@ -356,7 +356,7 @@ export default function LedgerDetailPage() {
         </div>
 
         <div className="stat-card">
-          <span className="stat-card-label">Repayments Paid (મેં પરત કર્યા)</span>
+          <span className="stat-card-label">Repayments Paid</span>
           <span className="stat-card-val text-danger font-semibold">
             {formatLedgerINR(balance.totalRepaidPaid)}
           </span>
@@ -374,7 +374,7 @@ export default function LedgerDetailPage() {
             onClick={() => openRecordModal('lend')}
           >
             <ArrowDownLeft size={16} />
-            <span>Lend Money (મેં આપ્યા)</span>
+            <span>Lend Money</span>
           </button>
 
           <button
@@ -383,7 +383,7 @@ export default function LedgerDetailPage() {
             onClick={() => openRecordModal('borrow')}
           >
             <ArrowUpRight size={16} />
-            <span>Borrow Money (મેં લીધા)</span>
+            <span>Borrow Money</span>
           </button>
 
           {balance.receivable > 0 && (
@@ -393,7 +393,7 @@ export default function LedgerDetailPage() {
               onClick={() => openRecordModal('repay_received')}
             >
               <CheckCircle2 size={16} />
-              <span>Record Repayment Received (પરત મળ્યા)</span>
+              <span>Record Repayment Received</span>
             </button>
           )}
 
@@ -404,7 +404,7 @@ export default function LedgerDetailPage() {
               onClick={() => openRecordModal('repay_paid')}
             >
               <CheckCircle2 size={16} />
-              <span>Pay Repayment (મેં પરત કર્યા)</span>
+              <span>Pay Repayment</span>
             </button>
           )}
 
@@ -414,7 +414,7 @@ export default function LedgerDetailPage() {
             onClick={() => openRecordModal('adjustment')}
           >
             <RotateCcw size={16} />
-            <span>Adjustment (સુધારો)</span>
+            <span>Adjustment</span>
           </button>
         </div>
       </div>
@@ -423,7 +423,7 @@ export default function LedgerDetailPage() {
       <div className="statement-history-card card">
         <div className="history-header">
           <div>
-            <h2 className="history-title">Account History & Statement (વ્યવહાર ઇતિહાસ)</h2>
+            <h2 className="history-title">Account History & Statement</h2>
             <p className="history-subtitle">
               Chronological ledger of all loans, borrowings, repayments, and adjustments.
             </p>
@@ -461,8 +461,11 @@ export default function LedgerDetailPage() {
 
         {filteredEntries.length === 0 ? (
           <div className="history-empty-state">
-            <Clock size={32} className="text-muted" />
-            <p>No transactions recorded matching your filter.</p>
+            <div className="history-empty-icon-wrap">
+              <Clock size={28} />
+            </div>
+            <h3 className="history-empty-title">No transactions recorded</h3>
+            <p className="history-empty-sub">No transactions have been recorded matching your selected filters.</p>
           </div>
         ) : (
           <div className="history-table-wrap">

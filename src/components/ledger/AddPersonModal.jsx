@@ -77,7 +77,7 @@ export default function AddPersonModal({ isOpen, onClose, contactToEdit = null, 
             </div>
             <div>
               <h2 className="ledger-modal-title">
-                {isEditing ? 'Edit Person Details' : 'Add New Person (નવી વ્યક્તિ ઉમેરો)'}
+                {isEditing ? 'Edit Person Details' : 'Add New Person'}
               </h2>
               <p className="ledger-modal-subtitle">
                 {isEditing
@@ -179,7 +179,7 @@ export default function AddPersonModal({ isOpen, onClose, contactToEdit = null, 
           {!isEditing && (
             <div className="ledger-opening-balance-section">
               <label className="ledger-form-label" htmlFor="opening-balance">
-                Opening Balance (પ્રારંભિક બાકી રકમ — Optional)
+                Opening Balance (Optional)
               </label>
               <div className="ledger-input-wrap">
                 <IndianRupee size={16} className="ledger-field-icon" />
@@ -210,7 +210,7 @@ export default function AddPersonModal({ isOpen, onClose, contactToEdit = null, 
                         checked={openingDirection === 'receivable'}
                         onChange={() => setOpeningDirection('receivable')}
                       />
-                      <span>They owe me (મારે લેવાના)</span>
+                      <span>They owe me (Receivable)</span>
                     </label>
                     <label className={`ledger-radio-badge ${openingDirection === 'payable' ? 'active-pay' : ''}`}>
                       <input
@@ -220,7 +220,7 @@ export default function AddPersonModal({ isOpen, onClose, contactToEdit = null, 
                         checked={openingDirection === 'payable'}
                         onChange={() => setOpeningDirection('payable')}
                       />
-                      <span>I owe them (મારે આપવાના)</span>
+                      <span>I owe them (Payable)</span>
                     </label>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export default function AddPersonModal({ isOpen, onClose, contactToEdit = null, 
                   <span>Saving...</span>
                 </>
               ) : (
-                <span>{isEditing ? 'Update Contact' : 'Save Person (સેવ કરો)'}</span>
+                <span>{isEditing ? 'Update Contact' : 'Save Person'}</span>
               )}
             </button>
           </div>

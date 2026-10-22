@@ -143,9 +143,8 @@ export default function LedgerPage() {
           <div>
             <div className="ledger-header-badge-row">
               <span className="ledger-badge-tag">Personal Ledger</span>
-              <span className="ledger-badge-gujarati">મારું ખાતું / ઉધાર ખાતું</span>
             </div>
-            <h1 className="ledger-main-title">My Ledger — Personal Debt & Credit</h1>
+            <h1 className="ledger-main-title">My Ledger — Personal Accounts</h1>
             <p className="ledger-main-sub">
               Track money you have lent, borrowed, and repayments. Private, auditable, and never double-counted with living expenses.
             </p>
@@ -171,7 +170,7 @@ export default function LedgerPage() {
             onClick={() => setIsAddPersonOpen(true)}
           >
             <UserPlus size={16} />
-            <span>Add Person (ખાતું ઉમેરો)</span>
+            <span>Add Person</span>
           </button>
         </div>
       </div>
@@ -181,7 +180,7 @@ export default function LedgerPage() {
         {/* Total Receivable */}
         <div className="ledger-kpi-card card border-receivable">
           <div className="kpi-card-header">
-            <span className="kpi-card-label">Total Receivable (કુલ લેવાના)</span>
+            <span className="kpi-card-label">Total Receivable</span>
             <div className="kpi-card-icon icon-rec">
               <ArrowDownLeft size={18} />
             </div>
@@ -195,7 +194,7 @@ export default function LedgerPage() {
         {/* Total Payable */}
         <div className="ledger-kpi-card card border-payable">
           <div className="kpi-card-header">
-            <span className="kpi-card-label">Total Payable (કુલ આપવાના)</span>
+            <span className="kpi-card-label">Total Payable</span>
             <div className="kpi-card-icon icon-pay">
               <ArrowUpRight size={18} />
             </div>
@@ -209,7 +208,7 @@ export default function LedgerPage() {
         {/* Net Ledger Balance */}
         <div className="ledger-kpi-card card border-net">
           <div className="kpi-card-header">
-            <span className="kpi-card-label">Net Balance (ચોખ્ખી સ્થિતિ)</span>
+            <span className="kpi-card-label">Net Balance</span>
             <div className="kpi-card-icon icon-net">
               <TrendingUp size={18} />
             </div>
@@ -225,7 +224,7 @@ export default function LedgerPage() {
         {/* Active Accounts */}
         <div className="ledger-kpi-card card">
           <div className="kpi-card-header">
-            <span className="kpi-card-label">Active People (ખાતાઓ)</span>
+            <span className="kpi-card-label">Active Accounts</span>
             <div className="kpi-card-icon icon-users">
               <Users size={18} />
             </div>
@@ -240,7 +239,7 @@ export default function LedgerPage() {
         {summary.overdueAccounts > 0 && (
           <div className="ledger-kpi-card card border-overdue">
             <div className="kpi-card-header">
-              <span className="kpi-card-label">Overdue Accounts (મુદત વીતી)</span>
+              <span className="kpi-card-label">Overdue Accounts</span>
               <div className="kpi-card-icon icon-overdue">
                 <AlertTriangle size={18} />
               </div>
@@ -350,7 +349,7 @@ export default function LedgerPage() {
                 onClick={() => setIsAddPersonOpen(true)}
               >
                 <UserPlus size={16} />
-                <span>Add First Person (પહેલું ખાતું ઉમેરો)</span>
+                <span>Add First Person</span>
               </button>
             )}
           </div>
@@ -476,7 +475,7 @@ export default function LedgerPage() {
           <div className="activity-section-header">
             <h2 className="activity-section-title">
               <Clock size={18} className="text-emerald" />
-              <span>Recent Ledger Activity (તાજેતરના વ્યવહારો)</span>
+              <span>Recent Ledger Activity</span>
             </h2>
             <span className="activity-badge">{recentActivity.length} recent</span>
           </div>

@@ -164,7 +164,7 @@ export async function createContact(payload) {
       amount: obAmount,
       transaction_date: payload.opening_balance_date || new Date().toISOString().split('T')[0],
       due_date: payload.due_date || null,
-      description: 'Opening Balance (પ્રારંભિક સિલક)',
+      description: 'Opening Balance',
       payment_method: 'Other',
       idempotency_key: generateIdempotencyKey('open')
     });
